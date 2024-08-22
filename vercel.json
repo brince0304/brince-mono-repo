@@ -1,0 +1,23 @@
+{
+	"version": 2,
+	"builds": [
+		{
+			"src": "packages/shared-components/package.json",
+			"use": "@vercel/node"
+		},
+		{
+			"src": "packages/shared-styles/package.json",
+			"use": "@vercel/node"
+		},
+		{
+			"src": "apps/blog/package.json",
+			"use": "@vercel/next"
+		}
+	],
+	"routes": [
+		{
+			"src": "/(.*)",
+			"dest": "apps/blog"
+		}
+	]
+}
