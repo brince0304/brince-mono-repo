@@ -13,7 +13,9 @@
 		"build-storybook:components": "pnpm --filter @brince-mono-repo/shared-components run build-storybook",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"lint": "biome lint .",
-		"format": "biome format . --write"
+		"format": "biome format . --write",
+		"build": "turbo run build",
+		"dev": "turbo run dev"
 	},
 	"dependencies": {
 		"next": "14.2.5",
@@ -23,6 +25,7 @@
 		"framer-motion": "^11.3.28"
 	},
 	"devDependencies": {
+		"turbo": "latest",
 		"@biomejs/biome": "^1.8.3",
 		"eslint": "^8.8.0",
 		"@types/node": "^20",
@@ -37,5 +40,6 @@
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
-	"description": ""
+	"description": "",
+	"packageManager": "pnpm@7.15.0"
 }

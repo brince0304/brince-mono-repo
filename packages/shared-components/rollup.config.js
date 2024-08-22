@@ -1,3 +1,5 @@
+import path from "node:path";
+import alias from "@rollup/plugin-alias";
 import babel from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
@@ -24,6 +26,9 @@ export default [
 		],
 		external: ["react", "react-dom", "next/link"],
 		plugins: [
+			alias({
+				entries: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
+			}),
 			resolve(),
 			commonjs(),
 			typescript({

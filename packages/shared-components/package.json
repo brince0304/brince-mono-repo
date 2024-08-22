@@ -5,7 +5,9 @@
 	"module": "dist/index.esm.js",
 	"types": "dist/index.d.ts",
 	"style": "dist/styles.css",
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"clean": "rm -rf dist",
 		"build": "npm run clean && rollup -c && tsc --emitDeclarationOnly --outDir dist",
@@ -26,6 +28,7 @@
 		"@babel/preset-react": "^7.24.7",
 		"@babel/preset-typescript": "^7.24.7",
 		"@chromatic-com/storybook": "^1.6.1",
+		"@rollup/plugin-alias": "^5.1.0",
 		"@rollup/plugin-babel": "^6.0.4",
 		"@rollup/plugin-commonjs": "^21.0.1",
 		"@rollup/plugin-node-resolve": "^13.0.6",
@@ -40,14 +43,14 @@
 		"@storybook/react": "^8.2.9",
 		"@storybook/test": "^8.2.9",
 		"@storybook/testing-library": "^0.2.2",
+		"autoprefixer": "^10.4.20",
 		"babel-plugin-add-import-extension": "^1.6.0",
 		"babel-plugin-transform-inline-environment-variables": "^0.4.4",
 		"magic-string": "^0.30.11",
 		"postcss": "^8",
 		"rollup": "^2.60.0",
 		"rollup-plugin-peer-deps-external": "^2.2.4",
-		"tailwindcss": "^3.4.1",
 		"rollup-plugin-postcss": "^4.0.2",
-		"autoprefixer": "^10.4.20"
+		"tailwindcss": "^3.4.1"
 	}
 }

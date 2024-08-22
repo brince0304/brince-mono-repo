@@ -1,9 +1,11 @@
 {
 	"version": 2,
-	"buildCommand": "npx pnpm install --no-frozen-lockfile && npx pnpm run build:all",
-	"outputDirectory": "apps/blog/.next",
-	"framework": "nextjs",
-	"installCommand": "npm i -g pnpm && pnpm install --no-frozen-lockfile",
+	"builds": [
+		{
+			"src": "apps/blog/next.config.js",
+			"use": "@vercel/next"
+		}
+	],
 	"routes": [
 		{
 			"src": "/(.*)",
