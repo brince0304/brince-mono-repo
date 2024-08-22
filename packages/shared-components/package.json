@@ -7,7 +7,8 @@
 	"style": "dist/styles.css",
 	"files": ["dist"],
 	"scripts": {
-		"build": "rollup -c && tsc --emitDeclarationOnly --outDir dist",
+		"clean": "rm -rf dist",
+		"build": "npm run clean && npx rollup -c && npx tsc --emitDeclarationOnly --outDir dist",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build"
 	},

@@ -1,8 +1,9 @@
 {
 	"version": 2,
-	"buildCommand": "pnpm install && pnpm -w run build:all",
+	"buildCommand": "npx pnpm install --no-frozen-lockfile && npx pnpm run build:all",
 	"outputDirectory": "apps/blog/.next",
 	"framework": "nextjs",
+	"installCommand": "npm i -g pnpm && pnpm install --no-frozen-lockfile",
 	"routes": [
 		{
 			"src": "/(.*)",
