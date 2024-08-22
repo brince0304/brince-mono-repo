@@ -1,26 +1,26 @@
-import { Avatar } from "@/Avatar/index";
-import type { Meta, StoryObj } from "@storybook/react";
+import { Avatar } from '@/Avatar/index';
+import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof Avatar> = {
-	title: "Components/Avatar",
-	component: Avatar,
-	tags: ["autodocs"],
+  title: 'Components/Avatar',
+  component: Avatar,
+  tags: ['autodocs'],
 
-	argTypes: {
-		owner: { control: "boolean" },
-		liked: { control: "boolean" },
-		size: { control: "number" },
-		className: { control: "text" },
-	},
+  argTypes: {
+    owner: { control: 'boolean' },
+    liked: { control: 'boolean' },
+    size: { control: 'number' },
+    className: { control: 'text' },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof Avatar>;
 
 export const Default: Story = {
-	args: {
-		owner: false,
-		liked: false,
-		size: 40,
-	},
+  args: {
+    owner: false,
+    liked: false,
+    size: 40,
+  },
 };

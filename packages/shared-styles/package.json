@@ -1,13 +1,13 @@
 {
-	"name": "@brince-mono-repo/shared-styles",
-	"version": "1.0.0",
-	"main": "src/globals.css",
-	"files": ["src", "dist"],
-	"scripts": {
-		"build": "postcss src/*.css -d dist"
-	},
-	"devDependencies": {
-		"postcss": "^8.4.21",
-		"postcss-cli": "^10.1.0"
-	}
+  "name": "@brince-mono-repo/shared-styles",
+  "version": "1.0.0",
+  "main": "src/globals.css",
+  "files": ["src", "dist"],
+  "scripts": {
+    "build": "postcss src/*.css -d dist"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.21",
+    "postcss-cli": "^10.1.0"
+  }
 }

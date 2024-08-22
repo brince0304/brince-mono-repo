@@ -1,11 +1,12 @@
 import CommentForm from '@/components/CommentForm/CommentForm';
 import Comments from '@/components/Comments/Comments';
+import { serverFetcher } from '@/lib/client';
+import type { PageBySlugResponse } from '@/models/notion';
 import { Text } from '@brince-mono-repo/shared-components';
-import { notionClient } from '@/lib/notion';
 import ReactMarkdown from 'react-markdown';
 
 export default async function Post({ params }: { params: { slug: string } }) {
-  const post = await notionClient.getPageBySlug(params.slug);
+  const post = await serverFetcher<PageBySlugResponse>(`posts/${params.slug}`);
 
   if (!post) {
     return <div>Post not found</div>;

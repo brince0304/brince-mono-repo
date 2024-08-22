@@ -1,25 +1,25 @@
 {
-	"compilerOptions": {
-		"target": "es5",
-		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"forceConsistentCasingInFileNames": true,
-		"esModuleInterop": true,
-		"module": "esnext",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"jsx": "preserve",
-		"baseUrl": ".",
-		"declaration": true,
-		"outDir": "./dist",
-		"declarationDir": "./dist/types",
-		"paths": {
-			"@/*": ["src/*"],
-			"@brince-mono-repo/*": ["packages/*/src"]
-		}
-	},
-	"exclude": ["node_modules"]
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "declaration": true,
+    "outDir": "./dist",
+    "declarationDir": "./dist/types",
+    "paths": {
+      "@/*": ["src/*"],
+      "@brince-mono-repo/*": ["packages/*/src"]
+    }
+  },
+  "exclude": ["node_modules"]
 }

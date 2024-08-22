@@ -2,6 +2,7 @@ import type {
   PageObjectResponse,
   QueryDatabaseResponse,
 } from '@notionhq/client/build/src/api-endpoints';
+import type { MdStringObject } from 'notion-to-md/build/types';
 
 interface NotionUser {
   object: 'user';
@@ -134,6 +135,11 @@ export interface NotionDatabaseQueryResponse extends QueryDatabaseResponse {
 }
 
 export type NotionPagesResponse = NotionDatabaseQueryResponse['results'];
+
+export interface PageBySlugResponse {
+  page: NotionPage;
+  markdown: MdStringObject;
+}
 
 export interface CommentRequest {
   text: string;

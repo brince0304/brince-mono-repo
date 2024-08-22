@@ -1,23 +1,24 @@
-import { convertToPostCardProps } from "@/lib/convert";
-import { notionClient } from "@/lib/notion";
-import { PostCard } from "@brince-mono-repo/shared-components";
+import { serverFetcher } from '@/lib/client';
+import { convertToPostCardProps } from '@/lib/convert';
+import type { NotionPagesResponse } from '@/models/notion';
+import { PostCard } from '@brince-mono-repo/shared-components';
 
 const Posts = async () => {
-	const posts = await notionClient.getPosts();
+  const posts = await serverFetcher<NotionPagesResponse>('posts');
 
-	if (!posts || posts.length === 0) {
-		return null;
-	}
+  if (!posts || posts.length === 0) {
+    return null;
+  }
 
-	return (
-		<ul className={"grid grid-cols-1 gap-4 md:grid-cols-3"}>
-			{posts
-				.map((post) => convertToPostCardProps(post))
-				.map((props) => (
-					<PostCard key={props.slug} {...props} />
-				))}
-		</ul>
-	);
+  return (
+    <ul className={'grid grid-cols-1 gap-4 md:grid-cols-3'}>
+      {posts
+        .map((post) => convertToPostCardProps(post))
+        .map((props) => (
+          <PostCard key={props.slug} {...props} />
+        ))}
+    </ul>
+  );
 };
 
 export default Posts;

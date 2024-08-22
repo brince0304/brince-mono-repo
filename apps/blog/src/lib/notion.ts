@@ -1,4 +1,9 @@
-import type { CommentRequest, NotionPage, NotionPagesResponse } from '@/models/notion';
+import type {
+  CommentRequest,
+  NotionPage,
+  NotionPagesResponse,
+  PageBySlugResponse,
+} from '@/models/notion';
 import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
 
