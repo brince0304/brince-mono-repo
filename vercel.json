@@ -1,15 +1,7 @@
 {
 	"version": 2,
-	"builds": [
-		{
-			"src": "apps/blog/next.config.js",
-			"use": "@vercel/next"
-		}
-	],
-	"routes": [
-		{
-			"src": "/(.*)",
-			"dest": "apps/blog/$1"
-		}
-	]
+	"buildCommand": "turbo run build",
+	"outputDirectory": "apps/blog/.next",
+	"installCommand": "pnpm install",
+	"framework": "nextjs"
 }
