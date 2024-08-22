@@ -5,9 +5,7 @@
 	"module": "dist/index.esm.js",
 	"types": "dist/index.d.ts",
 	"style": "dist/styles.css",
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"scripts": {
 		"clean": "rm -rf dist",
 		"build": "npm run clean && rollup -c && tsc --emitDeclarationOnly --outDir dist",
@@ -17,7 +15,8 @@
 	"dependencies": {
 		"@brince-mono-repo/shared-styles": "workspace:*",
 		"react": "^18",
-		"react-dom": "^18"
+		"react-dom": "^18",
+		"date-fns": "^3.6.0"
 	},
 	"peerDependencies": {
 		"react": "^18.2.0",
