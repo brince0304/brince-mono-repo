@@ -8,6 +8,7 @@
 		"start:blog": "pnpm --filter @brince-mono-repo/blog run start",
 		"build:components": "pnpm --filter @brince-mono-repo/shared-components run build",
 		"build:styles": "pnpm --filter @brince-mono-repo/shared-styles run build",
+		"build:all": "pnpm run build:components && pnpm run build:styles && pnpm run build:blog",
 		"storybook:components": "pnpm --filter @brince-mono-repo/shared-components run storybook",
 		"build-storybook:components": "pnpm --filter @brince-mono-repo/shared-components run build-storybook",
 		"test": "echo \"Error: no test specified\" && exit 1",

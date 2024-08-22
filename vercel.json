@@ -1,29 +1,12 @@
 {
 	"version": 2,
-	"builds": [
-		{
-			"src": "packages/shared-components/package.json",
-			"use": "@vercel/node",
-			"config": {
-				"buildCommand": "pnpm -w run build:components"
-			}
-		},
-		{
-			"src": "packages/shared-styles/package.json",
-			"use": "@vercel/node",
-			"config": {
-				"buildCommand": "pnpm -w run build:styles"
-			}
-		},
-		{
-			"src": "apps/blog/package.json",
-			"use": "@vercel/next"
-		}
-	],
+	"buildCommand": "pnpm install && pnpm -w run build:all",
+	"outputDirectory": "apps/blog/.next",
+	"framework": "nextjs",
 	"routes": [
 		{
 			"src": "/(.*)",
-			"dest": "apps/blog"
+			"dest": "apps/blog/$1"
 		}
 	]
 }
