@@ -1,0 +1,53 @@
+{
+	"name": "@brince-mono-repo/shared-components",
+	"version": "0.0.1",
+	"main": "dist/index.js",
+	"module": "dist/index.esm.js",
+	"types": "dist/index.d.ts",
+	"style": "dist/styles.css",
+	"files": ["dist"],
+	"scripts": {
+		"clean": "rimraf dist",
+		"build": "npm run clean && rollup -c && tsc --emitDeclarationOnly --outDir dist",
+		"storybook": "storybook dev -p 6006",
+		"build-storybook": "storybook build"
+	},
+	"dependencies": {
+		"@brince-mono-repo/shared-styles": "workspace:*",
+		"react": "^18",
+		"react-dom": "^18"
+	},
+	"peerDependencies": {
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.25.2",
+		"@babel/preset-react": "^7.24.7",
+		"@babel/preset-typescript": "^7.24.7",
+		"@chromatic-com/storybook": "^1.6.1",
+		"@rollup/plugin-babel": "^6.0.4",
+		"@rollup/plugin-commonjs": "^21.0.1",
+		"@rollup/plugin-node-resolve": "^13.0.6",
+		"@rollup/plugin-typescript": "^8.3.0",
+		"@storybook/addon-essentials": "^8.2.9",
+		"@storybook/addon-interactions": "^8.2.9",
+		"@storybook/addon-links": "^8.2.9",
+		"@storybook/addon-onboarding": "^8.2.9",
+		"@storybook/blocks": "^8.2.9",
+		"@storybook/jest": "^0.2.3",
+		"@storybook/nextjs": "^8.2.9",
+		"@storybook/react": "^8.2.9",
+		"@storybook/test": "^8.2.9",
+		"@storybook/testing-library": "^0.2.2",
+		"babel-plugin-add-import-extension": "^1.6.0",
+		"babel-plugin-transform-inline-environment-variables": "^0.4.4",
+		"magic-string": "^0.30.11",
+		"postcss": "^8",
+		"rollup": "^2.60.0",
+		"rollup-plugin-peer-deps-external": "^2.2.4",
+		"tailwindcss": "^3.4.1",
+		"rollup-plugin-postcss": "^4.0.2",
+		"autoprefixer": "^10.4.20"
+	}
+}

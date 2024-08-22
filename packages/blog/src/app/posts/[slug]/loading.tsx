@@ -1,7 +1,7 @@
-import Loading from '@/components/common/Loading/Loading';
+import { Loading } from "@brince-mono-repo/shared-components";
 
 const PostDetailLoading = () => {
-  return <Loading isLoading={true} />;
+	return <Loading isLoading={true} />;
 };
 
 export default PostDetailLoading;

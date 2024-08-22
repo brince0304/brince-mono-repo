@@ -1,6 +1,6 @@
 import CommentForm from '@/components/CommentForm/CommentForm';
 import Comments from '@/components/Comments/Comments';
-import Text from '@/components/common/Text/Text';
+import { Text } from '@brince-mono-repo/shared-components';
 import { notionClient } from '@/lib/notion';
 import ReactMarkdown from 'react-markdown';
 
