@@ -3,11 +3,17 @@
 	"builds": [
 		{
 			"src": "packages/shared-components/package.json",
-			"use": "@vercel/node"
+			"use": "@vercel/node",
+			"config": {
+				"buildCommand": "pnpm -w run build:components"
+			}
 		},
 		{
 			"src": "packages/shared-styles/package.json",
-			"use": "@vercel/node"
+			"use": "@vercel/node",
+			"config": {
+				"buildCommand": "pnpm -w run build:styles"
+			}
 		},
 		{
 			"src": "apps/blog/package.json",
