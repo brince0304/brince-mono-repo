@@ -8,7 +8,7 @@
 	"files": ["dist"],
 	"scripts": {
 		"clean": "rm -rf dist",
-		"build": "npm run clean && rollup -c && tsc --emitDeclarationOnly --outDir dist",
+		"build": "npm run clean && npx rollup -c && npx tsc --emitDeclarationOnly --outDir dist",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build"
 	},
