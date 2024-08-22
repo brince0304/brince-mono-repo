@@ -7,7 +7,7 @@
 	"style": "dist/styles.css",
 	"files": ["dist"],
 	"scripts": {
-		"clean": "rimraf dist",
+		"clean": "rm -rf dist",
 		"build": "npm run clean && rollup -c && tsc --emitDeclarationOnly --outDir dist",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build"
