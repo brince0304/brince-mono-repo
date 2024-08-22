@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "dev": "yarn workspace @my-monorepo/app dev",
-    "build": "yarn workspace @my-monorepo/app build",
-    "start": "yarn workspace @my-monorepo/app start",
+    "dev": "yarn workspace @brince-mono-repo/blog dev",
+    "build": "yarn workspace @brince-mono-repo/blog build",
+    "start": "yarn workspace @brince-mono-repo/blog start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "biome lint .",
     "format": "biome format . --write"
