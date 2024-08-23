@@ -4,9 +4,10 @@ import { serverFetcher } from '@/lib/client';
 import type { PageBySlugResponse } from '@/models/notion';
 import { Text } from '@brince-mono-repo/shared-components';
 import ReactMarkdown from 'react-markdown';
+import {notionClient} from "@/lib/notion/notion";
 
 export default async function Post({ params }: { params: { slug: string } }) {
-  const post = await serverFetcher<PageBySlugResponse>(`posts/${params.slug}`);
+  const post = await notionClient.getPageBySlug(params.slug);
 
   if (!post) {
     return <div>Post not found</div>;

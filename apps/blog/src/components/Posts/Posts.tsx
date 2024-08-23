@@ -2,9 +2,10 @@ import { serverFetcher } from '@/lib/client';
 import type { NotionPagesResponse } from '@/models/notion';
 import { PostCard } from '@brince-mono-repo/shared-components';
 import {convertToPostCardProps} from "@/lib/notion/convert";
+import {notionClient} from "@/lib/notion/notion";
 
 const Posts = async () => {
-  const posts = await serverFetcher<NotionPagesResponse>('posts');
+  const posts = await notionClient.getPosts();
 
   if (!posts || posts.length === 0) {
     return null;

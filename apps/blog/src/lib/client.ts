@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const serverFetcher = async <T>(url: string, options?: RequestInit): Promise<T> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${url}`, options);
+  const response = await fetch(url, options);
   return response.json();
 };
 
