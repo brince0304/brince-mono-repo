@@ -8,7 +8,7 @@ const usePostComment = (pageId: string) => {
 
   return useMutation({
     mutationFn: (data: CommentRequest) => commentService.postComment(pageId, data),
-    onSettled: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: CommentQueryKeys.getComments(pageId) });
     },
   });

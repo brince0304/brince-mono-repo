@@ -1,10 +1,10 @@
 'use client';
 
 import { CommentQueryOptions } from '@/hooks/comment/queries';
-import { convertToCommentProps } from '@/lib/convert';
 import { Comment } from '@brince-mono-repo/shared-components';
 import { SuspenseQuery } from '@suspensive/react-query';
 import { Suspense } from 'react';
+import {convertToCommentProps} from "@/lib/notion/convert";
 
 interface CommentsProps {
   pageId: string;

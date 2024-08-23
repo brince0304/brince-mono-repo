@@ -1,15 +1,15 @@
-import { notionClient } from '@/lib/notion';
+import { notionClient } from '@/lib/notion/notion';
 import { type NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams;
-  const pageId = searchParams.get('pageId');
-
-  if (!pageId) {
-    return NextResponse.json({ error: '페이지 ID가 존재하지 않습니다.' }, { status: 400 });
-  }
-
+export async function GET(request: NextRequest, { pageId }: { pageId: string }) {
   try {
+    const searchParams = request.nextUrl.searchParams;
+    const pageId = searchParams.get('pageId');
+
+    if (!pageId) {
+      return NextResponse.json({ error: '페이지 ID가 존재하지 않습니다.' }, { status: 400 });
+    }
+
     const response = await notionClient.getComments(pageId);
 
     return NextResponse.json(response);

@@ -1,7 +1,7 @@
 import { serverFetcher } from '@/lib/client';
-import { convertToPostCardProps } from '@/lib/convert';
 import type { NotionPagesResponse } from '@/models/notion';
 import { PostCard } from '@brince-mono-repo/shared-components';
+import {convertToPostCardProps} from "@/lib/notion/convert";
 
 const Posts = async () => {
   const posts = await serverFetcher<NotionPagesResponse>('posts');

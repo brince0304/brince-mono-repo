@@ -1,5 +1,5 @@
-import { notionClient } from '@/lib/notion';
 import { type NextRequest, NextResponse } from 'next/server';
+import {notionClient} from "@/lib/notion/notion";
 export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
   const slug = params.slug;
 

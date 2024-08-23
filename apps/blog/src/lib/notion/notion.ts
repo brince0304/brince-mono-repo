@@ -6,15 +6,15 @@ import type {
 } from '@/models/notion';
 import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
+import {COMMENT_DATABASE_ID, NOTION_TOKEN, POST_DATABASE_ID} from "@/lib/notion/consts";
 
-export const notion = new Client({ auth: process.env.NOTION_TOKEN });
-
+export const notion = new Client({ auth: NOTION_TOKEN });
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
 async function getPosts() {
   try {
     const response = await notion.databases.query({
-      database_id: process.env.NOTION_DATABASE_ID as string,
+      database_id: POST_DATABASE_ID,
       filter: {
         property: 'Published',
         checkbox: {
@@ -58,7 +58,7 @@ async function createCommentPage(pageId: string, data: CommentRequest) {
 
     await notion.pages.create({
       parent: {
-        database_id: process.env.NOTION_COMMENT_DATABASE_ID as string,
+        database_id: COMMENT_DATABASE_ID,
       },
       properties: {
         PageId: {
@@ -109,7 +109,7 @@ async function createCommentPage(pageId: string, data: CommentRequest) {
     });
 
     const comments = await notion.databases.query({
-      database_id: process.env.NOTION_COMMENT_DATABASE_ID as string,
+      database_id: COMMENT_DATABASE_ID,
       filter: {
         property: 'PageId',
         rich_text: {
@@ -135,7 +135,7 @@ async function createCommentPage(pageId: string, data: CommentRequest) {
 async function getComments(pageId: string) {
   try {
     const response = await notion.databases.query({
-      database_id: process.env.NOTION_COMMENT_DATABASE_ID as string,
+      database_id: COMMENT_DATABASE_ID,
       filter: {
         property: 'PageId',
         rich_text: {
@@ -159,10 +159,8 @@ async function getComments(pageId: string) {
 
 async function getPageBySlug(slug: string) {
   try {
-    const databaseId = process.env.NOTION_DATABASE_ID;
-
     const response = await notion.databases.query({
-      database_id: databaseId as string,
+      database_id: POST_DATABASE_ID,
       filter: {
         property: 'Slug',
         rich_text: {
