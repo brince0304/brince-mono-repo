@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "API_URL=$API_URL NOTION_API_KEY=$NOTION_API_KEY next build",
     "start": "next start"
   },
   "dependencies": {
