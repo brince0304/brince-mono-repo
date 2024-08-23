@@ -3,7 +3,8 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"]
+      "outputs": ["dist/**", ".next/**"],
+      "env": ["NOTION_TOKEN", "NOTION_DATABASE_ID", "NOTION_COMMENT_DATABASE_ID", "NOTION_OWNER_ID"]
     },
     "lint": {
       "outputs": []
