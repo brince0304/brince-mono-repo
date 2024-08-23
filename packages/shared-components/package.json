@@ -16,7 +16,8 @@
     "@brince-mono-repo/shared-styles": "workspace:*",
     "react": "^18",
     "react-dom": "^18",
-    "date-fns": "^3.6.0"
+    "date-fns": "^3.6.0",
+    "lucide-react": "^0.429.0"
   },
   "peerDependencies": {
     "react": "^18.2.0",

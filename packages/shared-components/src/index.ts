@@ -7,3 +7,4 @@ export { Header } from './Header';
 export { Comment } from './Comment';
 export { Text } from './Text';
 export { Skeleton } from './Skeleton';
+export { Chip } from './Chip';

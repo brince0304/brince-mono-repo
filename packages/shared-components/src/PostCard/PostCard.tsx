@@ -1,4 +1,5 @@
 import type React from 'react';
+import {Chip} from "@/Chip";
 
 export interface PostCardProps {
   title: string;
@@ -38,12 +39,7 @@ const PostCard: React.FC<PostCardProps> = ({
           <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{excerpt}</p>
           <div className="flex flex-wrap gap-2 mb-4">
             {tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-xs"
-              >
-                {tag}
-              </span>
+              <Chip text={tag} key={tag} color="zinc" shape={"square"} />
             ))}
           </div>
           <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400">
