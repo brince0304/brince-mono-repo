@@ -6,3 +6,4 @@ export { LinkButton } from './LinkButton';
 export { Header } from './Header';
 export { Comment } from './Comment';
 export { Text } from './Text';
+export { Skeleton } from './Skeleton';
