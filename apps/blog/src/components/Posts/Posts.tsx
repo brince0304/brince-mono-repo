@@ -1,6 +1,9 @@
-import { convertToPostCardProps } from "@/lib/notion/convert";
+import DailyPosts from "@/components/Posts/DailyPosts";
+import TechPosts from "@/components/Posts/TechPosts";
+import { POST_CATEGORY } from "@/lib/notion/consts";
 import { notionClient } from "@/lib/notion/notion";
-import { PostCard } from "@brince-mono-repo/shared-components";
+
+import React from "react";
 
 const Posts = async () => {
 	const posts = await notionClient.getPosts();
@@ -9,14 +12,19 @@ const Posts = async () => {
 		return null;
 	}
 
+	const techPosts = posts.filter(
+		(post) => post.properties.Category.select?.name === POST_CATEGORY.TECH,
+	);
+
+	const dailyPosts = posts.filter(
+		(post) => post.properties.Category.select?.name === POST_CATEGORY.DAILY,
+	);
+
 	return (
-		<ul className={"grid grid-cols-1 gap-4 md:grid-cols-3"}>
-			{posts
-				.map((post) => convertToPostCardProps(post))
-				.map((props) => (
-					<PostCard key={props.slug} {...props} />
-				))}
-		</ul>
+		<section className={"flex flex-col gap-4"}>
+			<DailyPosts posts={dailyPosts} />
+			<TechPosts posts={techPosts} />
+		</section>
 	);
 };
 
