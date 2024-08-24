@@ -2,7 +2,6 @@
 
 import usePostComment from "@/hooks/comment/usePostComment";
 import { Button } from "@brince-mono-repo/shared-components";
-import { Text } from "@brince-mono-repo/shared-components";
 import type React from "react";
 import { useState } from "react";
 
@@ -16,50 +15,46 @@ const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
 
 	const { mutate: postComment } = usePostComment(pageId);
 
-	const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
-		setAuthor("");
-		setText("");
-		postComment({ author, text });
+		if (author.trim() && text.trim()) {
+			postComment({ author, text });
+			setAuthor("");
+			setText("");
+		}
 	};
 
 	return (
-		<div className="rounded-lg p-4 mb-4 shadow-md transition-colors duration-200">
+		<form onSubmit={handleSubmit} className="mt-4">
 			<div className="mb-4">
-				<label htmlFor="nickname" className="block mb-2">
-					<Text variant="body-small">닉네임</Text>
-				</label>
 				<input
 					type="text"
-					id="nickname"
 					value={author}
 					onChange={(e) => setAuthor(e.target.value)}
-					className="w-40 px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-200"
+					className="w-full px-3 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-200"
 					placeholder="닉네임을 입력하세요"
 					required
 				/>
 			</div>
 			<div className="mb-4">
 				<textarea
-					id="content"
 					value={text}
 					onChange={(e) => setText(e.target.value)}
-					className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-200"
+					className="w-full px-3 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-200"
 					placeholder="댓글 내용을 입력하세요"
 					rows={4}
 					required
 				/>
 			</div>
-			<Button variant={"primary"} size={"small"} onClick={handleSubmit}>
-				<Text
-					variant="body"
-					className={"text-white dark:text-gray-900 font-bold"}
-				>
-					작성
-				</Text>
+			<Button
+				type="submit"
+				variant={"primary"}
+				size={"small"}
+				className={"float-end"}
+			>
+				등록
 			</Button>
-		</div>
+		</form>
 	);
 };
 

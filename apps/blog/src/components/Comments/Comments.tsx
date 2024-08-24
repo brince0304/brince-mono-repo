@@ -27,7 +27,7 @@ const Comments = ({ pageId }: CommentsProps) => {
 						</div>
 						{data.map((comment) => (
 							<Comment
-								key={comment.created_time}
+								key={comment.created_time + comment.id}
 								{...convertToCommentProps(comment)}
 							/>
 						))}
