@@ -5,6 +5,7 @@ import { convertToCommentProps } from "@/lib/notion/convert";
 import { Comment, Text } from "@brince-mono-repo/shared-components";
 import { Skeleton } from "@brince-mono-repo/shared-components";
 import { SuspenseQuery } from "@suspensive/react-query";
+import { size } from "es-toolkit/compat";
 import { Suspense } from "react";
 
 interface CommentsProps {
@@ -25,6 +26,14 @@ const Comments = ({ pageId }: CommentsProps) => {
 								댓글 {data.length}개
 							</Text>
 						</div>
+						{size(data) === 0 && (
+							<Text
+								variant={"body"}
+								className="text-center text-gray-500 dark:text-gray-400 p-4"
+							>
+								등록된 댓글이 없습니다. 첫 번째 댓글을 남겨주세요 🙋
+							</Text>
+						)}
 						{data.map((comment) => (
 							<Comment
 								key={comment.created_time + comment.id}
