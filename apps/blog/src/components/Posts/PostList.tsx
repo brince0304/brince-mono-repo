@@ -2,6 +2,8 @@
 import { convertToPostCardProps } from "@/lib/notion/convert";
 import type { NotionPage } from "@/models/notion";
 import { PostCard } from "@brince-mono-repo/shared-components";
+import Image from "next/image";
+import Link from "next/link";
 import type React from "react";
 
 interface PostListProps {
@@ -14,7 +16,12 @@ const PostList = ({ posts }: PostListProps) => {
 			{posts
 				.map((post) => convertToPostCardProps(post))
 				.map((props) => (
-					<PostCard key={props.slug} {...props} />
+					<PostCard
+						key={props.slug}
+						{...props}
+						ImageComponent={Image}
+						LinkComponent={Link}
+					/>
 				))}
 		</ul>
 	);
