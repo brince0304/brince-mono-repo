@@ -1,7 +1,8 @@
 import CommentForm from "@/components/CommentForm/CommentForm";
 import Comments from "@/components/Comments/Comments";
 import NotionPage from "@/components/NotionPage/NotionPage";
-import { notionClient } from "@/lib/notion/notion";
+import { serverFetcher } from "@/lib/client";
+import type { PageBySlugResponse } from "@/models/notion";
 import { Avatar, Chip, Text } from "@brince-mono-repo/shared-components";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale";
@@ -10,7 +11,10 @@ import type { Metadata } from "next";
 export async function generateMetadata({
 	params,
 }: { params: { slug: string } }): Promise<Metadata> {
-	const article = await notionClient.getPageBySlug(params.slug);
+	const article = await serverFetcher<PageBySlugResponse>(
+		`/posts/${params.slug}`,
+	);
+
 	return {
 		title: article?.page.properties.Title.title[0].plain_text,
 		description: article?.page.properties.Excerpt.rich_text[0].plain_text,
@@ -32,7 +36,7 @@ export async function generateMetadata({
 	};
 }
 export default async function Post({ params }: { params: { slug: string } }) {
-	const post = await notionClient.getPageBySlug(params.slug);
+	const post = await serverFetcher<PageBySlugResponse>(`/posts/${params.slug}`);
 
 	if (!post) {
 		return <div>Post not found</div>;
