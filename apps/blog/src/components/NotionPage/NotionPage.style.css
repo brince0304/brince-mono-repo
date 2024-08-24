@@ -1,12 +1,17 @@
 @media (min-width: 1020px) and (min-height: 300px) {
-  .notion-page-content-has-aside .notion-aside {
-    display: flex;
+  .notion-page-content-has-aside {
+    display: flex !important;
+    flex-direction: row !important;
+    width: calc((100vw + var(--notion-max-width)) / 1.8) !important;
   }
 
-  .notion-page-content-has-aside {
-    display: flex;
-    flex-direction: row;
-    width: calc((100vw + var(--notion-max-width)) / 1.8);
+  .notion-page-content-inner {
+    width: 720px !important;
+    max-width: 720px !important;
+  }
+
+  .notion-aside {
+    display: flex !important;
   }
 }
 
@@ -40,7 +45,6 @@
 }
 
 .notion-aside {
-
   z-index: 1;
 
   .notion-aside-table-of-contents {
