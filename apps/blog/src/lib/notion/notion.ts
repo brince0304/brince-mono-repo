@@ -1,15 +1,10 @@
-import type {
-  CommentRequest,
-  NotionPage,
-  NotionPagesResponse,
-  PageBySlugResponse,
-} from '@/models/notion';
+import type { CommentRequest, NotionPage, NotionPagesResponse } from '@/models/notion';
 import { Client } from '@notionhq/client';
-import { NotionToMarkdown } from 'notion-to-md';
-import {COMMENT_DATABASE_ID, NOTION_TOKEN, POST_DATABASE_ID} from "@/lib/notion/consts";
+import { COMMENT_DATABASE_ID, NOTION_TOKEN, POST_DATABASE_ID } from '@/lib/notion/consts';
+import { NotionAPI } from 'notion-client';
 
 export const notion = new Client({ auth: NOTION_TOKEN });
-const n2m = new NotionToMarkdown({ notionClient: notion });
+const notionAPI = new NotionAPI();
 
 async function getPosts() {
   try {
@@ -171,14 +166,10 @@ async function getPageBySlug(slug: string) {
 
     const page = response.results[0] as NotionPage;
 
-    const pageId = page.id;
-
-    const mdblocks = await n2m.pageToMarkdown(pageId);
-    const mdString = n2m.toMarkdownString(mdblocks);
-
+    const recordMap = await notionAPI.getPage(page.id);
     return {
       page,
-      markdown: mdString,
+      recordMap,
     };
   } catch (error) {
     console.error('Error fetching page:', error);

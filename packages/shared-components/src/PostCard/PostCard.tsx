@@ -1,5 +1,5 @@
 import type React from 'react';
-import {Chip} from "@/Chip";
+import { Chip } from '@/Chip';
 
 export interface PostCardProps {
   title: string;
@@ -39,7 +39,7 @@ const PostCard: React.FC<PostCardProps> = ({
           <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{excerpt}</p>
           <div className="flex flex-wrap gap-2 mb-4">
             {tags.map((tag) => (
-              <Chip text={tag} key={tag} color="zinc" shape={"square"} />
+              <Chip text={tag} key={tag} color="zinc" shape={'square'} />
             ))}
           </div>
           <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400">

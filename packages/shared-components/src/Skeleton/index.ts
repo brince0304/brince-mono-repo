@@ -1,7 +1,7 @@
-import CommentSkeleton from "@/Skeleton/CommentSkeleton";
+import CommentSkeleton from '@/Skeleton/CommentSkeleton';
 
 const Skeleton = {
-    Comment: CommentSkeleton,
+  Comment: CommentSkeleton,
 };
 
 export { Skeleton };

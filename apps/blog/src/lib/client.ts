@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const serverFetcher = async <T>(url: string, options?: RequestInit): Promise<T> => {
   const response = await fetch(url, options);
