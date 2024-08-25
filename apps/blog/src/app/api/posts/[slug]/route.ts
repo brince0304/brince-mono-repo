@@ -23,22 +23,6 @@ export async function GET(
 	try {
 		const response = await notionClient.getPageBySlug(slug);
 
-		const cookieStore = cookies();
-		const viewedCookie = cookieStore.get(`${slug}-viewed`);
-
-		if (viewedCookie) {
-			return NextResponse.json(response);
-		}
-
-		// 쿠키 설정 (24시간 유효)
-		cookieStore.set(`${slug}-viewed`, "true", {
-			httpOnly: true,
-			secure: process.env.NODE_ENV === "production",
-			sameSite: "strict",
-			maxAge: 60 * 60 * 24, // 24시간
-			path: "/",
-		});
-
 		await notionClient.updatePostProperties(response?.page.id, <
 			NotionProperties
 		>{
