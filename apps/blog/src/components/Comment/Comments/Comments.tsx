@@ -31,7 +31,7 @@ const Comments = ({ pageId }: CommentsProps) => {
 								variant={"body"}
 								className="text-center text-gray-500 dark:text-gray-400 p-4"
 							>
-								등록된 댓글이 없습니다. 첫 번째 댓글을 남겨주세요 🙋
+								첫 번째 댓글을 남겨주세요 🙋
 							</Text>
 						)}
 						{data.map((comment) => (
