@@ -9,3 +9,4 @@ export { Text } from "./Text";
 export { Skeleton } from "./Skeleton";
 export { Chip } from "./Chip";
 export { TextGrid } from "./TextGrid";
+export { Logo } from "./Logo";
