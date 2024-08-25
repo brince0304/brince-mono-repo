@@ -21,7 +21,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ post }) => {
 
 	return (
 		<article>
-			<section className="flex flex-col gap-2 mb-4">
+			<section className="flex flex-col gap-2 xl:w-2/3 lg:w-4/6 w-full">
 				<Text variant={"h1"}>
 					{post.page.properties.Title.title[0].plain_text}
 				</Text>
@@ -57,6 +57,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ post }) => {
 						/>
 					))}
 				</div>
+				<div className="border-t border-gray-200 dark:border-gray-700" />
 			</section>
 			<NotionPage recordMap={post.recordMap} />
 		</article>

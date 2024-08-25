@@ -8,6 +8,7 @@ import Link from "next/link";
 import React, { type ReactNode } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import CustomError from "@/components/Error/CustomError/CustomError";
+import Footer from "@/components/Footer/Footer";
 import ToastContainerWrapper from "@/components/Toast/ToastContainer/ToastContainerWrapper";
 import { ErrorBoundary } from "@suspensive/react";
 
@@ -42,6 +43,7 @@ export default function ClientLayout({
 							{children}
 							<ToastContainerWrapper />
 						</main>
+						<Footer />
 					</ErrorBoundary>
 				</div>
 			</QueryClientProvider>
