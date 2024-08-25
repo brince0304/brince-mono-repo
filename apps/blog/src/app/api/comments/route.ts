@@ -2,10 +2,7 @@ import { notionClient } from "@/lib/notion/notion";
 import type { NotionProperties } from "@/models/notion";
 import { type NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-	request: NextRequest,
-	{ pageId }: { pageId: string },
-) {
+export async function GET(request: NextRequest) {
 	try {
 		const searchParams = request.nextUrl.searchParams;
 		const pageId = searchParams.get("pageId");
@@ -40,8 +37,11 @@ export async function POST(request: NextRequest) {
 	}
 
 	try {
-		await notionClient.createCommentPage(pageId, data);
-		const comments = await notionClient.getComments(pageId);
+		const [_, comments] = await Promise.all([
+			notionClient.createCommentPage(pageId, data),
+			notionClient.getComments(pageId),
+		]);
+
 		await notionClient.updatePostProperties(pageId, <NotionProperties>{
 			Comments: {
 				type: "number",

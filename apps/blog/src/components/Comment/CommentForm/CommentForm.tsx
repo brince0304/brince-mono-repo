@@ -3,6 +3,7 @@
 import usePostComment from "@/hooks/comment/usePostComment";
 import { Button } from "@brince-mono-repo/shared-components";
 import type React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 
 interface CommentFormProps {
@@ -13,16 +14,21 @@ const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
 	const [author, setAuthor] = useState("");
 	const [text, setText] = useState("");
 
-	const { mutate: postComment } = usePostComment(pageId);
+	const { mutate: postComment, isPending, isSuccess } = usePostComment(pageId);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (author.trim() && text.trim()) {
 			postComment({ author, text });
+		}
+	};
+
+	useEffect(() => {
+		if (isSuccess) {
 			setAuthor("");
 			setText("");
 		}
-	};
+	}, [isSuccess]);
 
 	return (
 		<form onSubmit={handleSubmit} className="mt-4">
@@ -33,6 +39,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
 					onChange={(e) => setAuthor(e.target.value)}
 					className="w-full px-3 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-200"
 					placeholder="닉네임을 입력하세요"
+					disabled={isPending}
 					required
 				/>
 			</div>
@@ -42,6 +49,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
 					onChange={(e) => setText(e.target.value)}
 					className="w-full px-3 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-200"
 					placeholder="댓글 내용을 입력하세요"
+					disabled={isPending}
 					rows={4}
 					required
 				/>
@@ -51,6 +59,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
 				variant={"primary"}
 				size={"small"}
 				className={"float-end"}
+				disabled={isPending}
 			>
 				등록
 			</Button>
