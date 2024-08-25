@@ -1,9 +1,9 @@
-import Posts from '@/components/Posts/Posts';
+import Posts from "@/components/Post/Posts/Posts";
 
 export default async function Home() {
-  return (
-    <main className={'container mx-auto'}>
-      <Posts />
-    </main>
-  );
+	return (
+		<main className={"container mx-auto"}>
+			<Posts />
+		</main>
+	);
 }
