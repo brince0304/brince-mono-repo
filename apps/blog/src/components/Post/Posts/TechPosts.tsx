@@ -1,5 +1,5 @@
 "use client";
-import PostList from "@/components/Posts/PostList";
+import PostList from "@/components/Post/Posts/PostList";
 import type { NotionPage } from "@/models/notion";
 import { TextGrid } from "@brince-mono-repo/shared-components";
 import type React from "react";

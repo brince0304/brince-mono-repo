@@ -29,6 +29,8 @@
 		"react-dom": "^18",
 		"react-notion-x": "^6.16.0",
 		"react-scroll": "^1.9.0",
+		"react-spinners": "^0.14.1",
+		"react-toastify": "^10.0.5",
 		"rehype-highlight": "^7.0.0",
 		"rehype-raw": "^7.0.0",
 		"rehype-sanitize": "^6.0.0",
