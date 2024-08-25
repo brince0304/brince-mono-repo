@@ -7,12 +7,11 @@ const ToastContainerWrapper = () => {
 
 	return (
 		<ToastContainer
-			position="bottom-right"
+			position="bottom-center"
 			autoClose={3000}
 			hideProgressBar={false}
 			newestOnTop={false}
 			closeOnClick
-			rtl={false}
 			pauseOnFocusLoss
 			draggable
 			icon={false}

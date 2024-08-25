@@ -24,7 +24,7 @@ const usePostComment = (pageId: string) => {
 			toast.update(toastId, {
 				render: "댓글이 등록되었어요 🎉",
 				type: "success",
-				autoClose: 3000,
+				autoClose: 1000,
 			});
 		},
 	});
