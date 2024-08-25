@@ -35,7 +35,11 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
 
 	if (href) {
 		return (
-			<LinkComponent href={href} className={combinedClassName}>
+			<LinkComponent
+				href={href}
+				className={combinedClassName}
+				onClick={onClick}
+			>
 				{children}
 			</LinkComponent>
 		);
