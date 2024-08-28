@@ -9,6 +9,7 @@ import React, { type ReactNode } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import CustomError from "@/components/Error/CustomError/CustomError";
 import Footer from "@/components/Footer/Footer";
+import ProgressBar from "@/components/ProgressBar/ProgressBar";
 import ToastContainerWrapper from "@/components/Toast/ToastContainer/ToastContainerWrapper";
 import { ErrorBoundary } from "@suspensive/react";
 
@@ -34,6 +35,7 @@ export default function ClientLayout({
 							/>
 						}
 					>
+						<ProgressBar />
 						<Header
 							menuItems={menuItems}
 							themeToggle={<ThemeToggle />}
