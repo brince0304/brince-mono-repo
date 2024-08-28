@@ -1,17 +1,16 @@
 "use client";
 
+import CustomError from "@/components/Error/CustomError/CustomError";
+import Footer from "@/components/Footer/Footer";
+import ProgressBar from "@/components/ProgressBar/ProgressBar";
 import ThemeToggle from "@/components/ThemeToggle/ThemeToggle";
+import ToastContainerWrapper from "@/components/Toast/ToastContainer/ToastContainerWrapper";
 import { Header } from "@brince-mono-repo/shared-components";
+import { ErrorBoundary } from "@suspensive/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 import Link from "next/link";
 import React, { type ReactNode } from "react";
-import "react-toastify/dist/ReactToastify.css";
-import CustomError from "@/components/Error/CustomError/CustomError";
-import Footer from "@/components/Footer/Footer";
-import ProgressBar from "@/components/ProgressBar/ProgressBar";
-import ToastContainerWrapper from "@/components/Toast/ToastContainer/ToastContainerWrapper";
-import { ErrorBoundary } from "@suspensive/react";
 
 const menuItems = [{ name: "Home", path: "/" }];
 

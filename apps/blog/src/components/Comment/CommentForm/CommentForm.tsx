@@ -5,6 +5,7 @@ import { Button } from "@brince-mono-repo/shared-components";
 import type React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface CommentFormProps {
 	pageId: string;
@@ -14,12 +15,21 @@ const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
 	const [author, setAuthor] = useState("");
 	const [text, setText] = useState("");
 
-	const { mutate: postComment, isPending, isSuccess } = usePostComment(pageId);
+	const {
+		mutateAsync: postComment,
+		isPending,
+		isSuccess,
+	} = usePostComment(pageId);
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+
 		if (author.trim() && text.trim()) {
-			postComment({ author, text });
+			toast.promise(postComment({ author, text }), {
+				loading: "댓글을 등록 중입니다 🚀",
+				success: "댓글이 등록되었습니다 🎉",
+				error: "댓글 등록에 실패하였습니다 😢",
+			});
 		}
 	};
 
