@@ -15,6 +15,7 @@ type colors =
 	| "neutral"
 	| "stone";
 type shapes = "rounded" | "square";
+type sizes = "sm" | "md" | "lg";
 
 interface ChipProps {
 	text: string;
@@ -24,6 +25,7 @@ interface ChipProps {
 	icon?: React.ReactNode;
 	tag?: boolean;
 	shape?: shapes;
+	size?: sizes;
 }
 
 const Chip = ({
@@ -34,6 +36,7 @@ const Chip = ({
 	icon,
 	tag = false,
 	shape = "rounded",
+	size = "md",
 }: ChipProps) => {
 	const [isHovered, setIsHovered] = useState(false);
 
@@ -80,12 +83,22 @@ const Chip = ({
 		return shape === "rounded" ? "rounded-full" : "rounded-md";
 	};
 
+	const getSizeClasses = () => {
+		const sizeMap = {
+			sm: "px-2 py-1 text-xs",
+			md: "px-3 py-1.5 text-sm",
+			lg: "px-4 py-2 text-base",
+		};
+		return sizeMap[size] || sizeMap.md;
+	};
+
 	return (
 		// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 		<span
-			className={`inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium transition-all duration-200 ease-in-out ${getColorClasses()} ${getHoverClasses()} ${getShapeClasses()} ${
-				isHovered ? "shadow-md" : ""
-			} ${onClick ? "cursor-pointer" : ""}`}
+			className={`inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium transition-all duration-200
+			 ease-in-out ${getColorClasses()} ${getHoverClasses()} ${getShapeClasses()} ${
+					isHovered ? "shadow-md" : ""
+				} ${onClick ? "cursor-pointer" : ""} ${getSizeClasses()}`}
 			onClick={onClick}
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
