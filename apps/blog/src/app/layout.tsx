@@ -1,14 +1,7 @@
 import ClientLayout from "@/app/layout.client";
 import type { Metadata, Viewport } from "next";
-import { Noto_Sans_KR } from "next/font/google";
 import React, { type ReactNode } from "react";
 import "@brince-mono-repo/shared-styles";
-
-const notoSansKr = Noto_Sans_KR({
-	subsets: ["latin"],
-	weight: ["400", "700"],
-	variable: "--font-noto-sans-kr",
-});
 
 export const metadata: Metadata = {
 	title: "개발브ㄹ로그",
@@ -32,7 +25,7 @@ export default function RootLayout({
 	children: ReactNode;
 }) {
 	return (
-		<html lang="ko" className={`${notoSansKr.variable} scroll-smooth light`}>
+		<html lang="ko" className={"scroll-smooth light"}>
 			<head>
 				<link
 					rel="stylesheet"
