@@ -1,4 +1,5 @@
 import { Text } from "@brince-mono-repo/shared-components";
+import Link from "next/link";
 import type React from "react";
 
 interface CustomErrorProps {
@@ -17,12 +18,12 @@ const CustomError: React.FC<CustomErrorProps> = ({ code, message, emoji }) => {
 			<div className="w-16 h-16 rounded-full bg-yellow-400 dark:bg-yellow-300 flex items-center justify-center mb-8">
 				<span className="text-3xl">{emoji}</span>
 			</div>
-			<a
-				href="/apps/blog/public"
+			<Link
+				href="/"
 				className="px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white transition duration-300"
 			>
 				돌아가기
-			</a>
+			</Link>
 		</div>
 	);
 };
