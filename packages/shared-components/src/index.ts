@@ -1,3 +1,4 @@
+"use client";
 export { Avatar } from "./Avatar";
 export { PostCard } from "./PostCard";
 export { Loading } from "./Loading";
