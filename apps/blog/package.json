@@ -10,6 +10,7 @@
 	"dependencies": {
 		"@brince-mono-repo/shared-components": "workspace:*",
 		"@brince-mono-repo/shared-styles": "workspace:*",
+		"@brince-mono-repo/shared-tailwind-config": "workspace:*",
 		"@notionhq/client": "^2.2.15",
 		"@suspensive/react": "^2.13.1",
 		"@suspensive/react-query": "^2.13.1",

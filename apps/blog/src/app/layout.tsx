@@ -1,7 +1,9 @@
 import ClientLayout from "@/app/layout.client";
 import type { Metadata, Viewport } from "next";
+import { Inter as FontSans } from "next/font/google";
 import React, { type ReactNode } from "react";
 import "@brince-mono-repo/shared-styles";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "개발브ㄹ로그",
@@ -19,6 +21,11 @@ export const viewport: Viewport = {
 	],
 };
 
+const fontSans = FontSans({
+	subsets: ["latin"],
+	variable: "--font-sans",
+});
+
 export default function RootLayout({
 	children,
 }: {
@@ -34,7 +41,12 @@ export default function RootLayout({
 					href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
 				/>
 			</head>
-			<body className="font-sans overflow-x-hidden antialiased">
+			<body
+				className={cn(
+					"min-h-screen bg-background font-sans antialiased",
+					fontSans.variable,
+				)}
+			>
 				<ClientLayout>{children}</ClientLayout>
 			</body>
 		</html>

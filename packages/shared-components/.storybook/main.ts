@@ -17,13 +17,19 @@ module.exports = {
 		autodocs: "tag",
 	},
 	webpackFinal: async (config) => {
-		if (config.resolve) {
-			// 모노레포 루트 디렉토리 경로 추가
-			config.resolve.modules = [
-				...(config.resolve.modules || []),
-				path.resolve(__dirname, "../.."),
-			];
-		}
+		config.module.rules.push({
+			test: /\.css$/,
+			use: [
+				{
+					loader: "postcss-loader",
+					options: {
+						postcssOptions: {
+							plugins: [require("tailwindcss"), require("autoprefixer")],
+						},
+					},
+				},
+			],
+		});
 		return config;
 	},
 };

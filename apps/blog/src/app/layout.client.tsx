@@ -26,7 +26,7 @@ export default function ClientLayout({
 	return (
 		<ThemeProvider attribute="class" defaultTheme={"system"}>
 			<QueryClientProvider client={queryClient}>
-				<div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+				<div className="min-h-screen flex flex-col transition-colors duration-300">
 					<ErrorBoundary
 						fallback={
 							<CustomError
