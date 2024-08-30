@@ -12,8 +12,8 @@ interface PostDetailProps {
 
 const PostDetail: React.FC<PostDetailProps> = ({ post }) => {
 	return (
-		<article>
-			<section className="flex flex-col gap-2 xl:w-2/3 lg:w-4/6 w-full">
+		<article className={"flex flex-col gap-4"}>
+			<section className="flex flex-col gap-3 xl:w-2/3 lg:w-4/6 w-full">
 				<Text variant={"h1"} className={"font-bold"}>
 					{post.page.properties.Title.title[0].plain_text}
 				</Text>

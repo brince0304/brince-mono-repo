@@ -1,9 +1,9 @@
-import CommentSkeleton from "@/components/Skeleton/CommentSkeleton";
+import CommentSkeletons from "@/components/Skeleton/CommentSkeletons";
 import type { Meta, StoryObj } from "@storybook/react";
 
-const meta: Meta<typeof CommentSkeleton> = {
+const meta: Meta<typeof CommentSkeletons> = {
 	title: "Components/Skeleton/Comment",
-	component: CommentSkeleton,
+	component: CommentSkeletons,
 	tags: ["autodocs"],
 };
 

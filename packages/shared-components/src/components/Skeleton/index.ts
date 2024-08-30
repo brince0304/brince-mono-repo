@@ -1,8 +1,8 @@
-import CommentSkeleton from "../Skeleton/CommentSkeleton";
 import PostSkeleton from "../Skeleton/PostSkeleton";
+import CommentSkeletons from "./CommentSkeletons";
 
 const Skeleton = {
-	Comment: CommentSkeleton,
+	Comment: CommentSkeletons,
 	Post: PostSkeleton,
 };
 

@@ -3,10 +3,12 @@
 import usePostComment from "@/hooks/comment/usePostComment";
 import {
 	Avatar,
+	AvatarImage,
 	Button,
 	Text,
 	Textarea,
 } from "@brince-mono-repo/shared-components";
+import { getAvatarUrl } from "@brince-mono-repo/shared-components/src/lib/utils";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale";
 import type React from "react";
@@ -51,7 +53,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
 		<form onSubmit={handleSubmit} className="space-y-4" aria-label="댓글 등록">
 			<div className="flex items-start space-x-4">
 				<Avatar className="w-10 h-10">
-					<img src="/api/placeholder/40/40" alt="User avatar" />
+					<AvatarImage src={getAvatarUrl()} />
 				</Avatar>
 				<div className="flex-grow space-y-2">
 					<Text variant={"small"} className={"font-semibold"}>

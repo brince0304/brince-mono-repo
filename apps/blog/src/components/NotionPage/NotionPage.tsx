@@ -53,7 +53,7 @@ const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
 		setIsMounted(true);
 	}, []);
 
-	if (!isMounted) return null;
+	if (!isMounted) return <Skeleton.Post />;
 
 	if (!recordMap) {
 		return null;

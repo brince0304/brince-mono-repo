@@ -4,35 +4,35 @@ import PostDetail from "@/components/Post/PostDetail/PostDetail";
 import { serverFetcher } from "@/lib/client";
 import type { PageBySlugResponse } from "@/models/notion";
 import type { Metadata } from "next";
-import { useTheme } from "next-themes";
 
-// export async function generateMetadata({
-// 	params,
-// }: { params: { slug: string } }): Promise<Metadata> {
-// 	const article = await serverFetcher<PageBySlugResponse>(
-// 		`/posts/${params.slug}`,
-// 	);
-//
-// 	return {
-// 		title: article?.page.properties.Title.title[0].plain_text,
-// 		description: article?.page.properties.Excerpt.rich_text[0].plain_text,
-// 		authors: [
-// 			{
-// 				url: "https://brince.dev",
-// 				name: "브린스",
-// 			},
-// 		],
-// 		openGraph: {
-// 			title: article?.page.properties.Title.title[0].plain_text,
-// 			description: article?.page.properties.Excerpt.rich_text[0].plain_text,
-// 			images: [
-// 				{
-// 					url: article?.page.properties.Thumbnail.url ?? "",
-// 				},
-// 			],
-// 		},
-// 	};
-// }
+export async function generateMetadata({
+	params,
+}: { params: { slug: string } }): Promise<Metadata> {
+	const article = await serverFetcher<PageBySlugResponse>(
+		`/posts/${params.slug}`,
+	);
+
+	return {
+		title: article?.page.properties.Title.title[0].plain_text,
+		description: article?.page.properties.Excerpt.rich_text[0].plain_text,
+		authors: [
+			{
+				url: "https://brince.dev",
+				name: "브린스",
+			},
+		],
+		openGraph: {
+			title: article?.page.properties.Title.title[0].plain_text,
+			description: article?.page.properties.Excerpt.rich_text[0].plain_text,
+			images: [
+				{
+					url: article?.page.properties.Thumbnail.url ?? "",
+				},
+			],
+		},
+	};
+}
+
 export default async function Post({ params }: { params: { slug: string } }) {
 	const post = await serverFetcher<PageBySlugResponse>(`/posts/${params.slug}`);
 

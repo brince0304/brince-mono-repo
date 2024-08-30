@@ -16,7 +16,7 @@ const TextGrid: FC<TextGridProps> = ({ title, description, Icon }) => (
 					{<Icon />}
 				</div>
 			)}
-			<Text variant="h2" className="font-bold text-gray-900">
+			<Text variant="h2" className="font-bold">
 				{title}
 			</Text>
 		</div>
