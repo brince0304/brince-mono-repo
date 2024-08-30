@@ -1,5 +1,4 @@
-// @ts-ignore
-import path from "node:path";
+import { resolve } from "node:path";
 import react from "@vitejs/plugin-react";
 import MagicString from "magic-string";
 import { defineConfig } from "vite";
@@ -29,13 +28,13 @@ export default defineConfig({
 	],
 	build: {
 		lib: {
-			entry: path.resolve(__dirname, "src/index.ts"),
+			entry: resolve(__dirname, "src/index.ts"),
 			name: "SharedComponents",
 			formats: ["es", "cjs"],
 			fileName: (format) => `index.${format}.js`,
 		},
 		rollupOptions: {
-			external: ["react", "react-dom"],
+			external: ["react", "react-dom", "next/image", "next/link"],
 			output: {
 				globals: {
 					react: "React",
@@ -49,7 +48,7 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			"@": path.resolve(__dirname, "src"),
+			"@": resolve(__dirname, "src"),
 		},
 	},
 });

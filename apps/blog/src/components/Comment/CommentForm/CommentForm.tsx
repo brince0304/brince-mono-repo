@@ -1,7 +1,12 @@
 "use client";
 
 import usePostComment from "@/hooks/comment/usePostComment";
-import { Avatar, Button, Text } from "@brince-mono-repo/shared-components";
+import {
+	Avatar,
+	Button,
+	Text,
+	Textarea,
+} from "@brince-mono-repo/shared-components";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale";
 import type React from "react";
@@ -43,62 +48,35 @@ const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
 	}, [isSuccess]);
 
 	return (
-		<div className="flex flex-col mb-4 gap-2">
-			<div className="flex items-center">
-				<Avatar size={32} className={"mr-2"} />
-				<div>
-					<Text variant="emphasis">{author ? author : "닉네임"}</Text>
-					<Text
-						variant="body-small"
-						className="text-gray-500 dark:text-gray-400"
-					>
-						{formatDistanceToNow(new Date(), {
-							addSuffix: true,
-							locale: ko,
-						})}
+		<form onSubmit={handleSubmit} className="space-y-4" aria-label="댓글 등록">
+			<div className="flex items-start space-x-4">
+				<Avatar className="w-10 h-10">
+					<img src="/api/placeholder/40/40" alt="User avatar" />
+				</Avatar>
+				<div className="flex-grow space-y-2">
+					<Text variant={"small"} className={"font-semibold"}>
+						익명
 					</Text>
+					<Textarea
+						required
+						disabled={isPending}
+						placeholder="댓글은 큰 도움이 됩니다 🙏"
+						onChange={(e) => setText(e.target.value)}
+						value={text}
+					/>
+					<div className="flex justify-end">
+						<Button
+							disabled={isPending}
+							type={"submit"}
+							variant={"outline"}
+							size={"sm"}
+						>
+							등록
+						</Button>
+					</div>
 				</div>
 			</div>
-			<form
-				onSubmit={handleSubmit}
-				className="space-y-4"
-				aria-label="댓글 등록"
-			>
-				<div className="mb-4">
-					<input
-						type="text"
-						value={author}
-						onChange={(e) => setAuthor(e.target.value)}
-						className="w-full px-3 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-200"
-						placeholder="닉네임을 입력해주세요"
-						disabled={isPending}
-						required
-					/>
-				</div>
-				<div className="mb-4">
-					<textarea
-						value={text}
-						onChange={(e) => setText(e.target.value)}
-						className="w-full px-3 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-200"
-						placeholder="댓글은 큰 도움이 됩니다 🙏"
-						disabled={isPending}
-						rows={4}
-						required
-					/>
-				</div>
-				<div className="text-right">
-					<Button
-						type="submit"
-						variant={"primary"}
-						size={"small"}
-						className={"float-end"}
-						disabled={isPending}
-					>
-						등록
-					</Button>
-				</div>
-			</form>
-		</div>
+		</form>
 	);
 };
 

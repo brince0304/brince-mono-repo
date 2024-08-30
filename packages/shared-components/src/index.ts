@@ -1,13 +1,18 @@
 "use client";
-export { Avatar } from "./Avatar";
-export { PostCard } from "./PostCard";
-export { Loading } from "./Loading";
-export { Button } from "./Button";
-export { LinkButton } from "./LinkButton";
-export { Header } from "./Header";
-export { Comment } from "./Comment";
-export { Text } from "./Text";
-export { Skeleton } from "./Skeleton";
-export { Chip } from "./Chip";
-export { TextGrid } from "./TextGrid";
-export { Logo } from "./Logo";
+export {
+	Avatar,
+	AvatarImage,
+	AvatarFallback,
+} from "./components/ui/Avatar";
+export { PostCard } from "./components/PostCard";
+export { Button } from "./components/ui/Button";
+export { Header } from "./components/Header";
+export { Comment } from "./components/Comment";
+export { Text } from "./components/ui/Text";
+export { Skeleton } from "./components/Skeleton";
+export { Badge } from "./components/ui/Badge";
+export { TextGrid } from "./components/TextGrid";
+export { Logo } from "./components/ui/Logo";
+export { Footer } from "./components/Footer";
+export { BrinceAvatar } from "./components/BrnceAvatar";
+export { Textarea } from "./components/ui/TextArea";

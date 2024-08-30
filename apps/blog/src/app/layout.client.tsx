@@ -1,17 +1,16 @@
 "use client";
 
 import CustomError from "@/components/Error/CustomError/CustomError";
-import Footer from "@/components/Footer/Footer";
 import ProgressBar from "@/components/ProgressBar/ProgressBar";
 import ThemeToggle from "@/components/ThemeToggle/ThemeToggle";
 import ToastContainerWrapper, {
 	ToastStyles,
 } from "@/components/Toast/ToastContainer/ToastContainerWrapper";
 import { Header } from "@brince-mono-repo/shared-components";
+import { Footer } from "@brince-mono-repo/shared-components";
 import { ErrorBoundary } from "@suspensive/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ThemeProvider } from "next-themes";
-import Link from "next/link";
+import { ThemeProvider, useTheme } from "next-themes";
 import React, { type ReactNode } from "react";
 
 const menuItems = [{ name: "Home", path: "/" }];
@@ -23,6 +22,8 @@ export default function ClientLayout({
 }: {
 	children: ReactNode;
 }) {
+	const themeProps = useTheme();
+
 	return (
 		<ThemeProvider attribute="class" defaultTheme={"system"}>
 			<QueryClientProvider client={queryClient}>
@@ -37,12 +38,8 @@ export default function ClientLayout({
 						}
 					>
 						<ProgressBar />
-						<Header
-							menuItems={menuItems}
-							themeToggle={<ThemeToggle />}
-							LinkComponent={Link}
-						/>
-						<main className="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 mt-16">
+						<Header menuItems={menuItems} themeToggle={<ThemeToggle />} />
+						<main className="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
 							{children}
 							<ToastContainerWrapper />
 						</main>

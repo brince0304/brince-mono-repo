@@ -1,6 +1,7 @@
 "use client";
 import type { ExtendedRecordMap } from "notion-types";
 import type React from "react";
+import { useEffect, useState } from "react";
 import { NotionRenderer } from "react-notion-x";
 import "react-notion-x/src/styles.css";
 import { useTheme } from "next-themes";
@@ -9,6 +10,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import "prismjs/themes/prism-twilight.css";
+import { Skeleton } from "@brince-mono-repo/shared-components";
 
 interface NotionPageProps {
 	recordMap: ExtendedRecordMap | null;
@@ -45,6 +47,13 @@ const Collection = dynamic(
 
 const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
 	const { theme } = useTheme();
+	const [isMounted, setIsMounted] = useState(false);
+
+	useEffect(() => {
+		setIsMounted(true);
+	}, []);
+
+	if (!isMounted) return null;
 
 	if (!recordMap) {
 		return null;
