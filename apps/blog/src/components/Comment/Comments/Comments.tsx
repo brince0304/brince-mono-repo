@@ -27,14 +27,7 @@ const Comments = wrap
 								댓글 {data.length}개
 							</Text>
 						</div>
-						{size(data) === 0 && (
-							<Text
-								variant={"body"}
-								className="text-center text-gray-500 dark:text-gray-400 p-4"
-							>
-								첫 번째 댓글을 남겨주세요 🙋
-							</Text>
-						)}
+
 						{data.map((comment) => (
 							<Comment
 								key={comment.created_time + comment.id}
