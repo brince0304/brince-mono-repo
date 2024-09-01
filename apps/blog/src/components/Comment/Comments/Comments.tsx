@@ -6,7 +6,6 @@ import { Comment, Text } from "@brince-mono-repo/shared-components";
 import { Skeleton } from "@brince-mono-repo/shared-components";
 import { wrap } from "@suspensive/react";
 import { SuspenseQuery } from "@suspensive/react-query";
-import { size } from "es-toolkit/compat";
 
 interface CommentsProps {
 	pageId: string;

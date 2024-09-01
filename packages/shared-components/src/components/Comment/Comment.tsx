@@ -2,7 +2,7 @@
 import { HeartFilledIcon } from "@radix-ui/react-icons";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale";
-import type React from "react";
+import React from "react";
 import { getAvatarUrl } from "../../lib/utils";
 import { BrinceAvatar } from "../BrnceAvatar";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar/avatar";
@@ -69,4 +69,4 @@ const Comment: React.FC<CommentProps> = ({
 	);
 };
 
-export default Comment;
+export default React.memo(Comment);
