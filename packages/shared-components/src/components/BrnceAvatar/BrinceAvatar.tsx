@@ -12,7 +12,7 @@ const BrinceAvatar: React.FC<BrinceAvatarProps> = ({ className }) => {
 	return (
 		<Avatar className={className}>
 			<AvatarImage src={url} />
-			<AvatarFallback>브린스</AvatarFallback>
+			<AvatarFallback>B</AvatarFallback>
 		</Avatar>
 	);
 };

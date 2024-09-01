@@ -10,6 +10,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import "prismjs/themes/prism-twilight.css";
+import LikeButton from "@/components/Buttons/LikeButton/LikeButton";
 import { Skeleton } from "@brince-mono-repo/shared-components";
 
 interface NotionPageProps {

@@ -3,9 +3,7 @@
 import CustomError from "@/components/Error/CustomError/CustomError";
 import ProgressBar from "@/components/ProgressBar/ProgressBar";
 import ThemeToggle from "@/components/ThemeToggle/ThemeToggle";
-import ToastContainerWrapper, {
-	ToastStyles,
-} from "@/components/Toast/ToastContainer/ToastContainerWrapper";
+import ToastContainerWrapper from "@/components/Toast/ToastContainer/ToastContainerWrapper";
 import { Header } from "@brince-mono-repo/shared-components";
 import { Footer } from "@brince-mono-repo/shared-components";
 import { ErrorBoundary } from "@suspensive/react";
@@ -39,7 +37,7 @@ export default function ClientLayout({
 					>
 						<ProgressBar />
 						<Header menuItems={menuItems} themeToggle={<ThemeToggle />} />
-						<main className="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+						<main className="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
 							{children}
 							<ToastContainerWrapper />
 						</main>

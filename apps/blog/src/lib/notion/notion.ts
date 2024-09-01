@@ -38,21 +38,37 @@ async function getPosts() {
 	}
 }
 
-async function likePost(pageId: string) {
+async function updatePostLike(pageId: string, count: number) {
+	try {
+		await notion.pages.update({
+			page_id: pageId,
+			properties: {
+				Likes: {
+					type: "number",
+					number: count,
+				},
+			},
+		});
+	} catch (error) {
+		console.error("Error liking post:", error);
+	}
+}
+
+async function unlikePost(pageId: string) {
 	try {
 		const response = await notion.pages.update({
 			page_id: pageId,
 			properties: {
 				Likes: {
 					type: "number",
-					number: 1,
+					number: 0,
 				},
 			},
 		});
 
 		return response;
 	} catch (error) {
-		console.error("Error liking post:", error);
+		console.error("Error unliking post:", error);
 	}
 }
 
@@ -192,4 +208,5 @@ export const notionClient = {
 	createCommentPage,
 	getPageBySlug,
 	updatePostProperties,
+	updatePostLike,
 };

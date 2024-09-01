@@ -9,10 +9,8 @@ import {
 	Textarea,
 } from "@brince-mono-repo/shared-components";
 import { getAvatarUrl } from "@brince-mono-repo/shared-components/src/lib/utils";
-import { formatDistanceToNow } from "date-fns";
-import { ko } from "date-fns/locale";
 import type React from "react";
-import { useEffect } from "react";
+import { useMemo } from "react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -24,11 +22,9 @@ const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
 	const [author, setAuthor] = useState("익명");
 	const [text, setText] = useState("");
 
-	const {
-		mutateAsync: postComment,
-		isPending,
-		isSuccess,
-	} = usePostComment(pageId);
+	const avatarUrl = useMemo(() => getAvatarUrl(), []);
+
+	const { mutateAsync: postComment, isPending, reset } = usePostComment(pageId);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -36,24 +32,21 @@ const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
 		if (author.trim() && text.trim()) {
 			toast.promise(postComment({ author, text }), {
 				loading: "댓글을 등록 중입니다 🚀",
-				success: "댓글이 등록되었습니다 🎉",
+				success: () => {
+					reset();
+					setText("");
+					return "댓글이 등록되었습니다 🎉";
+				},
 				error: "댓글 등록에 실패하였습니다 😢",
 			});
 		}
 	};
 
-	useEffect(() => {
-		if (isSuccess) {
-			setAuthor("");
-			setText("");
-		}
-	}, [isSuccess]);
-
 	return (
 		<form onSubmit={handleSubmit} className="space-y-4" aria-label="댓글 등록">
 			<div className="flex items-start space-x-4">
 				<Avatar className="w-10 h-10">
-					<AvatarImage src={getAvatarUrl()} />
+					<AvatarImage src={avatarUrl} />
 				</Avatar>
 				<div className="flex-grow space-y-2">
 					<Text variant={"small"} className={"font-semibold"}>

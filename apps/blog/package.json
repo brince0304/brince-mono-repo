@@ -16,9 +16,12 @@
 		"@suspensive/react-query": "^2.13.1",
 		"@tanstack/react-query": "^5.51.23",
 		"axios": "^1.7.4",
+		"clsx": "^2.1.1",
 		"date-fns": "^3.6.0",
 		"es-toolkit": "^1.16.0",
 		"framer-motion": "^11.3.28",
+		"lottie-react": "^2.4.0",
+		"lottie-web": "^5.12.2",
 		"lucide-react": "^0.429.0",
 		"next": "14.2.5",
 		"next-nprogress-bar": "^2.3.13",
@@ -39,9 +42,8 @@
 		"remark-gfm": "^4.0.0",
 		"sass": "^1.77.8",
 		"sonner": "^1.5.0",
-		"vaul": "^0.9.1",
-		"clsx": "^2.1.1",
-		"tailwind-merge": "^2.5.2"
+		"tailwind-merge": "^2.5.2",
+		"vaul": "^0.9.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.8.3",

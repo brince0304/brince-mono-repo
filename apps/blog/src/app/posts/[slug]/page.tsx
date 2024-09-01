@@ -1,5 +1,3 @@
-import CommentForm from "@/components/Comment/CommentForm/CommentForm";
-import Comments from "@/components/Comment/Comments/Comments";
 import PostDetail from "@/components/Post/PostDetail/PostDetail";
 import { serverFetcher } from "@/lib/client";
 import type { PageBySlugResponse } from "@/models/notion";
@@ -21,12 +19,19 @@ export async function generateMetadata({
 				name: "브린스",
 			},
 		],
+		keywords: article?.page.properties.Tags.multi_select.map((tag) => tag.name),
+		robots: "index, follow",
 		openGraph: {
+			type: "article",
+			locale: "ko_KR",
 			title: article?.page.properties.Title.title[0].plain_text,
 			description: article?.page.properties.Excerpt.rich_text[0].plain_text,
 			images: [
 				{
-					url: article?.page.properties.Thumbnail.url ?? "",
+					url: "https://brince.dev/brince.png",
+					width: 1200,
+					height: 630,
+					alt: "브린스",
 				},
 			],
 		},
@@ -37,15 +42,8 @@ export default async function Post({ params }: { params: { slug: string } }) {
 	const post = await serverFetcher<PageBySlugResponse>(`/posts/${params.slug}`);
 
 	return (
-		<>
-			<PostDetail post={post} />
-			{!!post.page.id && (
-				<section className="flex xl:w-2/3 lg:w-4/6 w-full flex-col gap-4">
-					<Comments pageId={post.page.id} />
-					<div className="border-t border-gray-200 dark:border-gray-700" />
-					<CommentForm pageId={post.page.id} />
-				</section>
-			)}
-		</>
+		<div className="flex justify-center">
+			<PostDetail post={post} slug={params.slug} />
+		</div>
 	);
 }
