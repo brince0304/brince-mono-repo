@@ -15,7 +15,6 @@ export interface CommentProps {
 	createdAt: string;
 	liked?: boolean;
 	owner?: boolean;
-	isDark: boolean;
 }
 
 const Comment: React.FC<CommentProps> = ({
@@ -24,7 +23,6 @@ const Comment: React.FC<CommentProps> = ({
 	createdAt,
 	liked,
 	owner,
-	isDark,
 }) => {
 	return (
 		<div className="w-full mb-6">
@@ -57,7 +55,7 @@ const Comment: React.FC<CommentProps> = ({
 							<div className="relative inline-block">
 								<BrinceAvatar className="w-7 h-7" />
 								<div className="absolute top-4 left-5 p-0.5">
-									<HeartFilledIcon color={isDark ? "#FFF" : "#000000"} />
+									<HeartFilledIcon />
 								</div>
 							</div>
 						)}

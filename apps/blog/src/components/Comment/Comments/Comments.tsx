@@ -7,7 +7,6 @@ import { Skeleton } from "@brince-mono-repo/shared-components";
 import { wrap } from "@suspensive/react";
 import { SuspenseQuery } from "@suspensive/react-query";
 import { size } from "es-toolkit/compat";
-import { useTheme } from "next-themes";
 
 interface CommentsProps {
 	pageId: string;
@@ -18,9 +17,6 @@ const Comments = wrap
 	.on<CommentsProps>(({ pageId }) => (
 		<SuspenseQuery {...CommentQueryOptions.getComments(pageId)}>
 			{({ data }) => {
-				const { theme } = useTheme();
-				const isDark = theme === "dark";
-
 				return (
 					<section className="flex flex-col gap-1 mt-4" data-id={"comments"}>
 						<div className="flex items-center mb-6">
@@ -41,7 +37,6 @@ const Comments = wrap
 						)}
 						{data.map((comment) => (
 							<Comment
-								isDark={isDark}
 								key={comment.created_time + comment.id}
 								{...convertToCommentProps(comment)}
 							/>
