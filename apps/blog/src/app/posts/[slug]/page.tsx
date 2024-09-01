@@ -1,5 +1,6 @@
 import PostDetail from "@/components/Post/PostDetail/PostDetail";
 import { serverFetcher } from "@/lib/client";
+import { BLOG_URL } from "@/lib/consts";
 import type { PageBySlugResponse } from "@/models/notion";
 import type { Metadata } from "next";
 
@@ -15,7 +16,7 @@ export async function generateMetadata({
 		description: article?.page.properties.Excerpt.rich_text[0].plain_text,
 		authors: [
 			{
-				url: "https://brince.dev",
+				url: BLOG_URL,
 				name: "브린스",
 			},
 		],
@@ -26,14 +27,8 @@ export async function generateMetadata({
 			locale: "ko_KR",
 			title: article?.page.properties.Title.title[0].plain_text,
 			description: article?.page.properties.Excerpt.rich_text[0].plain_text,
-			images: [
-				{
-					url: "https://brince.dev/brince.png",
-					width: 1200,
-					height: 630,
-					alt: "브린스",
-				},
-			],
+			images: [{ url: article?.page.properties.Thumbnail.url ?? "" }],
+			url: `${BLOG_URL}/posts/${params.slug}`,
 		},
 	};
 }
