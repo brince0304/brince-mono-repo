@@ -35,6 +35,9 @@ export function generateMetadata({
 		keywords,
 		authors: [{ name: author }],
 		publisher,
+		icons: {
+			icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+		},
 		robots: "index, follow",
 		openGraph: {
 			title,

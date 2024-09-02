@@ -12,7 +12,7 @@ const Footer = () => {
 						<div className="flex flex-col space-y-4">
 							<h2 className="text-2xl font-bold">BRIN&lt;/&gt;E</h2>
 							<p className="text-gray-500 dark:text-gray-400">
-								© {new Date().getFullYear()} All rights reserved.
+								© {new Date().getFullYear()}
 							</p>
 						</div>
 						<div className="flex space-x-4 items-center">
