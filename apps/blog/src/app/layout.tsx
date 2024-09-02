@@ -4,21 +4,14 @@ import { Inter as FontSans } from "next/font/google";
 import React, { type ReactNode } from "react";
 import "@brince-mono-repo/shared-styles";
 import { cn } from "@/lib/utils";
+import { generateHomeMetadata } from "@/lib/utils/metadata";
 
-export const metadata: Metadata = {
-	title: "개발브ㄹ로그",
-	description:
-		"춤을 사랑하는 프론트엔드 개발자 브린스 입니다. 삶을 공유하면서 함께 성장하는 개발자가 되고 싶습니다.",
-};
+export const metadata: Metadata = generateHomeMetadata();
 
 export const viewport: Viewport = {
 	width: "device-width",
 	height: "device-height",
 	initialScale: 1,
-	themeColor: [
-		{ media: "(prefers-color-scheme: dark)", color: "#171717" },
-		{ media: "(prefers-color-scheme: light)", color: "#ffffff" },
-	],
 };
 
 const fontSans = FontSans({
