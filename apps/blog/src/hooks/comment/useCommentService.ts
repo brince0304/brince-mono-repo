@@ -3,7 +3,7 @@ import type { CommentRequest } from "@/models/notion";
 import { commentService } from "@/services/comment";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-const usePostComment = (pageId: string) => {
+export const usePostComment = (pageId: string) => {
 	const queryClient = useQueryClient();
 
 	return useMutation({
@@ -16,5 +16,3 @@ const usePostComment = (pageId: string) => {
 		},
 	});
 };
-
-export default usePostComment;

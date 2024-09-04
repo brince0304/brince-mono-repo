@@ -1,6 +1,6 @@
 "use client";
 
-import usePostComment from "@/hooks/comment/usePostComment";
+import { usePostComment } from "@/hooks/comment/useCommentService";
 import {
 	Avatar,
 	AvatarImage,
@@ -19,7 +19,6 @@ interface CommentFormProps {
 }
 
 const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
-	const [author, setAuthor] = useState("익명");
 	const [text, setText] = useState("");
 
 	const avatarUrl = useMemo(() => getAvatarUrl(), []);
@@ -29,8 +28,8 @@ const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		if (author.trim() && text.trim()) {
-			toast.promise(postComment({ author, text }), {
+		if (text.trim()) {
+			toast.promise(postComment({ author: "익명", text }), {
 				loading: "댓글을 등록 중입니다 🚀",
 				success: () => {
 					reset();
