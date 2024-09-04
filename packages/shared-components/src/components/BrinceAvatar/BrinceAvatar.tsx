@@ -11,7 +11,7 @@ const BrinceAvatar: React.FC<BrinceAvatarProps> = ({ className }) => {
 
 	return (
 		<Avatar className={className}>
-			<AvatarImage src={url} />
+			<AvatarImage src={url} alt={"Brince"} />
 			<AvatarFallback>B</AvatarFallback>
 		</Avatar>
 	);
