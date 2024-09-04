@@ -1,40 +1,48 @@
 import { cookies } from "next/headers";
 
-export async function getPostLikeStatus(pageId: string): Promise<boolean> {
-	const cookieStore = cookies();
-	const likedPosts = cookieStore.get("likedPosts");
+const LIKED_POSTS_COOKIE_NAME = "likedPosts";
 
-	if (!likedPosts) {
-		return false;
-	}
-
-	try {
-		const likedPostsArray = JSON.parse(likedPosts.value);
-		console.log("likedPostsArray", likedPostsArray);
-		return likedPostsArray.includes(pageId);
-	} catch (error) {
-		console.error("쿠키 파싱 중 오류 발생:", error);
-		return false;
-	}
+interface CookieOptions {
+	httpOnly: boolean;
+	secure: boolean;
+	sameSite: "strict" | "lax" | "none";
+	maxAge: number;
 }
 
-export async function savePostLikeStatus(pageId: string, isLiked: boolean) {
-	const cookieStore = cookies();
-	const likedPostsCookie = cookieStore.get("likedPosts");
+const cookieOptions: CookieOptions = {
+	httpOnly: true,
+	secure: process.env.NODE_ENV === "production",
+	sameSite: "strict",
+	maxAge: 30 * 24 * 60 * 60, // 30일
+};
 
-	let likedPosts: string[] = [];
+const parseLikedPosts = (cookieValue: string | undefined): string[] => {
+	if (!cookieValue) return [];
 
-	if (likedPostsCookie) {
-		try {
-			likedPosts = JSON.parse(likedPostsCookie.value);
-			if (!Array.isArray(likedPosts)) {
-				throw new Error("Invalid cookie value");
-			}
-		} catch (error) {
-			console.error("쿠키 파싱 중 오류 발생:", error);
-			likedPosts = [];
-		}
+	try {
+		const parsed = JSON.parse(cookieValue);
+		if (Array.isArray(parsed)) return parsed;
+		throw new Error("Invalid cookie value");
+	} catch (error) {
+		console.error("쿠키 파싱 중 오류 발생:", error);
+		return [];
 	}
+};
+
+export const getPostLikeStatus = async (pageId: string): Promise<boolean> => {
+	const cookieStore = cookies();
+	const likedPostsCookie = cookieStore.get(LIKED_POSTS_COOKIE_NAME);
+	const likedPosts = parseLikedPosts(likedPostsCookie?.value);
+	return likedPosts.includes(pageId);
+};
+
+export const savePostLikeStatus = async (
+	pageId: string,
+	isLiked: boolean,
+): Promise<void> => {
+	const cookieStore = cookies();
+	const likedPostsCookie = cookieStore.get(LIKED_POSTS_COOKIE_NAME);
+	const likedPosts = parseLikedPosts(likedPostsCookie?.value);
 
 	const pageIndex = likedPosts.indexOf(pageId);
 	if (isLiked && pageIndex === -1) {
@@ -43,10 +51,9 @@ export async function savePostLikeStatus(pageId: string, isLiked: boolean) {
 		likedPosts.splice(pageIndex, 1);
 	}
 
-	cookieStore.set("likedPosts", JSON.stringify(likedPosts), {
-		httpOnly: true,
-		secure: process.env.NODE_ENV === "production",
-		sameSite: "strict",
-		maxAge: 30 * 24 * 60 * 60, // 30 days
-	});
-}
+	cookieStore.set(
+		LIKED_POSTS_COOKIE_NAME,
+		JSON.stringify(likedPosts),
+		cookieOptions,
+	);
+};
