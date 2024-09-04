@@ -7,7 +7,7 @@ import NotionPage from "@/components/NotionPage/NotionPage";
 import { getPostLikeStatus } from "@/lib/cookie";
 import type { PageBySlugResponse } from "@/models/notion";
 import { Badge, Text } from "@brince-mono-repo/shared-components";
-import BrinceAvatar from "@brince-mono-repo/shared-components/src/components/BrnceAvatar/BrinceAvatar";
+import { BrinceAvatar } from "@brince-mono-repo/shared-components";
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale";
 import type React from "react";

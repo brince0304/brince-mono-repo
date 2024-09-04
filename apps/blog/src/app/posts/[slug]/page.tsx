@@ -14,10 +14,13 @@ export async function generateMetadata({
 	return generateBlogPostMetadata(article.page);
 }
 
-export const revalidate = 10;
-
 export default async function Post({ params }: { params: { slug: string } }) {
-	const post = await serverFetcher<PageBySlugResponse>(`/posts/${params.slug}`);
+	const post = await serverFetcher<PageBySlugResponse>(
+		`/posts/${params.slug}`,
+		{
+			cache: "no-store",
+		},
+	);
 
 	return (
 		<div className="flex">

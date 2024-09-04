@@ -8,7 +8,7 @@ import { Header } from "@brince-mono-repo/shared-components";
 import { Footer } from "@brince-mono-repo/shared-components";
 import { ErrorBoundary } from "@suspensive/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ThemeProvider, useTheme } from "next-themes";
+import { ThemeProvider } from "next-themes";
 import React, { type ReactNode } from "react";
 
 const menuItems = [{ name: "Home", path: "/" }];
@@ -20,8 +20,6 @@ export default function ClientLayout({
 }: {
 	children: ReactNode;
 }) {
-	const themeProps = useTheme();
-
 	return (
 		<ThemeProvider attribute="class" defaultTheme={"system"}>
 			<QueryClientProvider client={queryClient}>
