@@ -27,15 +27,6 @@ export async function GET(
 			);
 		}
 
-		await notionClient.updatePostProperties(response?.page.id, <
-			NotionProperties
-		>{
-			Views: {
-				type: "number",
-				number: (response?.page?.properties?.Views?.number ?? 0) + 1,
-			},
-		});
-
 		return NextResponse.json(response);
 	} catch (error) {
 		console.error("Error fetching post:", error);
