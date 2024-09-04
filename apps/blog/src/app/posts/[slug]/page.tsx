@@ -24,7 +24,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
 
 	return (
 		<div className="flex">
-			<PostDetail post={post} slug={params.slug} />
+			<PostDetail post={post} />
 		</div>
 	);
 }
