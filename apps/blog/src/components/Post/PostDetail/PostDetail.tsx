@@ -14,16 +14,20 @@ import type React from "react";
 
 interface PostDetailProps {
 	post: PageBySlugResponse;
-	slug: string;
 }
 
-const PostDetail: React.FC<PostDetailProps> = async ({ post, slug }) => {
-	const isLiked = await getPostLikeStatus(slug);
+const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
+	const isLiked = await getPostLikeStatus(post.page.id);
 
 	return (
 		<article className="flex gap-4 max-w-3xl w-full relative sm:px-0">
 			<div className="hidden lg:block sticky top-1/4 h-fit">
-				<LikeShareButton slug={slug} isLiked={isLiked} />
+				<LikeShareButton
+					isLiked={isLiked}
+					pageId={post.page.id}
+					count={post.page.properties.Likes.number}
+					column
+				/>
 			</div>
 			<div className="flex flex-col w-full flex-1 lg:ml-4 gap-4">
 				<header className="flex flex-col gap-3">
@@ -62,8 +66,11 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post, slug }) => {
 				</header>
 				<NotionPage recordMap={post.recordMap} />
 				<div className="lg:hidden mt-4 flex gap-4">
-					<LikeButton slug={slug} isLiked={isLiked} />
-					<ShareButton />
+					<LikeShareButton
+						isLiked={isLiked}
+						pageId={post.page.id}
+						count={post.page.properties.Likes.number}
+					/>
 				</div>
 				<Comments pageId={post.page.id} />
 				<div className="border-t border-gray-200 dark:border-gray-700" />

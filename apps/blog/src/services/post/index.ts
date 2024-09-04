@@ -1,7 +1,8 @@
 import { axiosClient } from "@/lib/client";
+import type { PostLikeRequest } from "@/models/post";
 
-const postLikePage = (slug: string) => {
-	return axiosClient.post(`/posts/${slug}/like`);
+const postLikePage = ({ pageId, count }: PostLikeRequest) => {
+	return axiosClient.post(`/posts/${pageId}/like`, { count });
 };
 
 export const postService = {
