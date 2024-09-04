@@ -1,6 +1,6 @@
 "use client";
 import Heart from "@/assets/lottie/heart.json";
-import LottieComponent from "@/components/LottieAnimation/LottieComponent";
+import LottieComponent from "@/components/LottieComponent/LottieComponent";
 import { useLikePost } from "@/hooks/post/usePostService";
 import { Button } from "@brince-mono-repo/shared-components";
 import { ReloadIcon } from "@radix-ui/react-icons";
