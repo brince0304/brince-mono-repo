@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-export async function getPostLikeStatus(slug: string): Promise<boolean> {
+export async function getPostLikeStatus(pageId: string): Promise<boolean> {
 	const cookieStore = cookies();
 	const likedPosts = cookieStore.get("likedPosts");
 
@@ -11,29 +11,42 @@ export async function getPostLikeStatus(slug: string): Promise<boolean> {
 	try {
 		const likedPostsArray = JSON.parse(likedPosts.value);
 		console.log("likedPostsArray", likedPostsArray);
-		return likedPostsArray.includes(slug);
+		return likedPostsArray.includes(pageId);
 	} catch (error) {
 		console.error("쿠키 파싱 중 오류 발생:", error);
 		return false;
 	}
 }
 
-export async function savePostLikeStatus(slug: string, isLiked: boolean) {
+export async function savePostLikeStatus(pageId: string, isLiked: boolean) {
 	const cookieStore = cookies();
-	const likedPosts = cookieStore.get("likedPosts");
+	const likedPostsCookie = cookieStore.get("likedPosts");
 
-	if (!likedPosts) {
-		cookieStore.set("likedPosts", JSON.stringify([slug]));
-		return;
+	let likedPosts: string[] = [];
+
+	if (likedPostsCookie) {
+		try {
+			likedPosts = JSON.parse(likedPostsCookie.value);
+			if (!Array.isArray(likedPosts)) {
+				throw new Error("Invalid cookie value");
+			}
+		} catch (error) {
+			console.error("쿠키 파싱 중 오류 발생:", error);
+			likedPosts = [];
+		}
 	}
 
-	try {
-		const likedPostsArray = JSON.parse(likedPosts.value);
-		const updatedLikedPosts = isLiked
-			? likedPostsArray.filter((likedSlug: string) => likedSlug !== slug)
-			: [...likedPostsArray, slug];
-		cookieStore.set("likedPosts", JSON.stringify(updatedLikedPosts));
-	} catch (error) {
-		console.error("쿠키 파싱 중 오류 발생:", error);
+	const pageIndex = likedPosts.indexOf(pageId);
+	if (isLiked && pageIndex === -1) {
+		likedPosts.push(pageId);
+	} else if (!isLiked && pageIndex !== -1) {
+		likedPosts.splice(pageIndex, 1);
 	}
+
+	cookieStore.set("likedPosts", JSON.stringify(likedPosts), {
+		httpOnly: true,
+		secure: process.env.NODE_ENV === "production",
+		sameSite: "strict",
+		maxAge: 30 * 24 * 60 * 60, // 30 days
+	});
 }
