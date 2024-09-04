@@ -1,5 +1,5 @@
-import LikeButton from "@/components/Buttons/LikeButton/LikeButton";
-import ShareButton from "@/components/Buttons/ShareButton/ShareButton";
+import LikeButton from "@/components/PostButtons/LikeButton/LikeButton";
+import ShareButton from "@/components/PostButtons/ShareButton/ShareButton";
 import type React from "react";
 
 interface LikeAndShareProps {
@@ -10,7 +10,7 @@ interface LikeAndShareProps {
 	className?: string;
 }
 
-const LikeShareButton: React.FC<LikeAndShareProps> = ({
+const PostFloatingButton: React.FC<LikeAndShareProps> = ({
 	isLiked,
 	pageId,
 	count,
@@ -25,4 +25,4 @@ const LikeShareButton: React.FC<LikeAndShareProps> = ({
 	);
 };
 
-export default LikeShareButton;
+export default PostFloatingButton;

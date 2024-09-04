@@ -1,9 +1,9 @@
-import LikeButton from "@/components/Buttons/LikeButton/LikeButton";
-import LikeShareButton from "@/components/Buttons/LikeShareButton/LikeShareButton";
-import ShareButton from "@/components/Buttons/ShareButton/ShareButton";
 import CommentForm from "@/components/Comment/CommentForm/CommentForm";
 import Comments from "@/components/Comment/Comments/Comments";
 import NotionPage from "@/components/NotionPage/NotionPage";
+import LikeButton from "@/components/PostButtons/LikeButton/LikeButton";
+import PostFloatingButton from "@/components/PostButtons/PostFloatingButton/PostFloatingButton";
+import ShareButton from "@/components/PostButtons/ShareButton/ShareButton";
 import { getPostLikeStatus } from "@/lib/cookie";
 import type { PageBySlugResponse } from "@/models/notion";
 import { Badge, Text } from "@brince-mono-repo/shared-components";
@@ -22,7 +22,7 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
 	return (
 		<article className="flex gap-4 max-w-3xl w-full relative sm:px-0">
 			<div className="hidden lg:block sticky top-1/4 h-fit">
-				<LikeShareButton
+				<PostFloatingButton
 					isLiked={isLiked}
 					pageId={post.page.id}
 					count={post.page.properties.Likes.number}
@@ -66,7 +66,7 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
 				</header>
 				<NotionPage recordMap={post.recordMap} />
 				<div className="lg:hidden mt-4 flex gap-4">
-					<LikeShareButton
+					<PostFloatingButton
 						isLiked={isLiked}
 						pageId={post.page.id}
 						count={post.page.properties.Likes.number}
