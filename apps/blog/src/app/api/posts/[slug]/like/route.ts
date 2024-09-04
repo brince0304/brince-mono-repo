@@ -1,4 +1,4 @@
-import { getPostLikeStatus, savePostLikeStatus } from "@/lib/cookie";
+import { savePostLikeStatus } from "@/lib/cookie";
 import { notionClient } from "@/lib/notion/notion";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -6,7 +6,7 @@ export async function POST(
 	req: NextRequest,
 	{ params }: { params: { slug: string } },
 ) {
-	const slug = params.slug;
+	const { slug } = params;
 
 	if (!slug) {
 		return NextResponse.json(
@@ -14,25 +14,15 @@ export async function POST(
 			{ status: 400 },
 		);
 	}
-	const isLiked = await getPostLikeStatus(slug);
-
-	if (isLiked) {
-		return NextResponse.json(
-			{ error: "이미 좋아요를 누르셨습니다." },
-			{ status: 400 },
-		);
-	}
 
 	try {
-		const post = await notionClient.getPageBySlug(slug);
-		if (!post) return;
+		const data = await req.json();
+		const count = data.count;
 
-		const currentLikeCount = post.page.properties.Likes.number;
-		const pageId = post.page.id;
-
-		await notionClient.updatePostLike(pageId, currentLikeCount + 1);
-
-		await savePostLikeStatus(slug, isLiked);
+		await Promise.all([
+			notionClient.updatePostLike(slug, count + 1),
+			savePostLikeStatus(slug, true),
+		]);
 
 		return NextResponse.json({ status: 201 });
 	} catch (error) {
