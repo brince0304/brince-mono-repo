@@ -1,16 +1,11 @@
 import { notionClient } from "@/lib/notion/notion";
 import type { NotionProperties } from "@/models/notion";
-import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
+
 export async function GET(
-	req: NextRequest,
+	request: NextRequest,
 	{ params }: { params: { slug: string } },
 ) {
-	req.headers.set(
-		"Cache-Control",
-		"public, s-maxage=60, stale-while-revalidate=30",
-	);
-
 	const slug = params.slug;
 
 	if (!slug) {
