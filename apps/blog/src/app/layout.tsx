@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter as FontSans } from "next/font/google";
 import React, { type ReactNode } from "react";
 import "@brince-mono-repo/shared-styles";
+import { generateHomeMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
-import { generateHomeMetadata } from "@/lib/utils/metadata";
 
 export const metadata: Metadata = generateHomeMetadata();
 
