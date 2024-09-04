@@ -4,7 +4,7 @@ import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale";
 import React from "react";
 import { getAvatarUrl } from "../../lib/utils";
-import { BrinceAvatar } from "../BrnceAvatar";
+import { BrinceAvatar } from "../BrinceAvatar";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar/avatar";
 import { Button } from "../ui/Button/button";
 import { Card } from "../ui/Card/card";

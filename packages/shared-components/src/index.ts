@@ -14,5 +14,5 @@ export { Badge } from "./components/ui/Badge";
 export { TextGrid } from "./components/TextGrid";
 export { Logo } from "./components/ui/Logo";
 export { Footer } from "./components/Footer";
-export { BrinceAvatar } from "./components/BrnceAvatar";
+export { BrinceAvatar } from "./components/BrinceAvatar";
 export { Textarea } from "./components/ui/TextArea";

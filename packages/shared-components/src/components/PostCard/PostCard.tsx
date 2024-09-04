@@ -2,7 +2,7 @@ import { ArrowRight, Heart, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
-import { BrinceAvatar } from "../BrnceAvatar";
+import { BrinceAvatar } from "../BrinceAvatar";
 import { Badge } from "../ui/Badge";
 import { Button } from "../ui/Button";
 import { Card, CardContent, CardFooter } from "../ui/Card";
