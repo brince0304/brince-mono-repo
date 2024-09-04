@@ -1,9 +1,4 @@
-import Lottie, {
-	type AnimationConfig,
-	type AnimationItem,
-	type RendererType,
-} from "lottie-web";
-import dynamic from "next/dynamic";
+import Lottie, { type AnimationConfig, type AnimationItem } from "lottie-web";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
