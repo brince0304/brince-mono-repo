@@ -17,6 +17,15 @@ export async function GET(
 
 	try {
 		const response = await notionClient.getPageBySlug(slug);
+		const isPublished =
+			response?.page?.properties?.Published?.checkbox ?? false;
+
+		if (!isPublished) {
+			return NextResponse.json(
+				{ error: "게시글이 존재하지 않습니다." },
+				{ status: 404 },
+			);
+		}
 
 		await notionClient.updatePostProperties(response?.page.id, <
 			NotionProperties
