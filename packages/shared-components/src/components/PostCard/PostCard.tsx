@@ -42,21 +42,14 @@ const PostCard: React.FC<PostCardProps> = ({
 						/>
 					</div>
 				)}
-				<CardContent className="p-6">
-					<div className="flex items-center space-x-4 mb-4">
-						<BrinceAvatar />
-						<div>
-							<p className="font-medium text-sm">브린스</p>
-							<p className="text-xs text-muted-foreground">{date}</p>
-						</div>
-					</div>
+				<CardContent className="p-5">
 					<h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
 						{title}
 					</h3>
 					<p className="text-sm text-muted-foreground mb-4 line-clamp-2">
 						{excerpt}
 					</p>
-					<div className="flex flex-wrap gap-2 mb-4">
+					<div className="flex flex-wrap gap-2">
 						{tags.map((tag) => (
 							<Badge key={tag} variant="secondary" className="text-xs">
 								{tag}
@@ -64,7 +57,7 @@ const PostCard: React.FC<PostCardProps> = ({
 						))}
 					</div>
 				</CardContent>
-				<CardFooter className="flex justify-between items-center px-6 py-4 bg-muted/50">
+				<CardFooter className="flex justify-between items-center px-5 py-3 bg-muted/50">
 					<div className="flex space-x-4">
 						<Button variant="ghost" size="sm" className="hover:text-primary">
 							<Heart className="mr-1 h-4 w-4" />
