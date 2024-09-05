@@ -16,3 +16,4 @@ export { Logo } from "./components/ui/Logo";
 export { Footer } from "./components/Footer";
 export { BrinceAvatar } from "./components/BrinceAvatar";
 export { Textarea } from "./components/ui/TextArea";
+export { ProfileCard } from "./components/ProfileCard";

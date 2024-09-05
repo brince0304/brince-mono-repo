@@ -33,6 +33,11 @@ const Comments = wrap
 								{...convertToCommentProps(comment)}
 							/>
 						))}
+						{data.length === 0 && (
+							<Text variant={"p"} className={"text-muted-foreground"}>
+								첫번째 댓글을 남겨주세요 🙃
+							</Text>
+						)}
 					</section>
 				);
 			}}
