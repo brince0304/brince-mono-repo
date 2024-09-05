@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
 		await notionClient.updatePostProperties(pageId, <NotionProperties>{
 			Comments: {
 				type: "number",
-				number: comments.length,
+				number: comments.length + 1,
 			},
 		});
 
