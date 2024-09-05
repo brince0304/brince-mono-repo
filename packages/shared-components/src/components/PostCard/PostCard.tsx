@@ -59,14 +59,14 @@ const PostCard: React.FC<PostCardProps> = ({
 				</CardContent>
 				<CardFooter className="flex justify-between items-center px-5 py-3 bg-muted/50">
 					<div className="flex space-x-4">
-						<Button variant="ghost" size="sm" className="hover:text-primary">
+						<div className="flex items-center gap-1">
 							<Heart className="mr-1 h-4 w-4" />
 							<span className="text-xs">{likes}</span>
-						</Button>
-						<Button variant="ghost" size="sm" className="hover:text-primary">
+						</div>
+						<div className="flex items-center gap-1">
 							<MessageCircle className="mr-1 h-4 w-4" />
 							<span className="text-xs">{comments}</span>
-						</Button>
+						</div>
 					</div>
 					<Button
 						variant="ghost"
