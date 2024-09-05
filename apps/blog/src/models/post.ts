@@ -1,4 +1,4 @@
 export interface PostLikeRequest {
-	pageId: string;
-	count: number;
+  pageId: string;
+  count: number;
 }

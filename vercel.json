@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "NOTION_API_KEY=$NOTION_API_KEY pnpm run build",
+  "buildCommand": "pnpm run build",
   "outputDirectory": "apps/blog/.next",
   "installCommand": "pnpm install",
   "framework": "nextjs"

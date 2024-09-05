@@ -1,3 +1,3 @@
-import BrinceAvatar from "./BrinceAvatar";
+import BrinceAvatar from './BrinceAvatar';
 
 export { BrinceAvatar };

@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { AppProgressBar } from "next-nprogress-bar";
+import { AppProgressBar } from 'next-nprogress-bar';
 
 export default function ProgressBar() {
-	return (
-		<AppProgressBar
-			height="3px"
-			color={"#1E90FF"}
-			options={{ showSpinner: false }}
-			shallowRouting
-		/>
-	);
+  return (
+    <AppProgressBar
+      height="3px"
+      color={'#1E90FF'}
+      options={{ showSpinner: false }}
+      shallowRouting
+    />
+  );
 }

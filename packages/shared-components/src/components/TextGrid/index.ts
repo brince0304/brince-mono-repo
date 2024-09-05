@@ -1,3 +1,3 @@
-import TextGrid from "./TextGrid";
+import TextGrid from './TextGrid';
 
 export { TextGrid };
