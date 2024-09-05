@@ -1,4 +1,3 @@
-"use client";
 import { convertToPostCardProps } from "@/lib/notion/convert";
 import type { NotionPage } from "@/models/notion";
 import { PostCard } from "@brince-mono-repo/shared-components";

@@ -5,7 +5,7 @@ import Text from "../ui/Text/Text";
 export interface TextGridProps {
 	title: string;
 	description: string;
-	Icon: ComponentType<SVGProps<SVGSVGElement>>;
+	Icon?: ComponentType<SVGProps<SVGSVGElement>>;
 }
 
 const TextGrid: FC<TextGridProps> = ({ title, description, Icon }) => (
