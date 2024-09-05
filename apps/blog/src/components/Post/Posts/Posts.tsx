@@ -1,12 +1,15 @@
 import DailyPosts from "@/components/Post/Posts/DailyPosts";
 import TechPosts from "@/components/Post/Posts/TechPosts";
 import { POST_CATEGORY } from "@/lib/notion/consts";
-import { notionClient } from "@/lib/notion/notion";
 
+import { serverFetcher } from "@/lib/client";
+import type { NotionPage } from "@/models/notion";
 import React from "react";
 
 const Posts = async () => {
-	const posts = await notionClient.getPosts();
+	const posts = await serverFetcher<NotionPage[]>("/posts", {
+		cache: "no-store",
+	});
 
 	if (!posts || posts.length === 0) {
 		return null;
