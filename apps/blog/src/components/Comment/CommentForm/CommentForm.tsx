@@ -24,7 +24,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
 
     if (text.trim()) {
       toast.promise(postComment({ author: '익명', text }), {
-        loading: '댓글을 등록 중입니다 🚀',
+        loading: '댓글을 등록 중입 니다 🚀',
         success: () => {
           reset();
           setText('');
