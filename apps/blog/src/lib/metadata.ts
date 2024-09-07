@@ -20,7 +20,7 @@ export function generateMetadata({
   author = BLOG_AUTHOR,
   publisher = BLOG_AUTHOR,
   type = 'website',
-  imageUrl,
+  imageUrl = BLOG_IMAGE_URL,
   url = BLOG_URL,
 }: GenerateMetadataOptions = {}): Metadata {
   const metadata: Metadata = {
