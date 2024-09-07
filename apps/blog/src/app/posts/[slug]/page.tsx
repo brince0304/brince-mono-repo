@@ -1,4 +1,4 @@
-import PostDetail from '@/components/Post/PostDetail/PostDetail';
+import PostDetail from '@/containers/PostDetail/PostDetail';
 import { serverFetcher } from '@/lib/client';
 import { generateBlogPostMetadata } from '@/lib/metadata';
 import type { PageBySlugResponse } from '@/models/notion';
@@ -17,9 +17,5 @@ export default async function Post({ params }: { params: { slug: string } }) {
     cache: 'no-store',
   });
 
-  return (
-    <div className="flex">
-      <PostDetail post={post} />
-    </div>
-  );
+  return <PostDetail post={post} />;
 }

@@ -1,5 +1,5 @@
-import DailyPosts from '@/components/Post/Posts/DailyPosts';
-import TechPosts from '@/components/Post/Posts/TechPosts';
+import DailyPosts from '@/components/Posts/DailyPosts';
+import TechPosts from '@/components/Posts/TechPosts';
 import { POST_CATEGORY } from '@/lib/notion/consts';
 
 import { serverFetcher } from '@/lib/client';

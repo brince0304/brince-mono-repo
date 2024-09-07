@@ -1,4 +1,11 @@
-import {BLOG_AUTHOR, BLOG_DESCRIPTION, BLOG_IMAGE_URL, BLOG_KEYWORDS, BLOG_TITLE, BLOG_URL} from '@/lib/consts';
+import {
+  BLOG_AUTHOR,
+  BLOG_DESCRIPTION,
+  BLOG_IMAGE_URL,
+  BLOG_KEYWORDS,
+  BLOG_TITLE,
+  BLOG_URL,
+} from '@/lib/consts';
 import type { NotionPage } from '@/models/notion';
 import type { Metadata } from 'next';
 
