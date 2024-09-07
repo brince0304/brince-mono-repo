@@ -7,7 +7,7 @@ interface BrinceAvatarProps {
 
 const BrinceAvatar: React.FC<BrinceAvatarProps> = ({ className }) => {
   const url =
-    'https://media.licdn.com/dms/image/v2/D5603AQEjKzwvM_Loaw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1718484829498?e=1730332800&v=beta&t=doUMfW0chxXKDP_gPCxgCYCFHScCdWj-gTJfzCcmZZw';
+    'https://avatars.githubusercontent.com/u/110673427?s=400&u=b32c9bbb7d88e6c54f4e7dca4a3c2a2ec24c721c&v=4';
 
   return (
     <Avatar className={className}>

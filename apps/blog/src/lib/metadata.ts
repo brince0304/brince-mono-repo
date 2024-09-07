@@ -1,4 +1,4 @@
-import { BLOG_AUTHOR, BLOG_DESCRIPTION, BLOG_KEYWORDS, BLOG_TITLE, BLOG_URL } from '@/lib/consts';
+import {BLOG_AUTHOR, BLOG_DESCRIPTION, BLOG_IMAGE_URL, BLOG_KEYWORDS, BLOG_TITLE, BLOG_URL} from '@/lib/consts';
 import type { NotionPage } from '@/models/notion';
 import type { Metadata } from 'next';
 
@@ -59,12 +59,12 @@ export function generateBlogPostMetadata(post: NotionPage): Metadata {
     description: post.properties.Excerpt.rich_text[0].plain_text,
     keywords: post.properties.Tags.multi_select.map((tag) => tag.name).join(', ') || BLOG_KEYWORDS,
     type: 'article',
-    imageUrl: post.properties.Thumbnail.url || '',
+    imageUrl: post.properties.Thumbnail.url || BLOG_IMAGE_URL,
     url: `${BLOG_URL}/posts/${post.id}`,
   });
 }
 
 // 홈페이지용 메타데이터 생성 함수
 export function generateHomeMetadata(): Metadata {
-  return generateMetadata(); // 기본값 사용
+  return generateMetadata();
 }
