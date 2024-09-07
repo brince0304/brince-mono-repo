@@ -16,7 +16,7 @@
     "format": "biome format . --write",
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": "biome lint",
