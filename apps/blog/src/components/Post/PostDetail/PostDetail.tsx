@@ -1,7 +1,9 @@
 import CommentForm from '@/components/Comment/CommentForm/CommentForm';
 import Comments from '@/components/Comment/Comments/Comments';
 import NotionPage from '@/components/NotionPage/NotionPage';
+import LikeButton from '@/components/PostButtons/LikeButton/LikeButton';
 import PostFloatingButton from '@/components/PostButtons/PostFloatingButton/PostFloatingButton';
+import ShareButton from '@/components/PostButtons/ShareButton/ShareButton';
 import { getPostLikeStatus } from '@/lib/cookie';
 import type { PageBySlugResponse } from '@/models/notion';
 import { Badge, Text } from '@brince-mono-repo/shared-components';

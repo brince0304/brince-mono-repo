@@ -1,5 +1,11 @@
-import MainPage from '@/containers/Main/Main';
+import { ProfileCard } from '@brince-mono-repo/shared-components';
+import Posts from '@/components/Posts/Posts';
 
 export default async function Home() {
-  return <MainPage />;
+  return (
+    <main className={'mx-auto'}>
+      <ProfileCard />
+      <Posts />
+    </main>
+  );
 }

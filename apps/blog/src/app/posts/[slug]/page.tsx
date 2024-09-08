@@ -1,8 +1,8 @@
-import PostDetail from '@/containers/PostDetail/PostDetail';
 import { serverFetcher } from '@/lib/client';
 import { generateBlogPostMetadata } from '@/lib/metadata';
 import type { PageBySlugResponse } from '@/models/notion';
 import type { Metadata } from 'next';
+import PostDetail from '@/components/Post/PostDetail/PostDetail';
 
 export async function generateMetadata({
   params,
@@ -17,5 +17,9 @@ export default async function Post({ params }: { params: { slug: string } }) {
     cache: 'no-store',
   });
 
-  return <PostDetail post={post} />;
+  return (
+    <div className="flex">
+      <PostDetail post={post} />
+    </div>
+  );
 }
