@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@brince-mono-repo/*": ["packages/*/src"]
-    }
-  },
-  "exclude": ["node_modules"]
-}

@@ -1,29 +1,32 @@
 {
+  "extends": "@repo/tsconfig/nextjs.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
+    "baseUrl": ".",
+    "paths": {
+      "@repo/blog": ["../../apps/blog/src"],
+      "@repo/ui/*": ["../../packages/ui/src/components/*"],
+      "@repo/ui/ui/*": ["../../packages/ui/src/components/ui/*"],
+      "@/*": ["src/*"]
+    },
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "rootDir": "."
+    "strictNullChecks": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.js",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "next.config.js",
+    "next.config.mjs",
+    "postcss.config.cjs",
+    "../../packages/monaco/monaco-editor.d.ts",
+    "../../packages/monaco/monaco-vim.d.ts"
+  ],
+  "exclude": ["node_modules", ".next", "public", "playwright-report"]
 }

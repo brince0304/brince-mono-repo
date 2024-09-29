@@ -1,0 +1,15 @@
+{
+  "extends": "@repo/tsconfig/react-library.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
+    "baseUrl": ".",
+    "paths": {
+      "@repo/blog/*": ["../../apps/blog/src/*"],
+      "@repo/ui/*": ["./src/*"],
+      "@/*": ["./src/*"],
+      "@/components/ui/*": ["./src/components/ui/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}

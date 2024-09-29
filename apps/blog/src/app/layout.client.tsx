@@ -4,14 +4,17 @@ import CustomError from '@/components/Error/CustomError/CustomError';
 import ProgressBar from '@/components/ProgressBar/ProgressBar';
 import ThemeToggle from '@/components/ThemeToggle/ThemeToggle';
 import ToastContainerWrapper from '@/components/Toast/ToastContainer/ToastContainerWrapper';
-import { Header } from '@brince-mono-repo/shared-components';
-import { Footer } from '@brince-mono-repo/shared-components';
+import { Footer } from '@repo/ui/Footer';
+import { Header } from '@repo/ui/Header';
 import { ErrorBoundary } from '@suspensive/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'next-themes';
 import React, { type ReactNode } from 'react';
 
-const menuItems = [{ name: 'Home', path: '/' }];
+const menuItems = [
+  { name: 'Home', path: '/' },
+  { name: 'Posts', path: '/posts' },
+];
 
 const queryClient = new QueryClient();
 

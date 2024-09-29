@@ -1,5 +1,5 @@
 {
-  "name": "@brince-mono-repo/blog",
+  "name": "@repo/blog",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,9 +10,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@brince-mono-repo/shared-components": "workspace:*",
-    "@brince-mono-repo/shared-styles": "workspace:*",
-    "@brince-mono-repo/shared-tailwind-config": "workspace:*",
+    "@repo/ui": "workspace:*",
     "@notionhq/client": "^2.2.15",
     "@radix-ui/react-icons": "^1.3.0",
     "@suspensive/react": "^2.13.1",
@@ -48,6 +46,8 @@
     "vaul": "^0.9.1"
   },
   "devDependencies": {
+    "@repo/tsconfig": "workspace:*",
+    "@repo/tailwind": "workspace:*",
     "@biomejs/biome": "^1.8.3",
     "@types/node": "^20",
     "@types/nprogress": "^0.2.3",

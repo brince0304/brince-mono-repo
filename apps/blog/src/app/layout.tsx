@@ -2,7 +2,7 @@ import ClientLayout from '@/app/layout.client';
 import type { Metadata, Viewport } from 'next';
 import { Inter as FontSans } from 'next/font/google';
 import React, { type ReactNode } from 'react';
-import '@brince-mono-repo/shared-styles';
+import './global.css';
 import { generateHomeMetadata } from '@/lib/metadata';
 import { cn } from '@/lib/utils';
 

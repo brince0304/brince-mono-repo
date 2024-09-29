@@ -2,8 +2,8 @@
 import Heart from '@/assets/lottie/heart.json';
 import LottieComponent from '@/components/LottieComponent/LottieComponent';
 import { useLikePost } from '@/hooks/post/usePostService';
-import { Button } from '@brince-mono-repo/shared-components';
 import { ReloadIcon } from '@radix-ui/react-icons';
+import { Button } from '@repo/ui/ui/button';
 import type React from 'react';
 import { useCallback, useState } from 'react';
 import { toast } from 'sonner';

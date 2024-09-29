@@ -1,7 +1,7 @@
 'use client';
 import PostList from '@/components/Posts/PostList';
 import type { NotionPage } from '@/models/notion';
-import { TextGrid } from '@brince-mono-repo/shared-components';
+import { TextGrid } from '@repo/ui/TextGrid';
 import { motion } from 'framer-motion';
 import type React from 'react';
 

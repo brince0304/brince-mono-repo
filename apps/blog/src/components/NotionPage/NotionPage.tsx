@@ -10,8 +10,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import 'prismjs/themes/prism-twilight.css';
-import LikeButton from '@/components/PostButtons/LikeButton/LikeButton';
-import { Skeleton } from '@brince-mono-repo/shared-components';
+import { UISkeleton } from '@repo/ui/UISkeleton';
 
 interface NotionPageProps {
   recordMap: ExtendedRecordMap | null;
@@ -43,7 +42,7 @@ const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
     setIsMounted(true);
   }, []);
 
-  if (!isMounted) return <Skeleton.Post />;
+  if (!isMounted) return <UISkeleton.Post />;
 
   if (!recordMap) {
     return null;

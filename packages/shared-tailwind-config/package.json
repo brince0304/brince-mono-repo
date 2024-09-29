@@ -1,9 +1,0 @@
-{
-  "name": "@brince-mono-repo/shared-tailwind-config",
-  "version": "1.0.0",
-  "main": "tailwind.config.js",
-  "files": ["tailwind.config.js"],
-  "peerDependencies": {
-    "tailwindcss": "^3.x"
-  }
-}

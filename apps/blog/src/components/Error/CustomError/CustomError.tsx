@@ -1,4 +1,5 @@
-import { Button, Text } from '@brince-mono-repo/shared-components';
+import { Button } from '@repo/ui/ui/button';
+import { Typography } from '@repo/ui/ui/typography';
 import type React from 'react';
 
 interface CustomErrorProps {
@@ -16,10 +17,10 @@ const CustomError: React.FC<CustomErrorProps> = ({
 }) => {
   return (
     <div className="flex flex-col items-center justify-center text-gray-900 dark:text-white gap-4 pt-16">
-      <Text variant={'h2'} className="font-semibold">
+      <Typography variant={'h2'} className="font-semibold">
         {code}
-      </Text>
-      <Text variant={'h3'}>{message}</Text>
+      </Typography>
+      <Typography variant={'h3'}>{message}</Typography>
       <div className="w-16 h-16 rounded-full bg-yellow-400 dark:bg-yellow-300 flex items-center justify-center mb-8">
         <span className="text-3xl">{emoji}</span>
       </div>

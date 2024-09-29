@@ -1,19 +1,18 @@
-import path from 'node:path';
+import * as path from 'node:path';
 import type { Config } from 'tailwindcss';
 
-const sharedConfig = require('@brince-mono-repo/shared-tailwind-config/tailwind.config');
+const sharedConfig = require('@repo/tailwind');
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
 const config: Config = {
   ...sharedConfig,
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    path.join(
-      path.dirname(require.resolve('@brince-mono-repo/shared-components')),
-      '**/*.{js,ts,jsx,tsx}'
-    ),
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    '../../packages/ui/src/**/*.{js,ts,jsx,tsx,mdx}',
+
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     ...sharedConfig.theme,
@@ -32,4 +31,5 @@ const config: Config = {
   darkMode: 'class',
   plugins: [...sharedConfig.plugins],
 };
+
 export default config;

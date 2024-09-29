@@ -1,22 +1,22 @@
 {
-  "name": "brince-blog-mono",
+  "name": "repo",
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "dev:blog": "pnpm --filter @brince-mono-repo/blog run dev",
-    "build:blog": "pnpm --filter @brince-mono-repo/blog run build",
-    "start:blog": "pnpm --filter @brince-mono-repo/blog run start",
-    "build:components": "cd packages/shared-components && pnpm install && pnpm build",
+    "dev:blog": "pnpm --filter @repo/blog run dev",
+    "build:blog": "pnpm --filter @repo/blog run build",
+    "start:blog": "pnpm --filter @repo/blog run start",
+    "build:components": "cd packages/ui && pnpm install && pnpm build",
     "build:styles": "cd packages/shared-styles && pnpm install && pnpm build",
     "build:all": "pnpm run build:components && pnpm run build:styles && pnpm run build:blog",
-    "storybook:components": "pnpm --filter @brince-mono-repo/shared-components run storybook",
-    "build-storybook:components": "pnpm --filter @brince-mono-repo/shared-components run build-storybook",
+    "storybook:ui": "pnpm --filter @repo/ui run storybook",
+    "build-storybook:ui": "pnpm --filter @repo/ui run build-storybook",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "biome lint .",
     "format": "biome format . --write",
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "prepare": "husky"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": "biome lint",

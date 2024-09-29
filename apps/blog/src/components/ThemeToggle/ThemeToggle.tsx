@@ -1,5 +1,5 @@
 'use client';
-import { Button } from '@brince-mono-repo/shared-components/src';
+import { Button } from '@repo/ui/ui/button';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import type * as React from 'react';

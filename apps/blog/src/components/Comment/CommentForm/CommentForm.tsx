@@ -1,8 +1,10 @@
 'use client';
 
 import { usePostComment } from '@/hooks/comment/useCommentService';
-import { Avatar, AvatarImage, Button, Text, Textarea } from '@brince-mono-repo/shared-components';
-import { getAvatarUrl } from '@brince-mono-repo/shared-components/src/lib/utils';
+import { Avatar, AvatarImage } from '@repo/ui/ui/avatar';
+import { Button } from '@repo/ui/ui/button';
+import { Textarea } from '@repo/ui/ui/textarea';
+import { Typography } from '@repo/ui/ui/typography';
 import type React from 'react';
 import { useMemo } from 'react';
 import { useState } from 'react';
@@ -13,8 +15,16 @@ interface CommentFormProps {
 }
 
 const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
+  const getAvatarUrl = () => {
+    const styles = ['adventurer', 'avataaars', 'bottts', 'personas'];
+    const randomStyle = styles[Math.floor(Math.random() * styles.length)];
+    const randomSeed = Math.random().toString(36).substring(7);
+    return `https://api.dicebear.com/6.x/${randomStyle}/svg?seed=${randomSeed}`;
+  };
+
   const [text, setText] = useState('');
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const avatarUrl = useMemo(() => getAvatarUrl(), []);
 
   const { mutateAsync: postComment, isPending, reset } = usePostComment(pageId);
@@ -42,9 +52,9 @@ const CommentForm: React.FC<CommentFormProps> = ({ pageId }) => {
           <AvatarImage src={avatarUrl} />
         </Avatar>
         <div className="flex-grow space-y-2">
-          <Text variant={'small'} className={'font-semibold'}>
+          <Typography variant={'small'} className={'font-semibold'}>
             익명
-          </Text>
+          </Typography>
           <Textarea
             required
             disabled={isPending}

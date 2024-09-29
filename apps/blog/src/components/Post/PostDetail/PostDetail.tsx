@@ -1,13 +1,13 @@
 import CommentForm from '@/components/Comment/CommentForm/CommentForm';
 import Comments from '@/components/Comment/Comments/Comments';
 import NotionPage from '@/components/NotionPage/NotionPage';
-import LikeButton from '@/components/PostButtons/LikeButton/LikeButton';
 import PostFloatingButton from '@/components/PostButtons/PostFloatingButton/PostFloatingButton';
-import ShareButton from '@/components/PostButtons/ShareButton/ShareButton';
 import { getPostLikeStatus } from '@/lib/cookie';
 import type { PageBySlugResponse } from '@/models/notion';
-import { Badge, Text } from '@brince-mono-repo/shared-components';
-import { BrinceAvatar } from '@brince-mono-repo/shared-components';
+import { BrinceAvatar } from '@repo/ui/BrinceAvatar';
+import { SimplifiedProfile } from '@repo/ui/SimplifiedProfile';
+import { Badge } from '@repo/ui/ui/Badge';
+import { Typography } from '@repo/ui/ui/typography';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import type React from 'react';
@@ -31,18 +31,18 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
       </div>
       <div className="flex flex-col w-full flex-1 lg:ml-4 gap-4">
         <header className="flex flex-col gap-3">
-          <Text variant={'h1'} className={'font-bold'}>
+          <Typography variant={'h1'} className={'font-bold'}>
             {post.page.properties.Title.title[0].plain_text}
-          </Text>
-          <Text variant={'large'} className="text-gray-500 dark:text-gray-400">
+          </Typography>
+          <Typography variant={'large'} className="text-gray-500 dark:text-gray-400">
             {post.page.properties.Excerpt.rich_text[0].plain_text}
-          </Text>
+          </Typography>
           <section className="flex gap-1 items-center">
             <div className="flex justify-center items-center gap-2">
               <BrinceAvatar className={'w-8 h-8'} />
-              <Text variant={'small'}>브린스</Text>
+              <Typography variant={'small'}>브린스</Typography>
             </div>
-            <Text
+            <Typography
               variant={'small'}
               className="text-gray-500 dark:text-gray-400 before:content-['·'] before:mr-1"
             >
@@ -50,7 +50,7 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
                 addSuffix: true,
                 locale: ko,
               })}
-            </Text>
+            </Typography>
           </section>
           <div className="flex flex-wrap gap-2">
             {post.page.properties.Tags.multi_select.map((tag) => (
@@ -62,6 +62,7 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
           <div className="border-t border-gray-200 dark:border-gray-700" />
         </header>
         <NotionPage recordMap={post.recordMap} />
+        <SimplifiedProfile />
         <div className="lg:hidden mt-4 flex gap-4">
           <PostFloatingButton
             isLiked={isLiked}

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@brince-mono-repo/shared-components';
+import { Button } from '@repo/ui/ui/button';
 import { Share2 } from 'lucide-react';
 import type React from 'react';
 import { useCallback, useState } from 'react';
