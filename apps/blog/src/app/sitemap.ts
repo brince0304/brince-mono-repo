@@ -10,10 +10,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const posts = (await notionClient.getPosts()) ?? [];
-  const dynamicRoutes = posts.map((post) => ({
-    url: `${baseUrl}/posts/${post.properties.Slug.rich_text[0].plain_text}`,
-    lastModified: new Date(post.properties.Date.date?.start || new Date()),
-  }));
+  const dynamicRoutes = posts.map((post) => {
+    const slug = post.properties.Slug.rich_text[0]?.plain_text || '';
+    const date = post.properties.Date.date?.start;
+
+    return {
+      url: `${baseUrl}/posts/${slug}`,
+      lastModified: date ? new Date(date) : new Date(),
+    };
+  });
 
   return [...staticRoutes, ...dynamicRoutes];
 }

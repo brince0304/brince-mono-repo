@@ -19,6 +19,9 @@ interface PostDetailProps {
 const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
   const isLiked = await getPostLikeStatus(post.page.id);
 
+  const title = post.page.properties.Title.title[0]?.plain_text;
+  const excerpt = post.page.properties.Excerpt.rich_text[0]?.plain_text;
+
   return (
     <article className="flex gap-4 max-w-3xl w-full relative sm:px-0">
       <div className="hidden lg:block sticky top-1/4 h-fit">
@@ -32,10 +35,10 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
       <div className="flex flex-col w-full flex-1 lg:ml-4 gap-4">
         <header className="flex flex-col gap-3">
           <Typography variant={'h1'} className={'font-bold'}>
-            {post.page.properties.Title.title[0].plain_text}
+            {title}
           </Typography>
           <Typography variant={'large'} className="text-gray-500 dark:text-gray-400">
-            {post.page.properties.Excerpt.rich_text[0].plain_text}
+            {excerpt}
           </Typography>
           <section className="flex gap-1 items-center">
             <div className="flex justify-center items-center gap-2">
