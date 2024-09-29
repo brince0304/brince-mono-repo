@@ -9,6 +9,7 @@ import React from 'react';
 const Posts = async () => {
   const posts = await serverFetcher<NotionPage[]>('/posts', {
     cache: 'no-store',
+    next: { revalidate: 600 },
   });
 
   if (!posts || posts.length === 0) {
