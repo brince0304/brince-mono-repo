@@ -1,18 +1,9 @@
 import type { NotionPage } from '@/models/notion';
-
-interface PostCardProps {
-  title: string;
-  excerpt: string;
-  imageUrl: string;
-  date: string;
-  tags: string[];
-  slug: string;
-  likes: number;
-  comments: number;
-}
+import type { CommentProps } from '@repo/ui/Comment';
+import type { PostCardProps } from '@repo/ui/PostCard';
 
 export const convertToPostCardProps = (responses: NotionPage): PostCardProps => {
-  if (typeof responses === 'undefined' || responses === null) {
+  if (!responses) {
     return {
       title: '',
       excerpt: '',
@@ -25,25 +16,26 @@ export const convertToPostCardProps = (responses: NotionPage): PostCardProps => 
     };
   }
 
+  const title = responses.properties.Title?.title?.[0]?.plain_text || '';
+  const excerpt = responses.properties.Excerpt?.rich_text?.[0]?.plain_text || '';
+  const imageUrl = responses.properties.Thumbnail?.url || '';
+  const date = responses.properties.Date?.date?.start || '';
+  const tags = responses.properties.Tags?.multi_select?.map((tag) => tag.name) || [];
+  const slug = responses.properties.Slug?.rich_text?.[0]?.plain_text || '';
+  const likes = responses.properties.Likes?.number ?? 0;
+  const comments = responses.properties.Comments?.number ?? 0;
+
   return {
-    title: responses.properties.Title.title[0].plain_text || '',
-    excerpt: responses.properties.Excerpt.rich_text[0]?.plain_text || '',
-    imageUrl: responses.properties.Thumbnail.url || '',
-    date: responses.properties.Date.date?.start || '',
-    tags: responses.properties.Tags.multi_select.map((tag) => tag.name) || [],
-    slug: responses.properties.Slug.rich_text[0].plain_text,
-    likes: responses.properties.Likes.number,
-    comments: responses.properties.Comments.number,
+    title,
+    excerpt,
+    imageUrl,
+    date,
+    tags,
+    slug,
+    likes,
+    comments,
   };
 };
-
-interface CommentProps {
-  author: string;
-  content: string;
-  createdAt: string;
-  liked: boolean;
-  owner: boolean;
-}
 
 export function convertToCommentProps(comment: NotionPage): CommentProps {
   return {
