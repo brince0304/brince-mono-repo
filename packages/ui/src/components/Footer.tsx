@@ -15,30 +15,6 @@ const Footer = () => {
               <h2 className="text-2xl font-bold">BRIN&lt;/&gt;E</h2>
               <p className="text-gray-500 dark:text-gray-400">© {new Date().getFullYear()}</p>
             </div>
-            <div className="flex space-x-4 items-center">
-              <Button variant="ghost" size="icon" asChild>
-                <a
-                  href="https://github.com/brince0304"
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white transition-colors duration-300"
-                  aria-label="GitHub 프로필"
-                >
-                  <Github className="h-5 w-5" />
-                </a>
-              </Button>
-              <Button variant="ghost" size="icon" asChild>
-                <a
-                  href="https://www.linkedin.com/in/%EC%84%9D%ED%98%84-%EB%B0%B1-439058292/"
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white transition-colors duration-300"
-                  aria-label="LinkedIn 프로필"
-                >
-                  <Linkedin className="h-5 w-5" />
-                </a>
-              </Button>
-            </div>
           </div>
         </div>
       </CardContent>

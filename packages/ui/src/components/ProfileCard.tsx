@@ -5,7 +5,13 @@ import { GithubIcon, LinkedinIcon } from 'lucide-react';
 import React from 'react';
 import { BrinceAvatar } from './BrinceAvatar';
 import { Card } from './ui/card';
-import { BLOG_OWNER, BLOG_OWNER_JOB, BLOG_OWNER_JOB_DESCRIPTION } from '../lib/constants';
+import {
+  BLOG_OWNER,
+  BLOG_OWNER_JOB,
+  BLOG_OWNER_JOB_DESCRIPTION,
+  GITHUB_URL,
+  LINKEDIN_URL,
+} from '../lib/constants';
 
 const ProfileCard = () => {
   return (
@@ -48,9 +54,9 @@ const ProfileCard = () => {
               <motion.a
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                href="https://github.com/brince0304"
+                href={GITHUB_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-300"
               >
                 <GithubIcon size={24} />
@@ -58,9 +64,9 @@ const ProfileCard = () => {
               <motion.a
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                href="https://linkedin.com/in/석현-백-439058292"
+                href={LINKEDIN_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-300"
               >
                 <LinkedinIcon size={24} />
