@@ -61,13 +61,23 @@ export function generateMetadata({
 }
 
 export function generateBlogPostMetadata(post: NotionPage): Metadata {
+  if (!post || !post.properties) {
+    return generateMetadata({
+      title: BLOG_TITLE,
+      description: '',
+      keywords: BLOG_KEYWORDS,
+    });
+  }
+
+  const title = post.properties.Title?.title[0]?.plain_text || '';
+  const description = post.properties.Excerpt?.rich_text[0]?.plain_text || '';
+  const keywords =
+    post.properties.Tags?.multi_select?.map((tag) => tag.name).join(', ') || BLOG_KEYWORDS;
+
   return generateMetadata({
-    title: `${post.properties.Title.title[0].plain_text} | ${BLOG_TITLE}`,
-    description: post.properties.Excerpt.rich_text[0].plain_text,
-    keywords: post.properties.Tags.multi_select.map((tag) => tag.name).join(', ') || BLOG_KEYWORDS,
-    type: 'article',
-    imageUrl: post.properties.Thumbnail.url || BLOG_IMAGE_URL,
-    url: `${BLOG_URL}/posts/${post.id}`,
+    title: title ? `${title} | ${BLOG_TITLE}` : BLOG_TITLE,
+    description,
+    keywords,
   });
 }
 
