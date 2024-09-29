@@ -20,8 +20,9 @@ const Footer = () => {
                 <a
                   href="https://github.com/brince0304"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow"
                   className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white transition-colors duration-300"
+                  aria-label="GitHub 프로필"
                 >
                   <Github className="h-5 w-5" />
                 </a>
@@ -30,8 +31,9 @@ const Footer = () => {
                 <a
                   href="https://www.linkedin.com/in/%EC%84%9D%ED%98%84-%EB%B0%B1-439058292/"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow"
                   className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white transition-colors duration-300"
+                  aria-label="LinkedIn 프로필"
                 >
                   <Linkedin className="h-5 w-5" />
                 </a>
