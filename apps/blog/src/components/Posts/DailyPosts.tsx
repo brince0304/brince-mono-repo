@@ -17,7 +17,7 @@ const DailyPosts = ({ posts }: DailyPosts) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <TextGrid title="Daily" description="일상에 관련된 얘기를 다룹니다." />
+      <TextGrid title="Daily Musings" description="여러 얘기를 다룹니다." />
       <PostList posts={posts} />
     </motion.section>
   );
