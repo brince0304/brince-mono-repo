@@ -13,9 +13,7 @@ const SimplifiedProfile = () => {
           <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
             백석현 (Brince)
           </p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            Frontend Developer | 코드로 뭔가를 만드는 것을 좋아해요 🚀
-          </p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Frontend Developer 🚀</p>
         </div>
       </CardContent>
     </Card>
