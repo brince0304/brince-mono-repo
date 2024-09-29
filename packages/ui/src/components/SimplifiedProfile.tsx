@@ -3,6 +3,7 @@
 import React from 'react';
 import { BrinceAvatar } from './BrinceAvatar';
 import { Card, CardContent } from './ui/card';
+import { BLOG_OWNER, BLOG_OWNER_JOB } from '../lib/constants';
 
 const SimplifiedProfile = () => {
   return (
@@ -11,9 +12,9 @@ const SimplifiedProfile = () => {
         <BrinceAvatar className="h-12 w-12" />
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
-            백석현 (Brince)
+            {BLOG_OWNER}
           </p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Frontend Developer 🚀</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{BLOG_OWNER_JOB}</p>
         </div>
       </CardContent>
     </Card>

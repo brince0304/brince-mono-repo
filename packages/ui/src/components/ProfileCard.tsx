@@ -5,6 +5,7 @@ import { GithubIcon, LinkedinIcon } from 'lucide-react';
 import React from 'react';
 import { BrinceAvatar } from './BrinceAvatar';
 import { Card } from './ui/card';
+import { BLOG_OWNER, BLOG_OWNER_JOB, BLOG_OWNER_JOB_DESCRIPTION } from '../lib/constants';
 
 const ProfileCard = () => {
   return (
@@ -25,7 +26,7 @@ const ProfileCard = () => {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="text-4xl font-bold mb-2 text-gray-800 dark:text-gray-100"
             >
-              백석현 (Brince)
+              {BLOG_OWNER}
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: -20 }}
@@ -33,7 +34,7 @@ const ProfileCard = () => {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="text-xl text-gray-600 dark:text-gray-300 mb-4"
             >
-              Frontend Developer
+              {BLOG_OWNER_JOB}
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: -20 }}
@@ -41,8 +42,7 @@ const ProfileCard = () => {
               transition={{ delay: 0.4, duration: 0.5 }}
               className="text-gray-700 dark:text-gray-300 mb-6 max-w-2xl leading-relaxed"
             >
-              주니어 프론트엔드 개발자 백석현입니다. 9년간의 댄서 생활을 하면서 무대에서 관객과
-              소통하던 경험을 살려, 이제는 사용자와 '대화'하는 웹사이트를 만들고 있습니다.
+              {BLOG_OWNER_JOB_DESCRIPTION}
             </motion.p>
             <div className="flex justify-center md:justify-start space-x-4">
               <motion.a
