@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { notionClient } from '@/lib/notion/notion';
+import { revalidatePath } from 'next/cache';
 
 export async function GET() {
   try {
@@ -7,6 +8,7 @@ export async function GET() {
     const wrappedResponse = NextResponse.json(response);
 
     wrappedResponse.headers.set('Cache-Control', 'public, max-age=60, s-maxage=60');
+    revalidatePath('/api/posts');
 
     return wrappedResponse;
   } catch (error) {
