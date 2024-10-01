@@ -1,32 +1,32 @@
-import DailyPosts from '@/components/Posts/DailyPosts';
-import TechPosts from '@/components/Posts/TechPosts';
+'use client';
+
+import PostSection from '@/components/Posts/PostSection';
 import { POST_CATEGORY } from '@/lib/notion/consts';
 
-import { serverFetcher } from '@/lib/client';
-import type { NotionPage } from '@/models/notion';
 import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { PostQueryOptions } from '@/hooks/post/\bqueries';
 
-const Posts = async () => {
-  const posts = await serverFetcher<NotionPage[]>('/posts', {
-    next: { revalidate: 600 },
-  });
+const Posts = () => {
+  const { isLoading, data: posts } = useQuery({ ...PostQueryOptions.getPosts() });
 
-  if (!posts || posts.length === 0) {
-    return null;
-  }
-
-  const techPosts = posts.filter(
-    (post) => post.properties.Category.select?.name === POST_CATEGORY.TECH
-  );
-
-  const dailyPosts = posts.filter(
-    (post) => post.properties.Category.select?.name === POST_CATEGORY.DAILY
-  );
+  const filterPostsByCategory = (category: string) =>
+    posts?.filter((post) => post.properties.Category.select?.name === category);
 
   return (
     <section className={'flex flex-col gap-4'}>
-      <DailyPosts posts={dailyPosts} />
-      <TechPosts posts={techPosts} />
+      <PostSection
+        title="Daily Musings"
+        description="여러 이야기를 다룹니다"
+        posts={filterPostsByCategory(POST_CATEGORY.DAILY)}
+        isLoading={isLoading}
+      />
+      <PostSection
+        title="Tech"
+        description="기술 관련 이야기를 다룹니다"
+        posts={filterPostsByCategory(POST_CATEGORY.TECH)}
+        isLoading={isLoading}
+      />
     </section>
   );
 };

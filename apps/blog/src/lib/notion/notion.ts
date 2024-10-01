@@ -27,6 +27,7 @@ async function getPosts() {
           direction: 'descending',
         },
       ],
+      page_size: 10,
     });
     return response.results as NotionPagesResponse;
   } catch (error) {

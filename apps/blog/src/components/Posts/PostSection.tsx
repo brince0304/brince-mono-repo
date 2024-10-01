@@ -3,14 +3,18 @@
 import PostList from '@/components/Posts/PostList';
 import type { NotionPage } from '@/models/notion';
 import { TextGrid } from '@repo/ui/TextGrid';
+import { UISkeleton } from '@repo/ui/UISkeleton';
 import { motion } from 'framer-motion';
 import type React from 'react';
 
-interface TechPostsProps {
-  posts: NotionPage[];
+interface PostSectionProps {
+  title: string;
+  description: string;
+  isLoading: boolean;
+  posts?: NotionPage[];
 }
 
-const TechPosts: React.FC<TechPostsProps> = ({ posts }) => {
+const PostSection = ({ title, description, posts, isLoading }: PostSectionProps) => {
   return (
     <motion.section
       className={'flex flex-col'}
@@ -18,10 +22,11 @@ const TechPosts: React.FC<TechPostsProps> = ({ posts }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <TextGrid title="Tech" description="개발에 관련된 얘기를 다룹니다." />
-      <PostList posts={posts} />
+      <TextGrid title={title} description={description} />
+      {isLoading && <UISkeleton.PostList />}
+      {posts && <PostList posts={posts} />}
     </motion.section>
   );
 };
 
-export default TechPosts;
+export default PostSection;
