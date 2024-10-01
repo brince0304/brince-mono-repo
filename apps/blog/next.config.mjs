@@ -11,6 +11,9 @@ const nextConfig = {
       {
         hostname: 'velog.velcdn.com',
       },
+      {
+        hostname: 'www.notion.so',
+      }
     ],
   },
   transpilePackages: ['@repo/ui'],

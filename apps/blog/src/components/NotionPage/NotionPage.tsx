@@ -1,4 +1,5 @@
 'use client';
+
 import type { ExtendedRecordMap } from 'notion-types';
 import type React from 'react';
 import { useEffect, useState } from 'react';
@@ -7,13 +8,26 @@ import 'react-notion-x/src/styles.css';
 import { useTheme } from 'next-themes';
 import './NotionPage.style.css';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
+import Image, { type ImageProps } from 'next/image';
 import Link from 'next/link';
 import 'prismjs/themes/prism-twilight.css';
 import { UISkeleton } from '@repo/ui/UISkeleton';
 
 interface NotionPageProps {
   recordMap: ExtendedRecordMap | null;
+}
+
+function NextImageComponent(props: ImageProps) {
+  return (
+    <Image
+      src={props.src}
+      alt={props.alt}
+      title="notion-image"
+      width={1200}
+      height={800}
+      loading="lazy"
+    />
+  );
 }
 
 const Code = dynamic(() => import('react-notion-x/build/third-party/code').then((m) => m.Code));
@@ -27,12 +41,6 @@ const Pdf = dynamic(() => import('react-notion-x/build/third-party/pdf').then((m
 const Modal = dynamic(() => import('react-notion-x/build/third-party/modal').then((m) => m.Modal), {
   ssr: false,
 });
-const Collection = dynamic(
-  () => import('react-notion-x/build/third-party/collection').then((m) => m.Collection),
-  {
-    ssr: false,
-  }
-);
 
 const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
   const { theme } = useTheme();
@@ -53,16 +61,16 @@ const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
     Equation,
     Pdf,
     Modal,
-    nextImage: Image,
+    nextImage: NextImageComponent,
     nextLink: Link,
-    header: () => null,
-    pageHeader: () => null,
+    Collection: () => null,
+    Header: () => null,
   };
 
   return (
     <NotionRenderer
       recordMap={recordMap}
-      fullPage={false}
+      fullPage={true}
       darkMode={theme === 'dark'}
       disableHeader={true}
       hideBlockId={true}
@@ -73,6 +81,7 @@ const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
       showCollectionViewDropdown={false}
       minTableOfContentsItems={1}
       components={components}
+      forceCustomImages={true}
     />
   );
 };
