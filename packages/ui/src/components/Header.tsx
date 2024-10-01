@@ -21,10 +21,10 @@ function Header({ menuItems, themeToggle }: HeaderProps) {
       <div className="container flex h-14 max-w-6xl mx-auto items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href={'/'}>
           <div className="flex items-center justify-center bg-transparent">
-            <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
+            <p className="text-3xl font-bold text-gray-800 dark:text-white">
               BRIN
               <span className="text-blue-500 dark:text-blue-400">&lt;/&gt;</span>E
-            </h1>
+            </p>
           </div>
         </Link>
         <nav className="flex items-center space-x-6 text-sm font-medium hidden md:flex-1 md:flex md:space-x-4 justify-center">

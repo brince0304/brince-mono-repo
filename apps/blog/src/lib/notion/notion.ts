@@ -180,6 +180,7 @@ async function getPageBySlug(slug: string) {
           equals: slug,
         },
       },
+      page_size: 1,
     });
 
     const page = response.results[0] as NotionPage;

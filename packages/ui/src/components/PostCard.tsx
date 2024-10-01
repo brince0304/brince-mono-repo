@@ -46,6 +46,7 @@ const PostCard: React.FC<PostCardProps> = ({
               <Image
                 src={imageUrl}
                 alt={title}
+                title={title}
                 layout="fill"
                 objectFit="cover"
                 priority={priority}

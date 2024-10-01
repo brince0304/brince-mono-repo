@@ -55,12 +55,14 @@ const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
     Modal,
     nextImage: Image,
     nextLink: Link,
+    header: () => null,
+    pageHeader: () => null,
   };
 
   return (
     <NotionRenderer
       recordMap={recordMap}
-      fullPage={true}
+      fullPage={false}
       darkMode={theme === 'dark'}
       disableHeader={true}
       hideBlockId={true}
