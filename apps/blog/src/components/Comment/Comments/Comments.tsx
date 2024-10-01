@@ -13,6 +13,13 @@ interface CommentsProps {
 }
 
 const Comments = wrap
+  .ErrorBoundary({
+    fallback: (
+      <div className="flex flex-col gap-1 mt-4 justify-center items-center">
+        <Typography variant={'p'}>댓글을 불러오는 중 오류가 발생했습니다 😢</Typography>
+      </div>
+    ),
+  })
   .Suspense({ fallback: <UISkeleton.Comment /> })
   .on<CommentsProps>(({ pageId }) => (
     <SuspenseQuery {...CommentQueryOptions.getComments(pageId)}>
