@@ -1,3 +1,5 @@
+'use client';
+
 import Posts from '@/components/Posts/Posts';
 import { ProfileCard } from '@repo/ui/ProfileCard';
 
