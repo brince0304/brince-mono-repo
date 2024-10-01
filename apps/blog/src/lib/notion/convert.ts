@@ -39,6 +39,7 @@ export const convertToPostCardProps = (responses: NotionPage): PostCardProps => 
 
 export function convertToCommentProps(comment: NotionPage): CommentProps {
   return {
+    id: comment.id,
     author: comment.properties.Author.rich_text[0].plain_text,
     content: comment.properties.Comment.title[0].plain_text,
     createdAt: comment.properties.CreatedAt.created_time,

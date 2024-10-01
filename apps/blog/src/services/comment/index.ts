@@ -5,8 +5,12 @@ const getComments = (pageId: string) => {
   return axiosClient.get<NotionPagesResponse>('/comments', { params: { pageId } });
 };
 
-const postComment = (pageId: string, data: CommentRequest) => {
-  return axiosClient.post('/comments', { pageId, data });
+const postComment = ({
+  pageId,
+  data,
+  parentId,
+}: { pageId: string; data: CommentRequest; parentId?: string }) => {
+  return axiosClient.post('/comments', { pageId, data, parentId });
 };
 
 export const commentService = {

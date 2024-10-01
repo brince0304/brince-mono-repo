@@ -11,15 +11,19 @@ import { Card } from './ui/card';
 import { getAvatarUrl } from '../lib/utils';
 
 export interface CommentProps {
+  id: string;
   author: string;
   content: string;
   createdAt: string;
   liked?: boolean;
   owner?: boolean;
+  isReply?: boolean;
+  onClick?: () => void;
+  childCommentLength?: number;
 }
 
 const Comment: React.FC<CommentProps> = React.memo(
-  ({ author, content, createdAt, liked, owner }) => {
+  ({ author, content, createdAt, liked, owner, isReply, onClick, childCommentLength }) => {
     return (
       <div className="w-full mb-6">
         <div className="flex items-start space-x-4 mb-2">
@@ -53,14 +57,19 @@ const Comment: React.FC<CommentProps> = React.memo(
                   </div>
                 </div>
               )}
-              <Button variant="ghost" size="sm">
-                답글
-              </Button>
+              {!isReply && (
+                <Button variant="ghost" size="sm" onClick={onClick}>
+                  답글 {childCommentLength}개
+                </Button>
+              )}
             </div>
           </div>
         </div>
       </div>
     );
+  },
+  (prevProps, nextProps) => {
+    return prevProps.content === nextProps.content;
   }
 );
 

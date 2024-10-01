@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const { pageId, data } = await request.json();
+  const { pageId, data, parentId } = await request.json();
 
   if (!pageId || !data) {
     return NextResponse.json(
@@ -31,6 +31,10 @@ export async function POST(request: NextRequest) {
   }
 
   try {
+    if (parentId) {
+      data.parentId = parentId;
+    }
+
     const [_, comments] = await Promise.all([
       notionClient.createCommentPage(pageId, data),
       notionClient.getComments(pageId),
