@@ -4,7 +4,7 @@ import { Comment } from '@repo/ui/Comment';
 import { useState } from 'react';
 import CommentForm from '../CommentForm/CommentForm';
 import { motion } from 'framer-motion';
-import React from 'react';
+import type React from 'react';
 
 interface CommentBoxProps {
   comment: NotionPage;
@@ -12,7 +12,7 @@ interface CommentBoxProps {
   pageId: string;
 }
 
-const CommentBox = ({ comment, childComments, pageId }: CommentBoxProps) => {
+const CommentBox: React.FC<CommentBoxProps> = ({ comment, childComments, pageId }) => {
   const parentId = comment.properties.ParentId.rich_text[0].text.content;
 
   if (parentId !== '') {
@@ -21,8 +21,6 @@ const CommentBox = ({ comment, childComments, pageId }: CommentBoxProps) => {
 
   const [isClickedReply, setIsClickedReply] = useState(false);
 
-  const toggleReply = () => setIsClickedReply((prev) => !prev);
-
   const renderChildComments = () =>
     childComments.map((childComment) => (
       <div key={childComment.id} className="flex flex-col pl-8">
@@ -30,33 +28,30 @@ const CommentBox = ({ comment, childComments, pageId }: CommentBoxProps) => {
       </div>
     ));
 
+  const handleTransition = () => {
+    setIsClickedReply((prev) => !prev);
+  };
+
   return (
     <div className="flex flex-col">
       <Comment
         {...convertToCommentProps(comment)}
-        onClick={toggleReply}
+        onClick={handleTransition}
         childCommentLength={childComments.length}
       />
 
       <div className="flex flex-col gap-4">
         <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{
-            opacity: isClickedReply ? 1 : 0,
-            height: isClickedReply ? 'auto' : 0,
-          }}
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: isClickedReply ? 'auto' : 0, opacity: isClickedReply ? 1 : 0 }}
           transition={{ duration: 0.3 }}
+          style={{ overflow: 'hidden' }}
         >
           {renderChildComments()}
 
-          <motion.div
-            className="pl-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
+          <div className="pl-8">
             <CommentForm parentId={comment.id} pageId={pageId} />
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </div>
