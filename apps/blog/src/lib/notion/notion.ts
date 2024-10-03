@@ -5,6 +5,7 @@ import type {
   NotionPagesResponse,
   NotionProperties,
 } from '@/models/notion';
+import type { GetPostRequest } from '@/models/post';
 import { Client } from '@notionhq/client';
 import { NotionAPI } from 'notion-client';
 
@@ -28,6 +29,26 @@ async function getPosts() {
         },
       ],
       page_size: 10,
+    });
+    return response.results as NotionPagesResponse;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getPostsByParams(params: GetPostRequest) {
+  try {
+    const response = await notion.databases.query({
+      database_id: POST_DATABASE_ID,
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      filter: params.filter as any,
+      sorts: [
+        {
+          property: params.sortBy || 'Date',
+          direction: params.sort || 'descending',
+        },
+      ],
+      page_size: params.pageSize || 10,
     });
     return response.results as NotionPagesResponse;
   } catch (error) {
@@ -199,6 +220,7 @@ async function getPageBySlug(slug: string) {
 
 export const notionClient = {
   getPosts,
+  getPostsByParams,
   getComments,
   createCommentPage,
   getPageBySlug,

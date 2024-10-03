@@ -4,6 +4,24 @@ import type {
 } from '@notionhq/client/build/src/api-endpoints';
 import type { ExtendedRecordMap } from 'notion-types';
 
+const myProperties = [
+  'Title',
+  'Date',
+  'Excerpt',
+  'Published',
+  'Thumbnail',
+  'Slug',
+  'Tags',
+  'Comments',
+  'Likes',
+  'Liked',
+  'CreatedAt',
+  'Category',
+  'Views',
+];
+
+export type MyProperties = (typeof myProperties)[number];
+
 interface NotionUser {
   object: 'user';
   id: string;

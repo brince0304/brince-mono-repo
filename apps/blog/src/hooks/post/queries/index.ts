@@ -1,3 +1,4 @@
+import type { GetPostRequest } from '@/models/post';
 import { postService } from '@/services/post';
 import { queryOptions } from '@tanstack/react-query';
 
@@ -12,10 +13,10 @@ export const PostQueryKeys = {
 };
 
 export const PostQueryOptions = {
-  getPosts: () =>
+  getPosts: (getPostRequest?: GetPostRequest) =>
     queryOptions({
       queryKey: PostQueryKeys.getPosts(),
-      queryFn: () => postService.getPosts(),
+      queryFn: () => postService.getPosts(getPostRequest),
       select: (res) => res.data,
       retry: false,
     }),
