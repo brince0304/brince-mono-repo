@@ -5,11 +5,12 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@repo/ui/u
 import { Input } from '@repo/ui/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/ui/select';
 import { LayoutList, LayoutGrid } from 'lucide-react';
+import { TextGrid } from '@repo/ui/TextGrid';
 
 export default async function Post() {
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Posts</h1>
+      <TextGrid title="Posts" description="최신 블로그 포스트를 확인해보세요 🔖" />
 
       <div className="flex mb-6 space-x-4">
         <div className="flex-grow">

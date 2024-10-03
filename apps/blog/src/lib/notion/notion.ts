@@ -7,7 +7,7 @@ import { NotionAPI } from 'notion-client';
 export const notion = new Client({ auth: NOTION_TOKEN });
 const notionAPI = new NotionAPI();
 
-// 추후에 쓰일지 모르니 일단 keep
+// sitemap 생성에 사용
 async function getPosts() {
   try {
     const response = await notion.databases.query({
@@ -24,9 +24,9 @@ async function getPosts() {
           direction: 'descending',
         },
       ],
-      page_size: 1,
+      page_size: 10,
     });
-    return response;
+    return response.results as NotionPage[];
   } catch (error) {
     console.log(error);
   }
