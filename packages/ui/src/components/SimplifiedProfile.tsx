@@ -8,7 +8,7 @@ import { GithubIcon, LinkedinIcon } from 'lucide-react';
 
 const SimplifiedProfile = () => {
   return (
-    <Card className="w-full">
+    <Card className="w-full mt-4">
       <CardContent className="flex items-center space-x-4 p-4">
         <BrinceAvatar className="h-12 w-12" />
         <div className="flex-1 min-w-0">
