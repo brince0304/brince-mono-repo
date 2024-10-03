@@ -11,7 +11,7 @@ interface PostListProps {
 const PostList = ({ posts }: PostListProps) => {
   return (
     <>
-      <ul className={'flex flex-col gap-4 lg:hidden'}>
+      <ul className={'flex flex-col gap-4 sm:hidden'}>
         {posts
           .map((post) => convertToPostCardProps(post))
           .map((props, index) => (
@@ -19,7 +19,7 @@ const PostList = ({ posts }: PostListProps) => {
           ))}
       </ul>
 
-      <ul className={'hidden lg:flex flex-col gap-4'}>
+      <ul className={'hidden sm:flex flex-col gap-4'}>
         {posts
           .map((post) => convertToPostCardProps(post))
           .map((props, index) => (

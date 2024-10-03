@@ -53,13 +53,13 @@ const HorizontalPostCardSkeleton = () => {
 const PostListSkeleton = () => {
   return (
     <div className="flex flex-col">
-      <div className="block lg:hidden flex flex-col gap-4">
+      <div className="block sm:hidden flex flex-col gap-4">
         <VerticalPostCardSkeleton />
         <VerticalPostCardSkeleton />
         <VerticalPostCardSkeleton />
       </div>
 
-      <div className="hidden lg:flex flex-col gap-4">
+      <div className="hidden sm:flex flex-col gap-4">
         <HorizontalPostCardSkeleton />
         <HorizontalPostCardSkeleton />
         <HorizontalPostCardSkeleton />
