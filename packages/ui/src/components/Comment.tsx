@@ -61,7 +61,7 @@ const Comment: React.FC<CommentProps> = ({
           <Card className="p-4">
             <p className="text-sm">{content}</p>
           </Card>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 mt-2">
             {liked && (
               <div className="relative inline-block">
                 <BrinceAvatar className="w-7 h-7" />
