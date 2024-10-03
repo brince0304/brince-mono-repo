@@ -9,13 +9,13 @@ export const PostQueryKeys = {
   all: () => [DEFAULT_POST_KEY],
 
   GET_POSTS: [DEFAULT_POST_KEY, 'posts'] as const,
-  getPosts: () => [...PostQueryKeys.GET_POSTS],
+  getPosts: (getPostRequest?: GetPostRequest) => [...PostQueryKeys.GET_POSTS, getPostRequest],
 };
 
 export const PostQueryOptions = {
   getPosts: (getPostRequest?: GetPostRequest) =>
     queryOptions({
-      queryKey: PostQueryKeys.getPosts(),
+      queryKey: PostQueryKeys.getPosts(getPostRequest),
       queryFn: () => postService.getPosts(getPostRequest),
       select: (res) => res.data,
       retry: false,

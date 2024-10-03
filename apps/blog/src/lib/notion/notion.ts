@@ -1,10 +1,5 @@
 import { COMMENT_DATABASE_ID, NOTION_TOKEN, POST_DATABASE_ID } from '@/lib/notion/consts';
-import type {
-  CommentRequest,
-  NotionPage,
-  NotionPagesResponse,
-  NotionProperties,
-} from '@/models/notion';
+import type { CommentRequest, NotionPage, NotionProperties } from '@/models/notion';
 import type { GetPostRequest } from '@/models/post';
 import { Client } from '@notionhq/client';
 import { NotionAPI } from 'notion-client';
@@ -12,6 +7,7 @@ import { NotionAPI } from 'notion-client';
 export const notion = new Client({ auth: NOTION_TOKEN });
 const notionAPI = new NotionAPI();
 
+// 추후에 쓰일지 모르니 일단 keep
 async function getPosts() {
   try {
     const response = await notion.databases.query({
@@ -28,9 +24,9 @@ async function getPosts() {
           direction: 'descending',
         },
       ],
-      page_size: 10,
+      page_size: 1,
     });
-    return response.results as NotionPagesResponse;
+    return response;
   } catch (error) {
     console.log(error);
   }
@@ -50,7 +46,8 @@ async function getPostsByParams(params: GetPostRequest) {
       ],
       page_size: params.pageSize || 10,
     });
-    return response.results as NotionPagesResponse;
+
+    return response;
   } catch (error) {
     console.log(error);
   }

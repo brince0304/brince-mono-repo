@@ -1,7 +1,5 @@
 import { notionClient } from '@/lib/notion/notion';
-import type { NotionPagesResponse } from '@/models/notion';
 import type { GetPostRequest } from '@/models/post';
-import { revalidatePath } from 'next/cache';
 import { type NextRequest, NextResponse } from 'next/server';
 
 function getParameters(params: URLSearchParams) {
@@ -18,23 +16,6 @@ function getParameters(params: URLSearchParams) {
     },
   };
 }
-
-async function getResponse(parameters: GetPostRequest) {
-  if (Object.keys(parameters).length === 0) {
-    return await notionClient.getPosts();
-  }
-
-  return await notionClient.getPostsByParams(parameters);
-}
-
-function createWrappedResponse(response: NotionPagesResponse | undefined) {
-  const wrappedResponse = NextResponse.json(response);
-  wrappedResponse.headers.set('Cache-Control', 'public, max-age=60, s-maxage=60');
-  revalidatePath('/api/posts');
-
-  return wrappedResponse;
-}
-
 export async function GET(request: NextRequest) {
   const url = request.nextUrl;
 
@@ -46,8 +27,8 @@ export async function GET(request: NextRequest) {
   const parameters = getParameters(params);
 
   try {
-    const response = await getResponse(parameters as GetPostRequest);
-    return createWrappedResponse(response);
+    const response = await notionClient.getPostsByParams(parameters as GetPostRequest);
+    return NextResponse.json(response);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
