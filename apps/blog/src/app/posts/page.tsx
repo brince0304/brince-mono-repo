@@ -6,8 +6,12 @@ import { Input } from '@repo/ui/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/ui/select';
 import { LayoutList, LayoutGrid } from 'lucide-react';
 import { TextGrid } from '@repo/ui/TextGrid';
+import { notionClient } from '@/lib/notion/notion';
+import { TagBadge } from '@repo/ui/TagBadge';
 
 export default async function Post() {
+  const tags = await notionClient.getAllTags();
+
   return (
     <div className="container mx-auto p-4">
       <TextGrid title="Posts" description="최신 블로그 포스트를 확인해보세요 🔖" />
@@ -30,18 +34,9 @@ export default async function Post() {
       </div>
 
       <div className="flex mb-6 space-x-2">
-        <Badge variant="secondary">
-          <Tag className="mr-1 h-4 w-4" />
-          React
-        </Badge>
-        <Badge variant="secondary">
-          <Tag className="mr-1 h-4 w-4" />
-          Node.js
-        </Badge>
-        <Badge variant="secondary">
-          <Tag className="mr-1 h-4 w-4" />
-          GraphQL
-        </Badge>
+        {tags.map((tag) => (
+          <TagBadge key={tag} tag={tag} useTooltip={false} />
+        ))}
       </div>
 
       <div className="flex justify-end mb-4 space-x-2">

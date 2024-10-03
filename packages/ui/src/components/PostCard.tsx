@@ -7,7 +7,7 @@ import Link from 'next/link';
 import type React from 'react';
 import { Card, CardContent, CardFooter } from './ui/card';
 import { Button } from './ui/button';
-import { Badge } from './ui/badge';
+import { TagBadge } from './TagBadge';
 
 export interface PostCardProps {
   title: string;
@@ -59,9 +59,7 @@ const VerticalPostCard: React.FC<PostCardProps> = ({
             <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{excerpt}</p>
             <div className="flex flex-wrap gap-2">
               {tags.map((tag) => (
-                <Badge key={tag} variant="secondary" className="text-xs">
-                  {tag}
-                </Badge>
+                <TagBadge key={tag} tag={tag} />
               ))}
             </div>
           </CardContent>
@@ -134,9 +132,7 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
             <CardFooter className="flex justify-between items-center px-5 py-2 bg-muted/50">
               <div className="flex items-center space-x-2 overflow-x-auto flex-grow">
                 {tags.map((tag) => (
-                  <Badge key={tag} variant="secondary" className="text-xs whitespace-nowrap">
-                    {tag}
-                  </Badge>
+                  <TagBadge key={tag} tag={tag} />
                 ))}
               </div>
               <div className="flex items-center space-x-4 ml-4">
