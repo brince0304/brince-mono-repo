@@ -1,5 +1,5 @@
-import LikeButton from '@/components/PostButtons/LikeButton/LikeButton';
-import ShareButton from '@/components/PostButtons/ShareButton/ShareButton';
+import LikeButton from '../LikeButton/LikeButton';
+import ShareButton from '../ShareButton/ShareButton';
 import type React from 'react';
 
 interface LikeAndShareProps {

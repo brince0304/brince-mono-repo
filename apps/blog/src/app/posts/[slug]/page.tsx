@@ -2,7 +2,7 @@ import { serverFetcher } from '@/lib/client';
 import { generateBlogPostMetadata } from '@/lib/metadata';
 import type { PageBySlugResponse } from '@/models/notion';
 import type { Metadata } from 'next';
-import PostDetail from '@/components/Post/PostDetail/PostDetail';
+import PostDetail from './_components/PostDetail/PostDetail';
 
 export async function generateMetadata({
   params,
