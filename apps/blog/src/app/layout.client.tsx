@@ -12,8 +12,8 @@ import { ThemeProvider } from 'next-themes';
 import React, { type ReactNode } from 'react';
 
 const menuItems = [
-  { name: 'Home', path: '/' },
-  { name: 'Posts', path: '/posts' },
+  { name: '메인', path: '/' },
+  { name: '포스트', path: '/posts' },
 ];
 
 const queryClient = new QueryClient();
