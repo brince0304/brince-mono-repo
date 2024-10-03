@@ -64,7 +64,6 @@ const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
     nextImage: NextImageComponent,
     nextLink: Link,
     Collection: () => null,
-    Header: () => null,
   };
 
   return (
@@ -77,9 +76,7 @@ const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
       isShowingSearch={false}
       pageTitle={false}
       showTableOfContents={true}
-      linkTableTitleProperties={true}
       showCollectionViewDropdown={false}
-      minTableOfContentsItems={1}
       components={components}
       forceCustomImages={true}
     />

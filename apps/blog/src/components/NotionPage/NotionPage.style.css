@@ -15,6 +15,9 @@
   }
 }
 
+.notion-title {
+  display: none;
+}
 
 .notion-page-content {
   padding-left: 0 !important;
