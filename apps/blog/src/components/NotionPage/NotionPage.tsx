@@ -22,9 +22,11 @@ function NextImageComponent(props: ImageProps) {
     <Image
       src={props.src}
       alt={props.alt}
-      title="notion-image"
-      width={1200}
-      height={800}
+      title={props.alt}
+      sizes="100vw"
+      width={0}
+      height={0}
+      style={{ width: '100%', height: 'auto' }}
       loading="lazy"
     />
   );
@@ -78,6 +80,7 @@ const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
       showTableOfContents={true}
       showCollectionViewDropdown={false}
       components={components}
+      previewImages={true}
       forceCustomImages={true}
     />
   );
