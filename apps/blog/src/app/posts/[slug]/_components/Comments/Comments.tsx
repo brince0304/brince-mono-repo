@@ -1,6 +1,6 @@
 'use client';
 
-import { CommentQueryOptions } from '@/hooks/comment/queries';
+import { CommentQueryOptions } from '@/hooks/comment';
 import { UISkeleton } from '@repo/ui/UISkeleton';
 import { Typography } from '@repo/ui/ui/typography';
 import { wrap } from '@suspensive/react';

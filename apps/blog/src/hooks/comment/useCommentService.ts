@@ -1,4 +1,4 @@
-import { CommentQueryKeys } from '@/hooks/comment/queries';
+import { CommentQueryKeys } from '@/hooks/comment';
 import type { CommentRequest } from '@/models/notion';
 import { commentService } from '@/services/comment';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
