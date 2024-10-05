@@ -175,6 +175,9 @@ importers:
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../tools/config-typescript
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       '@types/node':
         specifier: ^20
         version: 20.16.1
