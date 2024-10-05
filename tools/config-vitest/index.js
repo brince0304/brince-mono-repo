@@ -9,16 +9,6 @@ export default defineConfig({
     sequence: {
       shuffle: true,
     },
-    poolOptions: process.env.CI
-      ? {
-          threads: {
-            singleThread: true,
-          },
-          forks: {
-            singleFork: true,
-          },
-        }
-      : {},
     clearMocks: true,
     maxConcurrency: process.env.CI ? 1 : 4,
     coverage: {
