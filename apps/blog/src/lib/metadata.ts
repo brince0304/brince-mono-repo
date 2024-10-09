@@ -18,6 +18,7 @@ interface GenerateMetadataOptions {
   type?: 'website' | 'article';
   imageUrl?: string;
   url?: string;
+  canonicalUrl?: string;
 }
 
 export function generateMetadata({
@@ -29,8 +30,9 @@ export function generateMetadata({
   type = 'website',
   imageUrl = BLOG_IMAGE_URL,
   url = BLOG_URL,
+  canonicalUrl,
 }: GenerateMetadataOptions = {}): Metadata {
-  const metadata: Metadata = {
+  return {
     title,
     description,
     keywords,
@@ -55,9 +57,10 @@ export function generateMetadata({
       description,
       images: imageUrl,
     },
+    alternates: {
+      canonical: canonicalUrl || url,
+    },
   };
-
-  return metadata;
 }
 
 export function generateBlogPostMetadata(post: NotionPage): Metadata {
@@ -73,15 +76,16 @@ export function generateBlogPostMetadata(post: NotionPage): Metadata {
   const description = post.properties.Excerpt?.rich_text[0]?.plain_text || '';
   const keywords =
     post.properties.Tags?.multi_select?.map((tag) => tag.name).join(', ') || BLOG_KEYWORDS;
+  const canonicalUrl = `${BLOG_URL}/posts/${post.properties.Slug?.rich_text[0]?.plain_text}`;
 
   return generateMetadata({
     title: title ? `${title} | ${BLOG_TITLE}` : BLOG_TITLE,
     description,
     keywords,
+    canonicalUrl,
   });
 }
 
-// 홈페이지용 메타데이터 생성 함수
 export function generateHomeMetadata(): Metadata {
   return generateMetadata();
 }
