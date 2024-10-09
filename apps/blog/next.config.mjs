@@ -13,7 +13,7 @@ const nextConfig = {
       },
       {
         hostname: 'www.notion.so',
-      }
+      },
     ],
   },
   transpilePackages: ['@repo/ui'],
