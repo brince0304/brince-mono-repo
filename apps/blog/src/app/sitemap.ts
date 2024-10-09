@@ -16,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return {
       url: `${baseUrl}/posts/${slug}`,
-      lastModified: date ? new Date(date) : new Date(),
+      lastModified: new Date(),
     };
   });
 
