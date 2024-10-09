@@ -1,4 +1,1 @@
 export PATH="$PATH:$HOME/.pnpm-store/bin"
-
-pnpm lint-staged
-

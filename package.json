@@ -16,11 +16,11 @@
     "format": "biome format . --write",
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": "biome lint",
-    "*.{js,ts,tsx,json,md}": "biome format --write"
+    "*.{js,ts,tsx}": "pnpm lint",
+    "*.{js,ts,tsx,json,md}": "pnpm format"
   },
   "dependencies": {
     "framer-motion": "^11.3.28",
@@ -35,7 +35,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8.8.0",
-    "husky": "^9.1.4",
+    "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "rollup": "^2.60.0",
     "storybook": "^8.2.9",
