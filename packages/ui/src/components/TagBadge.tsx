@@ -1,20 +1,26 @@
 'use client';
 
 import type { FC } from 'react';
-import { Badge } from './ui/badge';
+import { Badge, type BadgeProps } from './ui/badge';
 import { Check, Tag } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 import { twMerge } from 'tailwind-merge';
 
-export interface TagProps {
+export interface TagProps extends BadgeProps {
   tag: string;
   useTooltip?: boolean;
-  className?: string;
   isActive?: boolean;
   onClick?: () => void;
 }
 
-const TagBadge: FC<TagProps> = ({ tag, useTooltip = true, className, isActive, onClick }) => {
+const TagBadge: FC<TagProps> = ({
+  tag,
+  useTooltip = true,
+  className,
+  isActive,
+  onClick,
+  ...props
+}) => {
   const combinedClassName = twMerge(
     'cursor-pointer',
     className,
@@ -26,7 +32,7 @@ const TagBadge: FC<TagProps> = ({ tag, useTooltip = true, className, isActive, o
   const TagIcon = isActive ? Check : Tag;
 
   const BadgeContent = (
-    <Badge onClick={onClick} variant="secondary" className={combinedClassName} key={tag}>
+    <Badge onClick={onClick} variant="secondary" className={combinedClassName} key={tag} {...props}>
       <TagIcon className="mr-1 h-4 w-4" />
       {tag}
     </Badge>

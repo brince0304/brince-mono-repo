@@ -41,8 +41,27 @@ async function getPostsByParams(params: GetPostRequest) {
   try {
     const response = await notion.databases.query({
       database_id: POST_DATABASE_ID,
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-      filter: params.filter as any,
+      filter: {
+        and: [
+          {
+            property: 'Published',
+            checkbox: {
+              equals: true,
+            },
+          },
+          ...(params.search
+            ? [
+                {
+                  property: 'Title',
+                  rich_text: {
+                    contains: params.search,
+                  },
+                },
+              ]
+            : []),
+          ...(params.tags ? [{ property: 'Tags', multi_select: { contains: params.tags } }] : []),
+        ],
+      },
       sorts: [
         {
           property: params.sortBy || 'Date',

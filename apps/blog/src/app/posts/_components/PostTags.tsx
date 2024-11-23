@@ -11,6 +11,10 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
+interface PostTagsProps {
+  isFetchingPost: boolean;
+}
+
 const PostTags = wrap
   .ErrorBoundary({
     fallback: (
@@ -27,47 +31,35 @@ const PostTags = wrap
       </div>
     ),
   })
-  .on(() => (
+  .on<PostTagsProps>(({ isFetchingPost }) => (
     <SuspenseInfiniteQuery {...PostQueryOptions.getInfiniteTags()}>
       {({ data, isFetchingNextPage, hasNextPage, fetchNextPage }) => {
         const router = useRouter();
-
-        const [isOpen, setIsOpen] = useState(true);
-
-        const uniqueTags = new Set<string>(data.pages.flat());
         const searchParams = useSearchParams();
-        const selectedTags = searchParams.getAll('tag');
+        const selectedTag = searchParams.get('tag');
+        const [isOpen, setIsOpen] = useState(true);
+        const uniqueTags = new Set<string>(data.pages.flat());
 
-        const isTagActive = (tag: string) => selectedTags.includes(tag);
-
-        const updateSearchParams = useCallback(
-          (tags: string[]) => {
-            const newSearchParams = new URLSearchParams(window.location.search);
-            newSearchParams.delete('tag');
-
-            for (const tag of tags) {
-              newSearchParams.append('tag', tag);
+        const handleTagClick = useCallback(
+          (tag: string) => {
+            const params = new URLSearchParams(window.location.search);
+            if (selectedTag === tag) {
+              params.delete('tag');
+            } else {
+              params.set('tag', tag);
             }
-
-            router.replace(`?${newSearchParams.toString()}`);
+            router.replace(`?${params.toString()}`);
           },
-          [router]
+          [router, selectedTag]
         );
 
-        const toggleTag = (tag: string) => {
-          const newTags = selectedTags.includes(tag)
-            ? selectedTags.filter((t) => t !== tag)
-            : [...selectedTags, tag];
-
-          updateSearchParams(newTags);
-        };
-
         useEffect(() => {
-          const validTags = selectedTags.filter((tag) => uniqueTags.has(tag));
-          if (validTags.length !== selectedTags.length) {
-            updateSearchParams(validTags);
+          if (selectedTag && !uniqueTags.has(selectedTag)) {
+            const params = new URLSearchParams(window.location.search);
+            params.delete('tag');
+            router.replace(`?${params.toString()}`);
           }
-        }, [uniqueTags, selectedTags, updateSearchParams]);
+        }, [uniqueTags, selectedTag, router]);
 
         return (
           <div className="flex flex-col gap-2 w-full">
@@ -84,14 +76,16 @@ const PostTags = wrap
                       key={tag}
                       tag={tag}
                       useTooltip={false}
-                      isActive={isTagActive(tag)}
-                      onClick={() => toggleTag(tag)}
+                      isActive={selectedTag === tag}
+                      onClick={() => handleTagClick(tag)}
+                      disabled={isFetchingPost}
                     />
                   ))}
                   {hasNextPage && (
                     <Badge
                       onClick={() => fetchNextPage()}
                       className={`cursor-pointer ${isFetchingNextPage ? 'opacity-50' : ''}`}
+                      disabled={isFetchingPost}
                     >
                       {isFetchingNextPage ? (
                         <Loader2 className="mr-1 h-4 w-4 animate-spin" />
@@ -106,7 +100,7 @@ const PostTags = wrap
             </div>
             <div className="flex items-center justify-between">
               <Typography variant="p" className="text-sm text-muted-foreground">
-                태그는 중복 선택이 가능해요 🤗
+                태그로도 검색해보세요 🤗
               </Typography>
               <Badge
                 onClick={() => setIsOpen((prev) => !prev)}

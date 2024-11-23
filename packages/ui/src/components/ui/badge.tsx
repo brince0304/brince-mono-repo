@@ -26,10 +26,21 @@ const badgeVariants = cva(
 
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
+    VariantProps<typeof badgeVariants> {
+  disabled?: boolean;
+}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
-  return <div className={cn(badgeVariants({ variant }), className)} {...props} />;
+function Badge({ className, variant, disabled, ...props }: BadgeProps) {
+  return (
+    <div
+      className={cn(
+        badgeVariants({ variant }),
+        className,
+        disabled ? 'cursor-not-allowed opacity-50' : ''
+      )}
+      {...props}
+    />
+  );
 }
 
 export { Badge, badgeVariants };

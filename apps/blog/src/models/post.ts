@@ -9,24 +9,8 @@ export interface GetPostRequest {
   pageSize?: number;
   sort?: 'ascending' | 'descending';
   sortBy?: MyProperties;
-  filter?: {
-    property: MyProperties;
-    checkbox?: {
-      equals: boolean;
-    };
-    rich_text?: {
-      equals: string;
-    };
-    number?: {
-      equals: number;
-    };
-    date?: {
-      equals: string;
-    };
-    relation?: {
-      contains: string;
-    };
-  };
+  search?: string;
+  tags?: string;
 }
 
 export interface GetTagsResponse {

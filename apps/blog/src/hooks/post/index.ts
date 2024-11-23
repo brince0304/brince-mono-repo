@@ -21,6 +21,7 @@ export const PostQueryOptions = {
       queryKey: PostQueryKeys.getPosts(getPostRequest),
       queryFn: () => postService.getPosts(getPostRequest),
       select: (res) => res.data,
+      staleTime: 1000 * 60 * 5,
       retry: false,
     }),
   getInfiniteTags: () =>

@@ -8,12 +8,8 @@ function getParameters(params: URLSearchParams) {
     pageSize: Number(params.get('pageSize') || 5),
     sort: params.get('sort') || ('descending' as 'descending' | 'ascending'),
     sortBy: params.get('sortBy') || ('Date' as 'Date' | 'Likes'),
-    filter: params.get('filter') || {
-      property: 'Published',
-      checkbox: {
-        equals: true,
-      },
-    },
+    search: params.get('search') || '',
+    tags: params.get('tags') || '',
   };
 }
 export async function GET(request: NextRequest) {
@@ -25,6 +21,7 @@ export async function GET(request: NextRequest) {
 
   const params = url.searchParams;
   const parameters = getParameters(params);
+  console.log('parameters', parameters);
 
   try {
     const response = await notionClient.getPostsByParams(parameters as GetPostRequest);

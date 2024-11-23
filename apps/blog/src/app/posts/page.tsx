@@ -1,9 +1,9 @@
 import { Button } from '@repo/ui/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@repo/ui/ui/card';
 import { LayoutList, LayoutGrid } from 'lucide-react';
 import { TextGrid } from '@repo/ui/TextGrid';
 
-import PostListHeader from './_components/PostTags/PostListHeader';
+import PostListHeader from './_components/PostListHeader';
+import PostListBody from './_components/PostList';
 
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
@@ -23,37 +23,7 @@ export default async function Post() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {[1, 2, 3, 4, 5, 6].map((post) => (
-          <Card key={post}>
-            <CardHeader>
-              <CardTitle>Blog Post Title</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">Short description of the blog post...</p>
-            </CardContent>
-            <CardFooter className="flex justify-between">
-              <span className="text-sm text-muted-foreground">2024년 10월 3일</span>
-              <Button variant="link">Read more →</Button>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
-
-      <div className="mt-6 flex justify-center space-x-2">
-        <Button variant="outline" size="sm">
-          1
-        </Button>
-        <Button variant="outline" size="sm">
-          2
-        </Button>
-        <Button variant="outline" size="sm">
-          3
-        </Button>
-        <Button variant="outline" size="sm">
-          ...
-        </Button>
-      </div>
+      <PostListBody />
     </div>
   );
 }
