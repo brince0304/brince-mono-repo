@@ -47,11 +47,13 @@ const CommentBox: React.FC<CommentBoxProps> = ({ comment, childComments, pageId 
           transition={{ duration: 0.3 }}
           style={{ overflow: 'hidden' }}
         >
-          {renderChildComments()}
+          {childComments.map((childComment) => (
+            <div key={childComment.id} className="flex flex-col pl-8">
+              <Comment {...convertToCommentProps(childComment)} isReply />
+            </div>
+          ))}
 
-          <div className="pl-8">
-            <CommentForm parentId={comment.id} pageId={pageId} />
-          </div>
+          <CommentForm parentId={comment.id} pageId={pageId} />
         </motion.div>
       </div>
     </div>
