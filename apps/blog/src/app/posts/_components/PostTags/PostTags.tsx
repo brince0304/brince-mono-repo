@@ -13,13 +13,18 @@ import { useCallback, useEffect } from 'react';
 const PostTags = wrap
   .ErrorBoundary({
     fallback: (
-      <div className="flex justify-center items-center text-muted-foreground">
+      <div className="flex justify-center items-center text-muted-foreground text-sm">
         <Typography variant={'p'}>태그를 불러오는 중 오류가 발생했어요 😢</Typography>
       </div>
     ),
   })
   .Suspense({
-    fallback: null,
+    fallback: (
+      <div className="flex justify-center items-center text-muted-foreground text-sm gap-1">
+        <Loader2 className="h-4 w-4 animate-spin" />
+        <Typography variant={'p'}>게시글 태그를 불러오고 있어요</Typography>
+      </div>
+    ),
   })
   .on(() => (
     <SuspenseInfiniteQuery {...PostQueryOptions.getInfiniteTags()}>

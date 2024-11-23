@@ -225,7 +225,7 @@ async function getAllTags(nextCursor?: string) {
     const response = await notion.databases.query({
       database_id: POST_DATABASE_ID,
       start_cursor: nextCursor as string | undefined,
-      page_size: 1,
+      page_size: 3,
       filter: {
         property: 'Tags',
         type: 'multi_select',
