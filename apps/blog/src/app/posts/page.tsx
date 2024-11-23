@@ -1,11 +1,9 @@
 import { Button } from '@repo/ui/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@repo/ui/ui/card';
-import { Input } from '@repo/ui/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/ui/select';
 import { LayoutList, LayoutGrid } from 'lucide-react';
 import { TextGrid } from '@repo/ui/TextGrid';
 
-import PostTags from './_components/PostTags/PostTags';
+import PostListHeader from './_components/PostTags/PostListHeader';
 
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
@@ -14,26 +12,7 @@ export default async function Post() {
   return (
     <div>
       <TextGrid title="Posts" description="최신 블로그 포스트를 확인해보세요 🔖" />
-      <div className="flex mb-6 space-x-4">
-        <div className="flex-grow">
-          <Input type="text" placeholder="Search posts..." />
-        </div>
-        <Select>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Category" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
-            <SelectItem value="frontend">Frontend</SelectItem>
-            <SelectItem value="backend">Backend</SelectItem>
-            <SelectItem value="devops">DevOps</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div className="flex mb-6 space-x-2">
-        <PostTags />
-      </div>
+      <PostListHeader />
 
       <div className="flex justify-end mb-4 space-x-2">
         <Button variant="outline" size="icon">

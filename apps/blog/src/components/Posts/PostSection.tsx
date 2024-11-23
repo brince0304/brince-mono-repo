@@ -17,7 +17,7 @@ interface PostSectionProps {
 const PostSection = ({ title, description, posts, isLoading }: PostSectionProps) => {
   return (
     <motion.section
-      className={'flex flex-col'}
+      className={'flex flex-col gap-4'}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
