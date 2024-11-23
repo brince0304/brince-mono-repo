@@ -12,7 +12,7 @@ import { ThemeProvider } from 'next-themes';
 import React, { type ReactNode } from 'react';
 
 const menuItems = [
-  { name: '메인', path: '/' },
+  { name: '홈', path: '/' },
   { name: '포스트', path: '/posts' },
 ];
 
