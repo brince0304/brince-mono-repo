@@ -1,5 +1,10 @@
 import { COMMENT_DATABASE_ID, NOTION_TOKEN, POST_DATABASE_ID } from '@/lib/notion/consts';
-import type { CommentRequest, NotionPage, NotionProperties } from '@/models/notion';
+import type {
+  CommentRequest,
+  NotionMultiSelect,
+  NotionPage,
+  NotionProperties,
+} from '@/models/notion';
 import type { GetPostRequest } from '@/models/post';
 import { Client } from '@notionhq/client';
 import { NotionAPI } from 'notion-client';
@@ -215,44 +220,38 @@ async function getPageBySlug(slug: string) {
   }
 }
 
-async function getAllTags() {
-  let allValues: string[] = [];
-  let hasMore = true;
-  let startCursor: string | null | undefined = undefined;
-
-  while (hasMore) {
-    try {
-      const response = await notion.databases.query({
-        database_id: POST_DATABASE_ID,
-        start_cursor: startCursor as string | undefined,
-        page_size: 100, // 최대 페이지 크기
-        filter: {
-          property: 'Tags',
-          type: 'multi_select',
-          multi_select: {
-            is_not_empty: true,
-          },
+async function getAllTags(nextCursor?: string) {
+  try {
+    const response = await notion.databases.query({
+      database_id: POST_DATABASE_ID,
+      start_cursor: nextCursor as string | undefined,
+      page_size: 1,
+      filter: {
+        property: 'Tags',
+        type: 'multi_select',
+        multi_select: {
+          is_not_empty: true,
         },
-      });
-      const result = response.results as NotionPage[];
+      },
+    });
+    const result = response.results as NotionPage[];
 
-      const values = result.map((page: NotionPage) => {
-        const property = page.properties.Tags;
+    const values = result.flatMap((page: NotionPage) => {
+      const property = page.properties.Tags;
+      return property.multi_select.map(
+        (item: NotionMultiSelect['multi_select'][number]) => item.name
+      );
+    });
 
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-        return property.multi_select.map((item: any) => item.name);
-      });
-
-      allValues = [...allValues, ...values.flat()];
-      hasMore = response.has_more;
-      startCursor = response.next_cursor as string | null | undefined;
-    } catch (error) {
-      console.error('Error fetching property values from Notion:', error);
-      throw error;
-    }
+    return {
+      tags: values.filter((value, index, self) => self.indexOf(value) === index),
+      nextCursor: response.next_cursor || undefined,
+      hasMore: response.has_more,
+    };
+  } catch (error) {
+    console.error('Error fetching property values from Notion:', error);
+    throw error;
   }
-
-  return allValues.filter((value, index, self) => self.indexOf(value) === index);
 }
 
 export const notionClient = {

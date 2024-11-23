@@ -72,6 +72,9 @@ importers:
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       '@suspensive/react':
         specifier: ^2.13.1
         version: 2.14.0(react@18.3.1)
@@ -175,9 +178,6 @@ importers:
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../tools/config-typescript
-      '@repo/utils':
-        specifier: workspace:*
-        version: link:../../packages/utils
       '@types/node':
         specifier: ^20
         version: 20.16.1

@@ -1,21 +1,16 @@
-import { Badge } from '@repo/ui/ui/badge';
 import { Button } from '@repo/ui/ui/button';
-import { Tag } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@repo/ui/ui/card';
 import { Input } from '@repo/ui/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/ui/select';
 import { LayoutList, LayoutGrid } from 'lucide-react';
 import { TextGrid } from '@repo/ui/TextGrid';
-import { notionClient } from '@/lib/notion/notion';
-import { TagBadge } from '@repo/ui/TagBadge';
+
+import PostTags from './_components/PostTags/PostTags';
 
 export default async function Post() {
-  const tags = await notionClient.getAllTags();
-
   return (
-    <div className="container mx-auto p-4">
+    <div>
       <TextGrid title="Posts" description="최신 블로그 포스트를 확인해보세요 🔖" />
-
       <div className="flex mb-6 space-x-4">
         <div className="flex-grow">
           <Input type="text" placeholder="Search posts..." />
@@ -34,9 +29,7 @@ export default async function Post() {
       </div>
 
       <div className="flex mb-6 space-x-2">
-        {tags.map((tag) => (
-          <TagBadge key={tag} tag={tag} useTooltip={false} />
-        ))}
+        <PostTags />
       </div>
 
       <div className="flex justify-end mb-4 space-x-2">

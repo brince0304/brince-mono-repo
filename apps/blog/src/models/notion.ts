@@ -22,23 +22,23 @@ const myProperties = [
 
 export type MyProperties = (typeof myProperties)[number];
 
-interface NotionUser {
+export interface NotionUser {
   object: 'user';
   id: string;
 }
 
-interface NotionParent {
+export interface NotionParent {
   type: 'database_id';
   database_id: string;
 }
 
-interface NotionRichTextProperty {
+export interface NotionRichTextProperty {
   id: string;
   type: 'rich_text';
   rich_text: NotionRichText[];
 }
 
-interface NotionRichText {
+export interface NotionRichText {
   type: 'text';
   text: {
     content: string;
@@ -56,13 +56,13 @@ interface NotionRichText {
   href: string | null;
 }
 
-interface NotionTitle {
+export interface NotionTitle {
   id: string;
   type: 'title';
   title: NotionRichText[];
 }
 
-interface NotionDate {
+export interface NotionDate {
   id: string;
   type: 'date';
   date: {
@@ -72,13 +72,13 @@ interface NotionDate {
   } | null;
 }
 
-interface NotionURL {
+export interface NotionURL {
   id: string;
   type: 'url';
   url: string | null;
 }
 
-interface NotionCheckbox {
+export interface NotionCheckbox {
   id: string;
   type: 'checkbox';
   checkbox: boolean;
@@ -94,7 +94,7 @@ interface NotionSelect {
   } | null;
 }
 
-interface NotionMultiSelect {
+export interface NotionMultiSelect {
   id: string;
   type: 'multi_select';
   multi_select: {
@@ -104,13 +104,13 @@ interface NotionMultiSelect {
   }[];
 }
 
-interface NotionNumber {
+export interface NotionNumber {
   id: string;
   type: 'number';
   number: number;
 }
 
-interface NotionCreatedTime {
+export interface NotionCreatedTime {
   id: string;
   type: 'created_time';
   created_time: string;

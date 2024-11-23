@@ -28,3 +28,8 @@ export interface GetPostRequest {
     };
   };
 }
+
+export interface GetTagsResponse {
+  tags: string[];
+  nextCursor: null | undefined;
+}

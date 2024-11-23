@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
+  "exports": {
+    "./hooks": "./src/hooks/index.ts",
+    "./lib": "./src/lib/index.ts"
+  },
   "scripts": {
     "test": "vitest",
     "test:ci": "vitest run"
