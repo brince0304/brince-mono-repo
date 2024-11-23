@@ -57,10 +57,6 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-
-  input {
-    font-size: 16px;
-  }
 }
 
 @layer base {
@@ -69,5 +65,9 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  input, select, textarea {
+    font-size: 16px;
   }
 }
