@@ -1,6 +1,6 @@
 'use client';
 
-import { PostQueryOptions } from '@/hooks/post';
+import { PostQueryKeys, PostQueryOptions } from '@/hooks/post';
 import { TagBadge } from '@repo/ui/components/TagBadge';
 import { Badge } from '@repo/ui/ui/badge';
 import { Typography } from '@repo/ui/ui/typography';
@@ -10,10 +10,7 @@ import { ChevronDownIcon, ChevronUpIcon, Loader2, PlusIcon } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-
-interface PostTagsProps {
-  isFetchingPost: boolean;
-}
+import { useIsFetching } from '@tanstack/react-query';
 
 const PostTags = wrap
   .ErrorBoundary({
@@ -31,14 +28,19 @@ const PostTags = wrap
       </div>
     ),
   })
-  .on<PostTagsProps>(({ isFetchingPost }) => (
+  .on(() => (
     <SuspenseInfiniteQuery {...PostQueryOptions.getInfiniteTags()}>
       {({ data, isFetchingNextPage, hasNextPage, fetchNextPage }) => {
         const router = useRouter();
         const searchParams = useSearchParams();
         const selectedTag = searchParams.get('tag');
-        const [isOpen, setIsOpen] = useState(true);
         const uniqueTags = new Set<string>(data.pages.flat());
+
+        const [isOpen, setIsOpen] = useState(true);
+
+        const isPostFetching = useIsFetching({
+          queryKey: PostQueryKeys.GET_POSTS,
+        });
 
         const handleTagClick = useCallback(
           (tag: string) => {
@@ -78,14 +80,14 @@ const PostTags = wrap
                       useTooltip={false}
                       isActive={selectedTag === tag}
                       onClick={() => handleTagClick(tag)}
-                      disabled={isFetchingPost}
+                      disabled={isPostFetching > 0}
                     />
                   ))}
                   {hasNextPage && (
                     <Badge
                       onClick={() => fetchNextPage()}
                       className={`cursor-pointer ${isFetchingNextPage ? 'opacity-50' : ''}`}
-                      disabled={isFetchingPost}
+                      disabled={isPostFetching > 0}
                     >
                       {isFetchingNextPage ? (
                         <Loader2 className="mr-1 h-4 w-4 animate-spin" />

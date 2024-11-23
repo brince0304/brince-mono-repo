@@ -38,40 +38,35 @@ async function getPosts() {
 }
 
 async function getPostsByParams(params: GetPostRequest) {
-  try {
-    const response = await notion.databases.query({
-      database_id: POST_DATABASE_ID,
-      filter: {
-        and: [
-          {
-            property: 'Published',
-            checkbox: {
-              equals: true,
-            },
-          },
-          ...(params.search
-            ? [
-                {
-                  property: 'Title',
-                  rich_text: {
-                    contains: params.search,
-                  },
-                },
-              ]
-            : []),
-          ...(params.tags ? [{ property: 'Tags', multi_select: { contains: params.tags } }] : []),
-        ],
-      },
-      sorts: [
-        {
-          property: params.sortBy || 'Date',
-          direction: params.sort || 'descending',
-        },
-      ],
-      page_size: params.pageSize || 10,
-    });
+  const { search, tags, sortBy = 'Date', sort = 'descending', pageSize = 10 } = params;
 
-    return response;
+  const baseFilter = {
+    property: 'Published',
+    checkbox: { equals: true },
+  };
+
+  const searchFilter = search
+    ? {
+        or: [
+          { property: 'Title', rich_text: { contains: search } },
+          { property: 'Excerpt', rich_text: { contains: search } },
+        ],
+      }
+    : null;
+
+  const tagsFilter = tags ? { property: 'Tags', multi_select: { contains: tags } } : null;
+
+  const filters = [baseFilter, searchFilter, tagsFilter].filter(
+    (filter): filter is NonNullable<typeof filter> => filter !== null
+  );
+
+  try {
+    return await notion.databases.query({
+      database_id: POST_DATABASE_ID,
+      filter: { and: filters },
+      sorts: [{ property: sortBy, direction: sort }],
+      page_size: pageSize,
+    });
   } catch (error) {
     console.log(error);
   }
