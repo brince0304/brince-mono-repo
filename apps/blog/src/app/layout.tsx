@@ -5,6 +5,7 @@ import './global.css';
 import { generateHomeMetadata } from '@/lib/metadata';
 import { cn } from '@/lib/utils';
 import { pretendard } from '@/lib/font';
+import { DisableIOSZoom } from '@/components/DisableIOSZoom';
 
 export const metadata: Metadata = generateHomeMetadata();
 
@@ -12,6 +13,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   height: 'device-height',
   initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
@@ -22,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={`scroll-smooth light ${pretendard.variable}`}>
       <body className={cn('min-h-screen bg-background font-sans antialiased')}>
+        <DisableIOSZoom />
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
