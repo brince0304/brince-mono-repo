@@ -7,6 +7,9 @@ import { TextGrid } from '@repo/ui/TextGrid';
 
 import PostTags from './_components/PostTags/PostTags';
 
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+
 export default async function Post() {
   return (
     <div>
