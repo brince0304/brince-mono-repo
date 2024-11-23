@@ -61,32 +61,37 @@ const PostTags = wrap
         }, [uniqueTags, selectedTags, updateSearchParams]);
 
         return (
-          <div className="w-full flex flex-wrap">
-            {Array.from(uniqueTags).map((tag) => (
-              <div key={tag} className="mr-2 mb-2">
-                <TagBadge
-                  tag={tag}
-                  useTooltip={false}
-                  isActive={isTagActive(tag)}
-                  onClick={() => toggleTag(tag)}
-                />
-              </div>
-            ))}
-            {hasNextPage && (
-              <div className="mr-2 mb-2">
-                <Badge
-                  onClick={() => fetchNextPage()}
-                  className={`cursor-pointer ${isFetchingNextPage ? 'opacity-50' : ''}`}
-                >
-                  {isFetchingNextPage ? (
-                    <Loader2 className="mr-1 h-4 w-4 animate-spin" />
-                  ) : (
-                    <PlusIcon className="mr-1 h-4 w-4" />
-                  )}
-                  더보기
-                </Badge>
-              </div>
-            )}
+          <div className="flex flex-col gap-0">
+            <div className="w-full flex flex-wrap">
+              {Array.from(uniqueTags).map((tag) => (
+                <div key={tag} className="mr-2 mb-2">
+                  <TagBadge
+                    tag={tag}
+                    useTooltip={false}
+                    isActive={isTagActive(tag)}
+                    onClick={() => toggleTag(tag)}
+                  />
+                </div>
+              ))}
+              {hasNextPage && (
+                <div className="mr-2 mb-2">
+                  <Badge
+                    onClick={() => fetchNextPage()}
+                    className={`cursor-pointer ${isFetchingNextPage ? 'opacity-50' : ''}`}
+                  >
+                    {isFetchingNextPage ? (
+                      <Loader2 className="mr-1 h-4 w-4 animate-spin" />
+                    ) : (
+                      <PlusIcon className="mr-1 h-4 w-4" />
+                    )}
+                    더보기
+                  </Badge>
+                </div>
+              )}
+            </div>
+            <Typography variant="p" className="text-sm text-muted-foreground">
+              태그는 중복 선택이 가능해요 🤗
+            </Typography>
           </div>
         );
       }}
