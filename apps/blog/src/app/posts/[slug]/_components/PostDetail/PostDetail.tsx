@@ -12,6 +12,7 @@ import type React from 'react';
 import Comments from '../Comments/Comments';
 import CommentForm from '../CommentForm/CommentForm';
 import { TagBadge } from '@repo/ui/TagBadge';
+import Link from 'next/link';
 
 interface PostDetailProps {
   post: PageBySlugResponse;
@@ -58,7 +59,9 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
           </section>
           <div className="flex flex-wrap gap-2">
             {post.page.properties.Tags.multi_select.map((tag) => (
-              <TagBadge key={tag.name} tag={tag.name} />
+              <Link href={`/posts?tag=${tag.name}`} key={tag.name}>
+                <TagBadge tag={tag.name} />
+              </Link>
             ))}
           </div>
           <div className="border-t border-gray-200 dark:border-gray-700" />

@@ -8,6 +8,7 @@ import type React from 'react';
 import { Card, CardContent, CardFooter } from './ui/card';
 import { Button } from './ui/button';
 import { TagBadge } from './TagBadge';
+import { useRouter } from 'next/navigation';
 
 export interface PostCardProps {
   title: string;
@@ -59,7 +60,9 @@ const VerticalPostCard: React.FC<PostCardProps> = ({
             <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{excerpt}</p>
             <div className="flex flex-wrap gap-2">
               {tags.map((tag) => (
-                <TagBadge key={tag} tag={tag} />
+                <Link href={`/posts?tag=${tag}`} key={tag}>
+                  <TagBadge tag={tag} />
+                </Link>
               ))}
             </div>
           </CardContent>
@@ -80,7 +83,7 @@ const VerticalPostCard: React.FC<PostCardProps> = ({
                 size="sm"
                 className="font-semibold group-hover:text-primary transition-colors"
               >
-                Read more
+                보러가기
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </motion.div>
@@ -102,9 +105,15 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
   likes = 0,
   priority = false,
 }) => {
+  const router = useRouter();
+
   const formatDate = (dateString: string) => {
     const d = new Date(dateString);
     return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일`;
+  };
+
+  const handleClickTag = (tag: string) => {
+    router.push(`/posts?tags=${tag}`);
   };
 
   return (
@@ -132,7 +141,9 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
             <CardFooter className="flex justify-between items-center px-5 py-2 bg-muted/50">
               <div className="flex items-center space-x-2 overflow-x-auto flex-grow">
                 {tags.map((tag) => (
-                  <TagBadge key={tag} tag={tag} />
+                  <Link href={`/posts?tag=${tag}`} key={tag}>
+                    <TagBadge tag={tag} />
+                  </Link>
                 ))}
               </div>
               <div className="flex items-center space-x-4 ml-4">

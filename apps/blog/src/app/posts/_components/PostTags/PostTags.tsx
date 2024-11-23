@@ -108,7 +108,10 @@ const PostTags = wrap
               <Typography variant="p" className="text-sm text-muted-foreground">
                 태그는 중복 선택이 가능해요 🤗
               </Typography>
-              <Badge onClick={() => setIsOpen((prev) => !prev)} className="whitespace-nowrap">
+              <Badge
+                onClick={() => setIsOpen((prev) => !prev)}
+                className="whitespace-nowrap cursor-pointer"
+              >
                 {isOpen ? (
                   <ChevronUpIcon className="h-4 w-4" />
                 ) : (
