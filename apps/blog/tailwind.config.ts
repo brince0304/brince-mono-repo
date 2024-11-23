@@ -24,7 +24,7 @@ const config: Config = {
       },
     },
     fontFamily: {
-      sans: ['var(--font-sans)', ...fontFamily.sans],
+      sans: ['var(--font-pretendard)', 'sans-serif'],
       pretendard: ['var(--font-pretendard)', 'sans-serif'],
     },
   },

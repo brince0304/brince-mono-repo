@@ -1,6 +1,6 @@
 import ClientLayout from '@/app/layout.client';
 import type { Metadata, Viewport } from 'next';
-import { Inter as FontSans } from 'next/font/google';
+import localFont from 'next/font/local';
 import React, { type ReactNode } from 'react';
 import './global.css';
 import { generateHomeMetadata } from '@/lib/metadata';
@@ -14,9 +14,10 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const fontSans = FontSans({
-  subsets: ['latin'],
-  variable: '--font-sans',
+const pretendard = localFont({
+  src: '../fonts/PretendardVariable.woff2',
+  variable: '--font-pretendard',
+  display: 'swap',
 });
 
 export default function RootLayout({
@@ -34,7 +35,12 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
         />
       </head>
-      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
+      <body
+        className={cn(
+          'min-h-screen bg-background font-pretendard antialiased',
+          pretendard.variable
+        )}
+      >
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
