@@ -9,7 +9,6 @@ export async function GET(request: NextRequest) {
 
   try {
     const response = await notionClient.getAllTags(nextCursor);
-    revalidatePath('/posts/tags');
 
     return NextResponse.json(response, {
       headers: {
