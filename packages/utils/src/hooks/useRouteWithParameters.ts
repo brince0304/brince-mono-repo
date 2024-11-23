@@ -1,7 +1,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 type Parameter = {
-  [key: string]: string;
+  [key: string]: string | undefined;
 };
 
 type RouteWithParameters = {
@@ -14,13 +14,23 @@ type RouteWithParameters = {
 const useRouteWithParameters = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const handleRoute = ({ baseUrl, parameters, replace, clear = true }: RouteWithParameters) => {
-    const currentSearchParams = new URLSearchParams(useSearchParams());
+  const createUrl = ({
+    baseUrl,
+    parameters,
+    clear = true,
+  }: Omit<RouteWithParameters, 'replace'>) => {
+    const currentSearchParams = new URLSearchParams(searchParams);
     const newSearchParams = new URLSearchParams(currentSearchParams);
 
     if (parameters) {
       for (const [key, value] of Object.entries(parameters)) {
+        if (value === undefined) {
+          newSearchParams.delete(key);
+          continue;
+        }
+
         newSearchParams.set(key, value);
       }
 
@@ -34,14 +44,16 @@ const useRouteWithParameters = () => {
     }
 
     const queryString = newSearchParams.toString();
-    const newPathname = `${baseUrl || pathname}${queryString ? `?${queryString}` : ''}`;
+    return `${baseUrl || pathname}${queryString ? `?${queryString}` : ''}`;
+  };
 
-    if (replace) {
-      router.replace(newPathname);
-      return;
-    }
-
-    router.push(newPathname);
+  const handleRoute = {
+    push: (options: Omit<RouteWithParameters, 'replace'>) => {
+      router.push(createUrl(options));
+    },
+    replace: (options: Omit<RouteWithParameters, 'replace'>) => {
+      router.replace(createUrl(options));
+    },
   };
 
   return handleRoute;

@@ -1,9 +1,7 @@
-import { usePathname } from 'next/navigation';
-import { isServer } from '@/lib/next';
+import { useSearchParams } from 'next/navigation';
 
 export default function useQueryString(keys: string[]) {
-  const pathname = isServer() ? usePathname() : window.location.pathname;
-  const searchParams = new URLSearchParams(pathname.split('?')[1] || '');
+  const searchParams = useSearchParams();
 
   const result: Record<string, string> = {};
 

@@ -11,7 +11,6 @@
     "build:all": "pnpm run build:components && pnpm run build:styles && pnpm run build:blog",
     "storybook:ui": "pnpm --filter @repo/ui run storybook",
     "build-storybook:ui": "pnpm --filter @repo/ui run build-storybook",
-    "test:ci": "pnpm --filter @repo/blog run test:ci && pnpm --filter @repo/utils run test:ci",
     "lint": "biome lint .",
     "format": "biome format . --write",
     "build": "turbo run build",

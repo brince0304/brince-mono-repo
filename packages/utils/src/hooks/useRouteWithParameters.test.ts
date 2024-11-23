@@ -35,7 +35,7 @@ describe('useRouteWithParameters', () => {
   it('파라미터를 추가하고 라우트를 푸시합니다', () => {
     const { result } = renderHook(() => useRouteWithParameters());
 
-    result.current({ parameters: { key: 'value' } });
+    result.current.push({ parameters: { key: 'value' } });
 
     expect(mockPush).toHaveBeenCalledWith('/test?key=value');
   });
@@ -43,7 +43,7 @@ describe('useRouteWithParameters', () => {
   it('replace가 true일 때 라우트를 교체합니다', () => {
     const { result } = renderHook(() => useRouteWithParameters());
 
-    result.current({ parameters: { key: 'value' }, replace: true });
+    result.current.replace({ parameters: { key: 'value' } });
 
     expect(mockReplace).toHaveBeenCalledWith('/test?key=value');
   });
@@ -51,7 +51,7 @@ describe('useRouteWithParameters', () => {
   it('clear가 false일 때 불필요한 파라미터를 제거합니다', () => {
     const { result } = renderHook(() => useRouteWithParameters());
 
-    result.current({ parameters: { newKey: 'newValue' } });
+    result.current.push({ parameters: { newKey: 'newValue' } });
 
     expect(mockPush).toHaveBeenCalledWith('/test?newKey=newValue');
   });
@@ -60,7 +60,7 @@ describe('useRouteWithParameters', () => {
     mockSearchParams.append('oldKey', 'oldValue');
     const { result } = renderHook(() => useRouteWithParameters());
 
-    result.current({ parameters: { newKey: 'newValue' } });
+    result.current.push({ parameters: { newKey: 'newValue' } });
 
     expect(mockPush).toHaveBeenCalledWith('/test?newKey=newValue');
   });
@@ -68,7 +68,7 @@ describe('useRouteWithParameters', () => {
   it('baseUrl이 없을 때 현재 경로 사용', () => {
     const { result } = renderHook(() => useRouteWithParameters());
 
-    result.current({ parameters: { key: 'value' } });
+    result.current.push({ parameters: { key: 'value' } });
 
     expect(mockPush).toHaveBeenCalledWith('/test?key=value');
   });

@@ -12,6 +12,20 @@
     "dev": {
       "cache": false,
       "dependsOn": ["^dev"]
+    },
+    "test:ci": {
+      "dependsOn": ["^test:ci"],
+      "inputs": [
+        "packages/*/src/**/*.test.*",
+        "packages/*/src/**/*.spec.*",
+        "packages/**/test/**/*.*",
+        "packages/**/__tests__/**/*.*",
+        "apps/*/src/**/*.test.*",
+        "apps/*/src/**/*.spec.*",
+        "apps/**/test/**/*.*",
+        "apps/**/__tests__/**/*.*"
+      ],
+      "outputs": []
     }
   }
 }
