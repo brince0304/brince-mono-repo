@@ -1,3 +1,5 @@
+import MillionLint from "@million/lint";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -19,4 +21,4 @@ const nextConfig = {
   transpilePackages: ['@repo/ui'],
 };
 
-export default nextConfig;
+export default MillionLint.next({ rsc: true })(nextConfig);
