@@ -8,6 +8,7 @@ import { PostQueryOptions } from '@/hooks/post';
 import PostList from '@/components/Posts/PostList';
 import type { NotionPage } from '@/models/notion';
 import { useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 const PostListBody = wrap
   .Suspense({ fallback: <PostListSkeleton /> })
@@ -19,9 +20,17 @@ const PostListBody = wrap
     ),
   })
   .on(() => {
+    const [mounted, setMounted] = useState(false);
     const searchParams = useSearchParams();
+
+    if (!mounted) return <PostListSkeleton />;
+
     const search = searchParams.get('search') ?? undefined;
     const tags = searchParams.get('tag') ?? undefined;
+
+    useEffect(() => {
+      setMounted(true);
+    }, []);
 
     return (
       <SuspenseQuery
