@@ -11,7 +11,7 @@ const getPosts = (getPostRequest?: GetPostRequest) => {
 };
 
 const getTags = (nextCursor?: string | undefined) => {
-  return axiosClient.get<GetTagsResponse>('/posts/tags', { params: { nextCursor } });
+  return axiosClient.get<GetTagsResponse>('/tags', { params: { nextCursor } });
 };
 
 export const postService = {
