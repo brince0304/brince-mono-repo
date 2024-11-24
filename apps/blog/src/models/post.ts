@@ -10,7 +10,8 @@ export interface GetPostRequest {
   sort?: 'ascending' | 'descending';
   sortBy?: MyProperties;
   search?: string;
-  tags?: string;
+  tag?: string;
+  category?: string;
 }
 
 export interface GetTagsResponse {

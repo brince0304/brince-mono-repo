@@ -38,7 +38,7 @@ async function getPosts() {
 }
 
 async function getPostsByParams(params: GetPostRequest) {
-  const { search, tags, sortBy = 'Date', sort = 'descending', pageSize = 10 } = params;
+  const { search, tag, category, sortBy = 'Date', sort = 'descending', pageSize = 10 } = params;
 
   const baseFilter = {
     property: 'Published',
@@ -54,9 +54,11 @@ async function getPostsByParams(params: GetPostRequest) {
       }
     : null;
 
-  const tagsFilter = tags ? { property: 'Tags', multi_select: { contains: tags } } : null;
+  const tagsFilter = tag ? { property: 'Tags', multi_select: { contains: tag } } : null;
 
-  const filters = [baseFilter, searchFilter, tagsFilter].filter(
+  const categoryFilter = category ? { property: 'Category', select: { equals: category } } : null;
+
+  const filters = [baseFilter, searchFilter, tagsFilter, categoryFilter].filter(
     (filter): filter is NonNullable<typeof filter> => filter !== null
   );
 

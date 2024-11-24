@@ -9,7 +9,8 @@ function getParameters(params: URLSearchParams) {
     sort: params.get('sort') || ('descending' as 'descending' | 'ascending'),
     sortBy: params.get('sortBy') || ('Date' as 'Date' | 'Likes'),
     search: params.get('search') || '',
-    tags: params.get('tags') || '',
+    tag: params.get('tag') || '',
+    category: params.get('category') || '',
   };
 }
 export async function GET(request: NextRequest) {
@@ -26,7 +27,7 @@ export async function GET(request: NextRequest) {
     const response = await notionClient.getPostsByParams(parameters as GetPostRequest);
     return NextResponse.json(response);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return NextResponse.json(
       { error: '게시글 조회에 실패하였습니다.', errorMessage: error },
       { status: 500 }

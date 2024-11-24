@@ -7,10 +7,10 @@ import { Typography } from '@repo/ui/ui/typography';
 import { wrap } from '@suspensive/react';
 import { SuspenseInfiniteQuery } from '@suspensive/react-query';
 import { ChevronDownIcon, ChevronUpIcon, Loader2, PlusIcon } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useIsFetching } from '@tanstack/react-query';
+import { useQueryString, useRouteWithParameters } from '@repo/utils/hooks';
 
 const PostTags = wrap
   .ErrorBoundary({
@@ -31,9 +31,8 @@ const PostTags = wrap
   .on(() => (
     <SuspenseInfiniteQuery {...PostQueryOptions.getInfiniteTags()}>
       {({ data, isFetchingNextPage, hasNextPage, fetchNextPage }) => {
-        const router = useRouter();
-        const searchParams = useSearchParams();
-        const selectedTag = searchParams.get('tag');
+        const router = useRouteWithParameters();
+        const { tag: selectedTag } = useQueryString(['tag']);
         const uniqueTags = new Set<string>(data.pages.flat());
 
         const [isOpen, setIsOpen] = useState(true);
@@ -44,22 +43,18 @@ const PostTags = wrap
 
         const handleTagClick = useCallback(
           (tag: string) => {
-            const params = new URLSearchParams(window.location.search);
-            if (selectedTag === tag) {
-              params.delete('tag');
+            if (tag === selectedTag) {
+              router.replace({ parameters: { tag: undefined } });
             } else {
-              params.set('tag', tag);
+              router.replace({ parameters: { tag } });
             }
-            router.replace(`?${params.toString()}`);
           },
           [router, selectedTag]
         );
 
         useEffect(() => {
           if (selectedTag && !uniqueTags.has(selectedTag)) {
-            const params = new URLSearchParams(window.location.search);
-            params.delete('tag');
-            router.replace(`?${params.toString()}`);
+            router.replace({ parameters: { tag: undefined } });
           }
         }, [uniqueTags, selectedTag, router]);
 

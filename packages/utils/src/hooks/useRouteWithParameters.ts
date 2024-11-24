@@ -54,6 +54,11 @@ const useRouteWithParameters = () => {
     replace: (options: Omit<RouteWithParameters, 'replace'>) => {
       router.replace(createUrl(options));
     },
+    parameters: {
+      get: () => {
+        return Object.fromEntries(searchParams.entries());
+      },
+    },
   };
 
   return handleRoute;

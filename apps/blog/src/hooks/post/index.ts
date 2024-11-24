@@ -16,6 +16,9 @@ export const PostQueryKeys = {
 
   GET_TAGS: [DEFAULT_POST_KEY, 'tags'] as const,
   getTags: (nextCursor?: string) => [...PostQueryKeys.GET_TAGS, nextCursor],
+
+  GET_CATEGORIES: [DEFAULT_POST_KEY, 'categories'] as const,
+  getCategories: () => [...PostQueryKeys.GET_CATEGORIES],
 };
 
 export const PostQueryOptions = {
@@ -45,5 +48,14 @@ export const PostQueryOptions = {
         pages: response.pages.map((page) => page.data.tags),
         pageParams: response.pages.map((page) => page.data.nextCursor),
       }),
+    }),
+  getCategories: () =>
+    queryOptions({
+      queryKey: PostQueryKeys.getCategories(),
+      queryFn: async () => {
+        const response = await serverFetcher<string[]>('/categories');
+        return { data: response } as AxiosResponse<string[]>;
+      },
+      select: (data: AxiosResponse<string[]>) => data.data,
     }),
 };
