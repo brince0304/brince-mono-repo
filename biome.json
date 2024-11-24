@@ -8,7 +8,9 @@
     "rules": {
       "suspicious": {
         "noExplicitAny": "error",
-        "noConsoleLog": "warn",
+        "noConsoleLog": {
+          "level": "warn"
+        },
         "noDoubleEquals": "error"
       },
       "correctness": {
@@ -59,7 +61,8 @@
       "public/**/*",
       "coverage/**/*",
       "storybook-static/**/*",
-      ".storybook/**/*"
+      ".storybook/**/*",
+      "**/*.stories.tsx"
     ]
   }
 }

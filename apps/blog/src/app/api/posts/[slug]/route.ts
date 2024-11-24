@@ -1,8 +1,7 @@
 import { notionClient } from '@/lib/notion/notion';
-import type { NotionProperties } from '@/models/notion';
 import { type NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
+export async function GET(_: NextRequest, { params }: { params: { slug: string } }) {
   const slug = params.slug;
 
   if (!slug) {

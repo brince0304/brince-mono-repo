@@ -5,7 +5,6 @@ import type { NotionPage } from '@/models/notion';
 import { TextGrid } from '@repo/ui/TextGrid';
 import { UISkeleton } from '@repo/ui/UISkeleton';
 import { motion } from 'framer-motion';
-import type React from 'react';
 
 interface PostSectionProps {
   title: string;

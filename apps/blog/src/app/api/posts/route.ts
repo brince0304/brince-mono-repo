@@ -21,7 +21,6 @@ export async function GET(request: NextRequest) {
 
   const params = url.searchParams;
   const parameters = getParameters(params);
-  console.log('parameters', parameters);
 
   try {
     const response = await notionClient.getPostsByParams(parameters as GetPostRequest);

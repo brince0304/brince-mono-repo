@@ -88,23 +88,23 @@ async function updatePostLike(pageId: string, count: number) {
   }
 }
 
-async function unlikePost(pageId: string) {
-  try {
-    const response = await notion.pages.update({
-      page_id: pageId,
-      properties: {
-        Likes: {
-          type: 'number',
-          number: 0,
-        },
-      },
-    });
+// async function unlikePost(pageId: string) {
+//   try {
+//     const response = await notion.pages.update({
+//       page_id: pageId,
+//       properties: {
+//         Likes: {
+//           type: 'number',
+//           number: 0,
+//         },
+//       },
+//     });
 
-    return response;
-  } catch (error) {
-    console.error('Error unliking post:', error);
-  }
-}
+//     return response;
+//   } catch (error) {
+//     console.error('Error unliking post:', error);
+//   }
+// }
 
 async function createCommentPage(pageId: string, data: CommentRequest) {
   try {

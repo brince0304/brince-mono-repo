@@ -21,13 +21,6 @@ const CommentBox: React.FC<CommentBoxProps> = ({ comment, childComments, pageId 
 
   const [isClickedReply, setIsClickedReply] = useState(false);
 
-  const renderChildComments = () =>
-    childComments.map((childComment) => (
-      <div key={childComment.id} className="flex flex-col pl-8">
-        <Comment {...convertToCommentProps(childComment)} isReply />
-      </div>
-    ));
-
   const handleTransition = () => {
     setIsClickedReply((prev) => !prev);
   };

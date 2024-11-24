@@ -32,6 +32,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ className = '' }) => {
   return (
     <Button
       variant="outline"
+      aria-label="게시글 공유 버튼"
       className={`w-12 h-12 rounded-full justify-center relative ${className}`}
       size="icon"
       onClick={handleCopy}

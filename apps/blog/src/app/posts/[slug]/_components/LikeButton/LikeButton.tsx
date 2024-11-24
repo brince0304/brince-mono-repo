@@ -46,6 +46,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ className = '', isLiked, pageId
   return (
     <Button
       variant="outline"
+      aria-label="게시글 좋아요 버튼"
       className={`w-12 h-12 rounded-full justify-center relative ${className}
             ${!isAnimating ? 'overflow-hidden' : ''}`}
       size="icon"

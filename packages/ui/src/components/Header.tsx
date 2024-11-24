@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type * as React from 'react';
@@ -35,6 +35,7 @@ function Header({ menuItems, themeToggle }: HeaderProps) {
               className={`transition-colors hover:text-foreground/80 ${
                 pathname === item.path ? 'text-foreground' : 'text-foreground/60'
               }`}
+              title={`${item.name} 클릭해서 바로가기`}
             >
               {item.name}
             </Link>
@@ -78,6 +79,7 @@ function MobileNav({
                     ? 'bg-primary text-primary-foreground'
                     : 'text-foreground/60 hover:bg-accent hover:text-accent-foreground'
                 }`}
+                title={`${item.name} 클릭해서 바로가기`}
                 onClick={() => setIsOpen(false)}
               >
                 {item.icon}

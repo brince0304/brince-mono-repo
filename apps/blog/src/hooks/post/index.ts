@@ -1,4 +1,4 @@
-import type { GetPostRequest, GetTagsResponse } from '@/models/post';
+import type { GetPostRequest } from '@/models/post';
 import { postService } from '@/services/post';
 import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
 

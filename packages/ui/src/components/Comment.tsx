@@ -38,7 +38,7 @@ const Comment: React.FC<CommentProps> = ({
       <BrinceAvatar />
     ) : (
       <Avatar>
-        <AvatarImage src={getAvatarUrl()} />
+        <AvatarImage src={getAvatarUrl()} alt="댓글 아바타" />
         <AvatarFallback>{author[0]}</AvatarFallback>
       </Avatar>
     );

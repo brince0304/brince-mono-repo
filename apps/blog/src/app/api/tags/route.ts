@@ -1,5 +1,4 @@
 import { notionClient } from '@/lib/notion/notion';
-import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 

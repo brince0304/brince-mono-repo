@@ -2,8 +2,6 @@ import { convertToPostCardProps } from '@/lib/notion/convert';
 import type { NotionPage } from '@/models/notion';
 import { PostCard } from '@repo/ui/PostCard';
 
-import type React from 'react';
-
 interface PostListProps {
   posts: NotionPage[];
 }

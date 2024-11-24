@@ -2,7 +2,6 @@
 
 import PostSection from '@/components/Posts/PostSection';
 
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { PostQueryOptions } from '@/hooks/post';
 import type { NotionPage } from '@/models/notion';

@@ -1,4 +1,3 @@
-import * as path from 'node:path';
 import type { Config } from 'tailwindcss';
 
 const sharedConfig = require('@repo/tailwind');

@@ -1,7 +1,6 @@
 import { TextGrid } from '@/components/TextGrid';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Home, Settings, User } from 'lucide-react';
-import React from 'react';
 
 export default {
   title: 'Components/TextGrid',

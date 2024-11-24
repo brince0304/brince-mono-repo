@@ -4,7 +4,6 @@ import { getPostLikeStatus } from '@/lib/cookie';
 import type { PageBySlugResponse } from '@/models/notion';
 import { BrinceAvatar } from '@repo/ui/BrinceAvatar';
 import { SimplifiedProfile } from '@repo/ui/SimplifiedProfile';
-import { Badge } from '@repo/ui/ui/badge';
 import { Typography } from '@repo/ui/ui/typography';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';

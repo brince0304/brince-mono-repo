@@ -83,9 +83,19 @@ export function generateBlogPostMetadata(post: NotionPage): Metadata {
     description,
     keywords,
     canonicalUrl,
+    imageUrl: post.properties.Thumbnail?.url || BLOG_IMAGE_URL,
   });
 }
 
 export function generateHomeMetadata(): Metadata {
   return generateMetadata();
+}
+
+export function generatePostsMetadata(): Metadata {
+  return generateMetadata({
+    title: 'BRINCE - 프론트엔드 개발 아티클',
+    description: '프론트엔드 개발 아티클을 공유합니다.',
+    keywords: BLOG_KEYWORDS,
+    canonicalUrl: `${BLOG_URL}/posts`,
+  });
 }

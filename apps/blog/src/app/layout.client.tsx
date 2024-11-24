@@ -9,7 +9,7 @@ import { Header } from '@repo/ui/Header';
 import { ErrorBoundary } from '@suspensive/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'next-themes';
-import React, { type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 const menuItems = [
   { name: '홈', path: '/' },

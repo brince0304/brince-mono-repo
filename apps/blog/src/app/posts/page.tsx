@@ -4,6 +4,10 @@ import { TextGrid } from '@repo/ui/TextGrid';
 
 import PostListHeader from './_components/PostListHeader';
 import PostListBody from './_components/PostList';
+import { generatePostsMetadata } from '@/lib/metadata';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = generatePostsMetadata();
 
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';

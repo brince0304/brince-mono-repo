@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://brince.dev/sitemap.xml

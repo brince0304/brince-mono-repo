@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { GithubIcon, LinkedinIcon } from 'lucide-react';
-import React from 'react';
 import { BrinceAvatar } from './BrinceAvatar';
 import { Card } from './ui/card';
 import {
@@ -58,6 +57,7 @@ const ProfileCard = () => {
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-300"
+                title={`${BLOG_OWNER} Github 바로가기`}
               >
                 <GithubIcon size={24} />
               </motion.a>
@@ -68,6 +68,7 @@ const ProfileCard = () => {
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-300"
+                title={`${BLOG_OWNER} LinkedIn 바로가기`}
               >
                 <LinkedinIcon size={24} />
               </motion.a>

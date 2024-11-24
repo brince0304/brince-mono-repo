@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import Link from 'next/link';
 import { BrinceAvatar } from './BrinceAvatar';
 import { Card, CardContent } from './ui/card';
 import { BLOG_OWNER, BLOG_OWNER_JOB, GITHUB_URL, LINKEDIN_URL } from '../lib/constants';
@@ -18,22 +18,24 @@ const SimplifiedProfile = () => {
           <p className="text-sm text-gray-500 dark:text-gray-400">{BLOG_OWNER_JOB}</p>
         </div>
         <div className="flex space-x-2 gap-2">
-          <a
+          <Link
             href={GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer nofollow"
             className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-300"
+            title={`${BLOG_OWNER} Github 바로가기`}
           >
             <GithubIcon size={20} />
-          </a>
-          <a
+          </Link>
+          <Link
             href={LINKEDIN_URL}
             target="_blank"
             rel="noopener noreferrer nofollow"
             className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-300"
+            title={`${BLOG_OWNER} LinkedIn 바로가기`}
           >
             <LinkedinIcon size={20} />
-          </a>
+          </Link>
         </div>
       </CardContent>
     </Card>
