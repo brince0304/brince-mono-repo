@@ -17,7 +17,9 @@ const PostCategorySelector = wrap.Suspense({ fallback: null }).on(() => {
         const handleRoute = (selectedCategory: string) => {
           if (currentCategory === selectedCategory) return;
 
-          router.replace({ parameters: { category: selectedCategory } });
+          router.replace({
+            parameters: { category: selectedCategory, search: undefined, tag: undefined },
+          });
         };
 
         return (

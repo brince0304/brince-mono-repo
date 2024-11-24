@@ -32,7 +32,11 @@ const PostTags = wrap
     <SuspenseInfiniteQuery {...PostQueryOptions.getInfiniteTags()}>
       {({ data, isFetchingNextPage, hasNextPage, fetchNextPage }) => {
         const router = useRouteWithParameters();
-        const { tag: selectedTag } = useQueryString(['tag']);
+        const {
+          tag: selectedTag,
+          search,
+          category,
+        } = useQueryString(['tag', 'search', 'category']);
         const uniqueTags = new Set<string>(data.pages.flat());
 
         const [isOpen, setIsOpen] = useState(true);
@@ -44,19 +48,19 @@ const PostTags = wrap
         const handleTagClick = useCallback(
           (tag: string) => {
             if (tag === selectedTag) {
-              router.replace({ parameters: { tag: undefined } });
+              router.replace({ parameters: { tag: undefined, search, category } });
             } else {
-              router.replace({ parameters: { tag } });
+              router.replace({ parameters: { tag, search, category } });
             }
           },
-          [router, selectedTag]
+          [router, selectedTag, search, category]
         );
 
         useEffect(() => {
           if (selectedTag && !uniqueTags.has(selectedTag)) {
-            router.replace({ parameters: { tag: undefined } });
+            router.replace({ parameters: { tag: undefined, search, category } });
           }
-        }, [uniqueTags, selectedTag, router]);
+        }, [uniqueTags, selectedTag, router, search, category]);
 
         return (
           <div className="flex flex-col gap-2 w-full">

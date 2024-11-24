@@ -4,7 +4,7 @@ import { PostQueryKeys } from '@/hooks/post';
 import { Input } from '@repo/ui/ui/input';
 import { useIsFetching } from '@tanstack/react-query';
 import { useDebounce } from '@toss/react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useQueryString, useRouteWithParameters } from '@repo/utils/hooks';
 
 const PostSearch = () => {
@@ -12,7 +12,7 @@ const PostSearch = () => {
     queryKey: PostQueryKeys.GET_POSTS,
   });
 
-  const { tag, search } = useQueryString(['tag', 'search']);
+  const { tag, search, category } = useQueryString(['tag', 'search', 'category']);
   const router = useRouteWithParameters();
 
   const [input, setInput] = useState(search ?? '');
@@ -21,14 +21,14 @@ const PostSearch = () => {
   const debouncedSearch = useDebounce((value: string) => {
     if (value) {
       router.replace({
-        parameters: { search: value, tag },
+        parameters: { search: value, tag, category },
       });
 
       return;
     }
 
     router.replace({
-      parameters: { search: undefined, tag },
+      parameters: { search: undefined, tag, category },
     });
   }, 300);
 
@@ -42,14 +42,14 @@ const PostSearch = () => {
     if (e.key === 'Enter') {
       if (input) {
         router.replace({
-          parameters: { search: input, tag },
+          parameters: { search: input, tag, category },
         });
 
         return;
       }
 
       router.replace({
-        parameters: { search: undefined, tag },
+        parameters: { search: undefined, tag, category },
       });
     }
   };
@@ -58,12 +58,6 @@ const PostSearch = () => {
     debouncedSearch('');
     setInput('');
   };
-
-  useEffect(() => {
-    if (!isPostFetching && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isPostFetching]);
 
   return (
     <div className="flex-grow">
