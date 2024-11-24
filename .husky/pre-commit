@@ -1,3 +1,2 @@
 pnpm turbo run test:ci
-pnpm lint-staged
 

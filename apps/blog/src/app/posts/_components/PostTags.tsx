@@ -100,9 +100,15 @@ const PostTags = wrap
               </div>
             </div>
             <div className="flex items-center justify-between">
-              <Typography variant="p" className="text-sm text-muted-foreground">
-                태그로도 검색해보세요 🤗
-              </Typography>
+              <motion.div
+                animate={{ opacity: isOpen ? 1 : 0 }}
+                transition={{ duration: 0.3 }}
+                className="flex items-center gap-2"
+              >
+                <Typography variant="p" className="text-sm text-muted-foreground">
+                  태그로도 검색해보세요 🤗
+                </Typography>
+              </motion.div>
               <Badge
                 onClick={() => setIsOpen((prev) => !prev)}
                 className="whitespace-nowrap cursor-pointer"

@@ -34,6 +34,14 @@ const PostListBody = wrap
         })}
       >
         {(data) => {
+          if (!data.data.results || data.data.results.length === 0) {
+            return (
+              <div className="flex flex-col items-center justify-center min-h-[200px] gap-4 rounded-lg border border-dashed border-muted p-8">
+                <Typography variant="p" className="text-muted-foreground">아직 게시글이 없어요 ✍️</Typography>
+              </div>
+            );
+          }
+
           return <PostList posts={data.data.results as NotionPage[]} />;
         }}
       </SuspenseQuery>

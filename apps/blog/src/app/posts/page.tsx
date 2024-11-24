@@ -1,5 +1,3 @@
-import { Button } from '@repo/ui/ui/button';
-import { LayoutList, LayoutGrid } from 'lucide-react';
 import { TextGrid } from '@repo/ui/TextGrid';
 
 import PostListHeader from './_components/PostListHeader';
@@ -22,16 +20,9 @@ export default async function Post() {
         <PostListHeader />
       </QueryHydrationBoundary>
 
-      <div className="flex justify-end mb-4 space-x-2">
-        <Button variant="outline" size="icon">
-          <LayoutList className="h-4 w-4" />
-        </Button>
-        <Button variant="outline" size="icon">
-          <LayoutGrid className="h-4 w-4" />
-        </Button>
+      <div className="flex flex-col gap-4 py-6">
+        <PostListBody />
       </div>
-
-      <PostListBody />
     </div>
   );
 }

@@ -12,24 +12,30 @@ const PostCategorySelector = wrap.Suspense({ fallback: null }).on(() => {
       {({ data }) => {
         const router = useRouteWithParameters();
         const uniqueCategories = [...new Set(data)];
+
         const { category: currentCategory } = useQueryString(['category']);
 
         const handleRoute = (selectedCategory: string) => {
           if (currentCategory === selectedCategory) return;
+          if (selectedCategory === 'all') {
+            router.replace({ parameters: { category: undefined } });
+            return;
+          }
 
-          router.replace({
-            parameters: { category: selectedCategory, search: undefined, tag: undefined },
-          });
+          router.replace({ parameters: { category: selectedCategory } });
         };
 
         return (
-          <Select value={currentCategory} onValueChange={handleRoute}>
+          <Select value={currentCategory ?? 'all'} onValueChange={handleRoute}>
             <SelectTrigger className="w-[150px] flex items-center gap-2">
-              <SelectValue placeholder="카테고리" />
+              <SelectValue />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="all" >
+                전체
+              </SelectItem>
               {uniqueCategories.map((category) => (
-                <SelectItem key={category} value={category}>
+                <SelectItem key={category} value={category} onClick={() => handleRoute(category)}>
                   {category}
                 </SelectItem>
               ))}
