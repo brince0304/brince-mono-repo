@@ -33,7 +33,7 @@ async function getPosts() {
     });
     return response.results as NotionPage[];
   } catch (error) {
-    console.log(error);
+    console.error('getPosts error', error);
   }
 }
 
@@ -68,7 +68,7 @@ async function getPostsByParams(params: GetPostRequest) {
       page_size: pageSize,
     });
   } catch (error) {
-    console.log(error);
+    console.error('getPostsByParams error', error);
   }
 }
 
@@ -268,6 +268,27 @@ async function getAllTags(nextCursor?: string) {
   }
 }
 
+async function getAllCategories() {
+  try {
+    const response = await notion.databases.query({
+      database_id: POST_DATABASE_ID,
+      filter: {
+        property: 'Category',
+        type: 'select',
+        select: {
+          is_not_empty: true,
+        },
+      },
+    });
+
+    const result = response.results as NotionPage[];
+
+    return result.map((page: NotionPage) => page.properties.Category.select?.name);
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+  }
+}
+
 export const notionClient = {
   getPosts,
   getPostsByParams,
@@ -277,4 +298,5 @@ export const notionClient = {
   updatePostProperties,
   updatePostLike,
   getAllTags,
+  getAllCategories,
 };

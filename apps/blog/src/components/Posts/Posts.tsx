@@ -5,9 +5,13 @@ import PostSection from '@/components/Posts/PostSection';
 import { useQuery } from '@tanstack/react-query';
 import { PostQueryOptions } from '@/hooks/post';
 import type { NotionPage } from '@/models/notion';
+import { useIsMounted } from '@toss/react';
 
 const Posts = () => {
+  const isMounted = useIsMounted();
   const { isLoading, data: posts } = useQuery({ ...PostQueryOptions.getPosts() });
+
+  if (!isMounted) return null;
 
   return (
     <section className={'flex flex-col gap-4'}>

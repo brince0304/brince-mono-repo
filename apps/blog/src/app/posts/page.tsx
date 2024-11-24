@@ -15,7 +15,7 @@ export const fetchCache = 'force-no-store';
 export default async function Post() {
   return (
     <div>
-      <TextGrid title="Posts" description="최신 블로그 포스트를 확인해보세요 🔖" />
+      <TextGrid title="포스트" description="최신 블로그 포스트를 확인해보세요 🔖" />
       <PostListHeader />
 
       <div className="flex justify-end mb-4 space-x-2">

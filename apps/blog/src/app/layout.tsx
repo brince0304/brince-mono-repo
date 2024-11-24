@@ -5,6 +5,7 @@ import './global.css';
 import { generateHomeMetadata } from '@/lib/metadata';
 import { cn } from '@/lib/utils';
 import { pretendard } from '@/lib/font';
+import ReactQueryProvider from '@/components/ReactQueryProvider';
 
 export const metadata: Metadata = generateHomeMetadata();
 
@@ -26,8 +27,9 @@ export default function RootLayout({
   return (
     <html lang="ko" className={`scroll-smooth light ${pretendard.variable}`}>
       <body className={cn('min-h-screen bg-background font-sans antialiased')}>
-        {/* <DisableIOSZoom /> */}
-        <ClientLayout>{children}</ClientLayout>
+        <ReactQueryProvider>
+          <ClientLayout>{children}</ClientLayout>
+        </ReactQueryProvider>
       </body>
     </html>
   );

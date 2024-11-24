@@ -7,7 +7,6 @@ import ToastContainerWrapper from '@/components/Toast/ToastContainer/ToastContai
 import { Footer } from '@repo/ui/Footer';
 import { Header } from '@repo/ui/Header';
 import { ErrorBoundary } from '@suspensive/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'next-themes';
 import type { ReactNode } from 'react';
 
@@ -16,8 +15,6 @@ const menuItems = [
   { name: '포스트', path: '/posts' },
 ];
 
-const queryClient = new QueryClient();
-
 export default function ClientLayout({
   children,
 }: {
@@ -25,30 +22,28 @@ export default function ClientLayout({
 }) {
   return (
     <ThemeProvider attribute="class" defaultTheme={'system'}>
-      <QueryClientProvider client={queryClient}>
-        <div className="min-h-screen flex flex-col transition-colors duration-300">
-          <ErrorBoundary
-            fallback={
-              <CustomError
-                code={500}
-                message="알수없는 오류가 발생했어요"
-                emoji="🙅"
-                onClick={() => {
-                  window.location.href = '/';
-                }}
-              />
-            }
-          >
-            <ProgressBar />
-            <Header menuItems={menuItems} themeToggle={<ThemeToggle />} />
-            <main className="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">
-              {children}
-              <ToastContainerWrapper />
-            </main>
-            <Footer />
-          </ErrorBoundary>
-        </div>
-      </QueryClientProvider>
+      <div className="min-h-screen flex flex-col transition-colors duration-300">
+        <ErrorBoundary
+          fallback={
+            <CustomError
+              code={500}
+              message="알수없는 오류가 발생했어요"
+              emoji="🙅"
+              onClick={() => {
+                window.location.href = '/';
+              }}
+            />
+          }
+        >
+          <ProgressBar />
+          <Header menuItems={menuItems} themeToggle={<ThemeToggle />} />
+          <main className="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">
+            {children}
+            <ToastContainerWrapper />
+          </main>
+          <Footer />
+        </ErrorBoundary>
+      </div>
     </ThemeProvider>
   );
 }

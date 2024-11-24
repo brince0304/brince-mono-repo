@@ -1,6 +1,9 @@
+import { serverFetcher } from '@/lib/client';
 import type { GetPostRequest } from '@/models/post';
 import { postService } from '@/services/post';
+import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
+import type { AxiosResponse } from 'axios';
 
 const DEFAULT_POST_KEY = 'post';
 
@@ -20,9 +23,17 @@ export const PostQueryOptions = {
     queryOptions({
       queryKey: PostQueryKeys.getPosts(getPostRequest),
       queryFn: () => postService.getPosts(getPostRequest),
-      select: (res) => res.data,
+      select: (res: AxiosResponse<QueryDatabaseResponse>) => res.data,
+    }),
+  getPrefetchPosts: (getPostRequest?: GetPostRequest) =>
+    queryOptions({
+      queryKey: PostQueryKeys.getPosts(getPostRequest),
+      queryFn: async () => {
+        const response = await serverFetcher<QueryDatabaseResponse>('/posts');
+        return { data: response } as AxiosResponse<QueryDatabaseResponse>;
+      },
+      select: (data: AxiosResponse<QueryDatabaseResponse>) => data.data,
       staleTime: 1000 * 60 * 5,
-      retry: false,
     }),
   getInfiniteTags: () =>
     infiniteQueryOptions({
