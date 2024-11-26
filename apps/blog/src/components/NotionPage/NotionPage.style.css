@@ -1,3 +1,4 @@
+/* Layout */
 @media (min-width: 1020px) and (min-height: 300px) {
   .notion-page-content-has-aside {
     display: flex !important;
@@ -15,47 +16,65 @@
   }
 }
 
-.notion-title {
-  display: none;
-}
-
-.notion-page-content {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.notion-page-scroller {
-  flex-direction: unset;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
+/* Reset Padding/Margin */
+.notion-full-page,
+.notion-page-content,
+.notion-page-scroller,
 .notion-page {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  @apply p-0 !important;
 }
 
 .notion-page-no-cover {
   margin-top: 0 !important;
 }
 
-.notion-app {
-  background-color: transparent !important;
+/* Typography */
+.notion-font,
+.notion-font-body,
+.notion-text,
+.notion-quote,
+.notion-h-title,
+.notion-table-of-contents-item-body {
+  font-family: 'Pretendard', sans-serif !important;
+}
+
+.notion-quote {
+  @apply text-[1.05rem] !important;
+}
+
+/* Table of Contents */
+.notion-table-of-contents-active-item {
+  @apply font-semibold bg-black text-white dark:bg-white dark:text-black !important;
 }
 
 .notion-table-of-contents-item-body {
   border-bottom: none !important;
 }
 
+/* Hide Elements */
+.notion-title {
+  @apply hidden !important;
+}
+
+/* Misc */
+.notion-page-scroller {
+  flex-direction: unset;
+}
+
+.notion-app {
+  background-color: transparent !important;
+}
+
+/* Aside */
 .notion-aside {
   z-index: 1;
+}
 
-  .notion-aside-table-of-contents {
-    background-color: transparent !important;
-    overflow: unset !important;
+.notion-aside-table-of-contents {
+  background-color: transparent !important;
+  overflow: unset !important;
+}
 
-    .notion-aside-table-of-contents-header {
-      display: none;
-    }
-  }
+.notion-aside-table-of-contents-header {
+  display: none;
 }
