@@ -2,7 +2,6 @@
 
 import type { FC } from 'react';
 import { Badge, type BadgeProps } from './ui/badge';
-import { Check, Tag } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 import { twMerge } from 'tailwind-merge';
 
