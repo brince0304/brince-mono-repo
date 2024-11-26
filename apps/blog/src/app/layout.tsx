@@ -1,13 +1,10 @@
 import ClientLayout from '@/app/layout.client';
-import type { Metadata, Viewport } from 'next';
+import type { Viewport } from 'next';
 import type { ReactNode } from 'react';
 import './global.css';
-import { generateHomeMetadata } from '@/lib/metadata';
 import { cn } from '@/lib/utils';
 import { pretendard } from '@/lib/font';
 import ReactQueryProvider from '@/components/ReactQueryProvider';
-
-export const metadata: Metadata = generateHomeMetadata();
 
 export const viewport: Viewport = {
   width: 'device-width',

@@ -1,5 +1,5 @@
 import { serverFetcher } from '@/lib/client';
-import { generateBlogPostMetadata } from '@/lib/metadata';
+import { generateBlogPostMetadata } from '@/lib/meta';
 import type { NotionPage, PageBySlugResponse } from '@/models/notion';
 import type { Metadata } from 'next';
 import PostDetail from './_components/PostDetail/PostDetail';
