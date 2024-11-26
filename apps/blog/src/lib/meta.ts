@@ -110,6 +110,7 @@ export function generateBlogPostMetadata(post: NotionPage): Metadata {
     title,
     description,
     keywords: tags.join(', ') || DEFAULT_METADATA.keywords,
+    url: `${BLOG_URL}/posts/${slug}`,
     canonicalUrl: `${BLOG_URL}/posts/${slug}`,
     imageUrl,
     type: 'article',
