@@ -38,11 +38,11 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
   return (
     <li className="group">
       <Link href={`/posts/${slug}`} title={`${title} 보러가기`}>
-        <div className="flex gap-6 p-4 hover:bg-muted/50 rounded-lg transition-colors">
+        <div className="flex gap-6 hover:bg-muted/50 rounded-lg transition-colors p-2 sm:p-4">
           {/* 이미지 영역 */}
           {imageUrl && (
             <motion.div
-              className="flex-shrink-0 w-24 h-24 sm:w-32 sm:h-32 overflow-hidden rounded-md"
+              className="flex-shrink-0 w-20 h-20 sm:w-32 sm:h-32 overflow-hidden rounded-md"
               initial={{ opacity: 0, y: 10, filter: "blur(10px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.3 }}

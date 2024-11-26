@@ -2,9 +2,9 @@ import { Skeleton } from '../ui/skeleton';
 
 const PostSkeleton = () => {
   return (
-    <div className="flex gap-6 p-4 rounded-lg">
+    <div className="flex gap-6 p-2 sm:p-4 rounded-lg">
       {/* 이미지 영역 */}
-      <div className="flex-shrink-0 w-24 h-24 sm:w-32 sm:h-32 overflow-hidden rounded-md">
+      <div className="flex-shrink-0 w-20 h-20 sm:w-32 sm:h-32 overflow-hidden rounded-md">
         <Skeleton className="w-full h-full" />
       </div>
 
