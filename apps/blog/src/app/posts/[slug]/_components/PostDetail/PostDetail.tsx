@@ -12,6 +12,7 @@ import Comments from '../Comments/Comments';
 import CommentForm from '../CommentForm/CommentForm';
 import { TagBadge } from '@repo/ui/TagBadge';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface PostDetailProps {
   post: PageBySlugResponse;
@@ -22,6 +23,7 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
 
   const title = post.page.properties.Title.title[0]?.plain_text;
   const excerpt = post.page.properties.Excerpt.rich_text[0]?.plain_text;
+  const cover = post.page.properties.Thumbnail?.url;
 
   return (
     <article className="flex gap-4 max-w-3xl w-full relative sm:px-0">
@@ -34,14 +36,26 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
         />
       </div>
       <div className="flex flex-col w-full flex-1 lg:ml-4 gap-4">
-        <header className="flex flex-col gap-3">
+        <div className="relative w-full aspect-[2/1]">
+          {cover && (
+            <Image
+              src={cover}
+              alt={title || '커버 이미지'}
+              fill
+              priority
+              className="object-cover rounded-lg"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          )}
+        </div>
+        <header className="flex flex-col gap-4 mt-2">
           <Typography variant={'h1'} className={'font-bold'}>
             {title}
           </Typography>
           <Typography variant={'large'} className="text-gray-500 dark:text-gray-400">
             {excerpt}
           </Typography>
-          <section className="flex gap-1 items-center">
+          <section className="flex gap-2 items-center">
             <div className="flex justify-center items-center gap-2">
               <BrinceAvatar className={'w-8 h-8'} />
               <Typography variant={'small'}>브린스</Typography>
@@ -65,8 +79,10 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
           </div>
           <div className="border-t border-gray-200 dark:border-gray-700" />
         </header>
-        <NotionPage recordMap={post.recordMap} />
-        <SimplifiedProfile />
+        <div className="py-14 sm:py-10">
+          <NotionPage recordMap={post.recordMap} />
+          <SimplifiedProfile />
+        </div>
         <div className="lg:hidden mt-4 flex gap-4">
           <PostFloatingButton
             isLiked={isLiked}

@@ -10,9 +10,7 @@ export async function generateMetadata({
   params,
 }: { params: { slug: string } }): Promise<Metadata> {
   try {
-    const article = await serverFetcher<PageBySlugResponse>(`/posts/${params.slug}`, {
-      next: { revalidate: 3600 }
-    });
+    const article = await serverFetcher<PageBySlugResponse>(`/posts/${params.slug}`);
 
     if (!article?.page) {
       throw new Error('Post not found');
@@ -39,13 +37,11 @@ export async function generateStaticParams() {
 
 export const dynamic = 'force-static';
 
-export const revalidate = 3600;
-
 export default async function Post({ params }: { params: { slug: string } }) {
   const post = await serverFetcher<PageBySlugResponse>(`/posts/${params.slug}`);
 
   return (
-    <div className="flex">
+    <div className="flex sm:mt-4 mt-5">
       <PostDetail post={post} />
     </div>
   );
