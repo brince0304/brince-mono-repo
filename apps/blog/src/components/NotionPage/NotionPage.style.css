@@ -16,6 +16,12 @@
   }
 }
 
+.notion-list {
+  li::marker {
+    @apply text-lg !important;
+  }
+}
+
 /* Reset Padding/Margin */
 .notion-full-page,
 .notion-page-content,
