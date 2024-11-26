@@ -10,12 +10,12 @@ const textVariants = cva('', {
       h2: 'scroll-m-20 text-3xl font-semibold tracking-tight',
       h3: 'scroll-m-20 text-2xl font-semibold tracking-tight',
       h4: 'scroll-m-20 text-xl font-semibold tracking-tight',
-      p: 'leading-7',
+      p: 'leading-7 font-medium',
       blockquote: 'mt-6 border-l-2 pl-6 italic',
       large: 'text-lg font-semibold',
       small: 'text-sm font-medium leading-none',
       xsmall: 'text-xs',
-      muted: 'text-sm text-muted-foreground',
+      muted: 'text-sm font-medium text-muted-foreground',
     },
   },
   defaultVariants: {
@@ -25,7 +25,7 @@ const textVariants = cva('', {
 
 interface TextProps
   extends React.HTMLAttributes<HTMLParagraphElement>,
-    VariantProps<typeof textVariants> {
+  VariantProps<typeof textVariants> {
   children: React.ReactNode;
   asChild?: boolean;
 }
@@ -33,11 +33,11 @@ interface TextProps
 const Typography: React.FC<TextProps> = ({ children, variant, className, ...props }) => {
   const Component =
     variant === 'p' ||
-    variant === 'blockquote' ||
-    variant === 'large' ||
-    variant === 'small' ||
-    variant === 'xsmall' ||
-    variant === 'muted'
+      variant === 'blockquote' ||
+      variant === 'large' ||
+      variant === 'small' ||
+      variant === 'xsmall' ||
+      variant === 'muted'
       ? 'p'
       : variant || 'p';
 

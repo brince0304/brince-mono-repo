@@ -10,7 +10,7 @@ export interface TextGridProps {
 }
 
 const TextGrid: FC<TextGridProps> = ({ title, description, Icon }) => (
-  <div className="flex flex-col gap-1">
+  <div className="flex flex-col">
     <div className="flex items-center gap-2">
       {Icon && <div className="w-8 h-8 text-blue-500 dark:text-blue-400">{<Icon />}</div>}
       <Typography variant="h3" className="font-bold">
