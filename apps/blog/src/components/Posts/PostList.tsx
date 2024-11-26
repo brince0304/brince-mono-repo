@@ -8,23 +8,13 @@ interface PostListProps {
 
 const PostList = ({ posts }: PostListProps) => {
   return (
-    <>
-      <ul className={'flex flex-col gap-4 sm:hidden'}>
-        {posts
-          .map((post) => convertToPostCardProps(post))
-          .map((props, index) => (
-            <PostCard.Vertical key={props.slug} {...props} priority={index === 0} />
-          ))}
-      </ul>
-
-      <ul className={'hidden sm:flex flex-col gap-4'}>
-        {posts
-          .map((post) => convertToPostCardProps(post))
-          .map((props, index) => (
-            <PostCard.Horizontal key={props.slug} {...props} priority={index === 0} />
-          ))}
-      </ul>
-    </>
+    <ul className={'flex flex-col gap-4'}>
+      {posts
+        .map((post) => convertToPostCardProps(post))
+        .map((props, index) => (
+          <PostCard.Horizontal key={props.slug} {...props} priority={index === 0} />
+        ))}
+    </ul>
   );
 };
 

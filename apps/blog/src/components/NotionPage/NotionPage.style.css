@@ -42,6 +42,10 @@
 .notion-h-title,
 .notion-table-of-contents-item-body {
   font-family: 'Pretendard', sans-serif !important;
+
+  > b {
+    font-weight: bold !important;
+  }
 }
 
 .notion-quote {

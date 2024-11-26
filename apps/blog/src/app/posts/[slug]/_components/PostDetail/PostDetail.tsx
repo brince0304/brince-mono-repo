@@ -79,7 +79,7 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
           </div>
           <div className="border-t border-gray-200 dark:border-gray-700" />
         </header>
-        <div className="py-14 sm:py-10">
+        <div className="flex flex-col py-14 sm:py-10 gap-10">
           <NotionPage recordMap={post.recordMap} />
           <SimplifiedProfile />
         </div>

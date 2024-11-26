@@ -29,11 +29,8 @@ const TagBadge: FC<TagProps> = ({
       : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
   );
 
-  const TagIcon = isActive ? Check : Tag;
-
   const BadgeContent = (
     <Badge onClick={onClick} variant="secondary" className={combinedClassName} key={tag} {...props}>
-      <TagIcon className="mr-1 h-4 w-4" />
       {tag}
     </Badge>
   );
@@ -41,7 +38,7 @@ const TagBadge: FC<TagProps> = ({
   const TagContent = useTooltip ? (
     <Tooltip>
       <TooltipTrigger>{BadgeContent}</TooltipTrigger>
-      <TooltipContent>
+      <TooltipContent side="bottom">
         <p>{`${tag} 관련 포스트를 확인해보세요 👋🏻`}</p>
       </TooltipContent>
     </Tooltip>

@@ -1,14 +1,12 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ArrowRight, Heart, MessageCircle } from 'lucide-react';
+import { Heart, MessageCircle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type React from 'react';
-import { Card, CardContent, CardFooter } from './ui/card';
-import { Button } from './ui/button';
 import { TagBadge } from './TagBadge';
-
+import { Typography } from './ui/typography';
+import { motion } from 'framer-motion';
 export interface PostCardProps {
   title: string;
   excerpt: string;
@@ -21,84 +19,6 @@ export interface PostCardProps {
   priority?: boolean;
 }
 
-const VerticalPostCard: React.FC<PostCardProps> = ({
-  title,
-  excerpt,
-  slug,
-  date,
-  tags,
-  imageUrl,
-  comments,
-  likes = 0,
-  priority = false,
-}) => {
-  const formatDate = (dateString: string) => {
-    const d = new Date(dateString);
-    return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일`;
-  };
-
-  return (
-    <li>
-      <Link
-        href={`/posts/${slug}`}
-        className="block w-full max-w-md mx-auto"
-        title={`${title} 보러가기`}
-      >
-        <motion.div transition={{ duration: 0.2 }} whileHover={{ scale: 1.02 }}>
-          <Card className="group overflow-hidden">
-            {imageUrl && (
-              <div className="relative h-48 w-full overflow-hidden">
-                <Image
-                  src={imageUrl}
-                  alt={`${title} 이미지`}
-                  title={`${title} 이미지`}
-                  layout="fill"
-                  objectFit="cover"
-                  priority={priority}
-                />
-              </div>
-            )}
-            <CardContent className="p-5">
-              <h3 className="text-xl font-bold mb-2 group-hover:text-primary">{title}</h3>
-              <p className="text-sm text-muted-foreground mb-3">{formatDate(date)}</p>
-              <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{excerpt}</p>
-              <div className="flex flex-wrap gap-2">
-                {tags.map((tag) => (
-                  <Link href={`/posts?tag=${tag}`} key={tag} title={`${tag} 태그 클릭해서 검색`}>
-                    <TagBadge tag={tag} />
-                  </Link>
-                ))}
-              </div>
-            </CardContent>
-            <CardFooter className="flex justify-between items-center px-5 py-2 bg-muted/50">
-              <div className={'flex items-center space-x-4'}>
-                <div className="flex items-center">
-                  <Heart className="mr-1 h-4 w-4" />
-                  <span className="text-xs">{likes}</span>
-                </div>
-                <div className="flex items-center">
-                  <MessageCircle className="mr-1 h-4 w-4" />
-                  <span className="text-xs">{comments}</span>
-                </div>
-              </div>
-              <motion.div whileHover={{ x: 5 }}>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="font-semibold group-hover:text-primary transition-colors"
-                >
-                  보러가기
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </motion.div>
-            </CardFooter>
-          </Card>
-        </motion.div>
-      </Link>
-    </li>
-  );
-};
-
 const HorizontalPostCard: React.FC<PostCardProps> = ({
   title,
   excerpt,
@@ -108,75 +28,86 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
   imageUrl,
   comments,
   likes = 0,
-  priority = false,
 }) => {
   const formatDate = (dateString: string) => {
     const d = new Date(dateString);
     return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일`;
   };
 
+
   return (
-    <li>
-      <Link href={`/posts/${slug}`} className="block w-full mx-auto" title={`${title} 보러가기`}>
-        <motion.div transition={{ duration: 0.2 }} whileHover={{ scale: 1.01 }}>
-          <Card className="group overflow-hidden flex flex-row h-48">
-            {imageUrl && (
-              <div className="relative w-1/3 overflow-hidden">
-                <Image
-                  src={imageUrl}
-                  alt={`${title} 이미지`}
-                  title={`${title} 이미지`}
-                  layout="fill"
-                  objectFit="cover"
-                  priority={priority}
-                />
-              </div>
-            )}
-            <div className="w-2/3 flex flex-col">
-              <CardContent className="p-5 flex-grow">
-                <h3 className="text-xl font-bold mb-2 group-hover:text-primary">{title}</h3>
-                <p className="text-sm text-muted-foreground mb-2">{formatDate(date)}</p>
-                <p className="text-sm text-muted-foreground mb-3 line-clamp-1">{excerpt}</p>
-              </CardContent>
-              <CardFooter className="flex justify-between items-center px-5 py-2 bg-muted/50">
-                <div className="flex items-center space-x-2 overflow-x-auto flex-grow">
+    <li className="group">
+      <Link href={`/posts/${slug}`} title={`${title} 보러가기`}>
+        <div className="flex gap-6 p-4 hover:bg-muted/50 rounded-lg transition-colors">
+          {/* 이미지 영역 */}
+          {imageUrl && (
+            <motion.div
+              className="flex-shrink-0 w-24 h-24 sm:w-32 sm:h-32 overflow-hidden rounded-md"
+              initial={{ opacity: 0, y: 10, filter: "blur(10px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.3 }}
+            >
+              <Image
+                src={imageUrl}
+                alt=""
+                width={128}
+                height={128}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </motion.div>
+          )}
+
+          {/* 컨텐츠 영역 */}
+          <div className="flex-1 flex flex-col min-w-0">
+            <Typography
+              variant="h4"
+              className="group-hover:text-primary transition-colors line-clamp-2 mb-2"
+            >
+              {title}
+            </Typography>
+
+            <Typography
+              variant="small"
+              className="text-muted-foreground line-clamp-2 mb-auto"
+            >
+              {excerpt}
+            </Typography>
+
+            {/* 메타 정보 */}
+            <div className="flex flex-col gap-3 mt-3">
+              {tags.length > 0 && (
+                <div className="flex flex-wrap gap-1.5">
                   {tags.map((tag) => (
-                    <Link href={`/posts?tag=${tag}`} key={tag} title={`${tag} 태그 클릭해서 검색`}>
+                    <Link href={`/posts?tag=${tag}`} key={tag} className="hover:opacity-80">
                       <TagBadge tag={tag} />
                     </Link>
                   ))}
                 </div>
-                <div className="flex items-center space-x-4 ml-4">
-                  <div className="flex items-center">
-                    <Heart className="mr-1 h-4 w-4" />
-                    <span className="text-xs">{likes}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <MessageCircle className="mr-1 h-4 w-4" />
-                    <span className="text-xs">{comments}</span>
-                  </div>
-                  <motion.div whileHover={{ x: 5 }}>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="font-semibold group-hover:text-primary transition-colors"
-                    >
-                      Read more
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </motion.div>
+              )}
+
+              <div className="flex items-center gap-4 text-sm text-muted-foreground/80">
+                <time>{formatDate(date)}</time>
+                <div className="flex items-center gap-3">
+                  <Typography variant="small" className="flex items-center gap-1">
+                    <MessageCircle className="w-4 h-4" />
+                    {comments}
+                  </Typography>
+                  <Typography variant="small" className="flex items-center gap-1">
+                    <Heart className="w-4 h-4" />
+                    {likes}
+                  </Typography>
                 </div>
-              </CardFooter>
+              </div>
             </div>
-          </Card>
-        </motion.div>
+          </div>
+        </div>
       </Link>
     </li>
   );
 };
 
 const PostCard = {
-  Vertical: VerticalPostCard,
   Horizontal: HorizontalPostCard,
 };
 
