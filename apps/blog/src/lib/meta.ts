@@ -140,7 +140,7 @@ export function generateBlogPostMetadata(post: NotionPage): Metadata {
 export const generateHomeMetadata = () => generateMetadata();
 
 export const generatePostsMetadata = () => generateMetadata({
-  title: `게시글 목록 | ${BLOG_TITLE}`,
+  title: '게시글 목록',
   description: BLOG_DESCRIPTION,
   url: `${BLOG_URL}/posts`,
   canonicalUrl: `${BLOG_URL}/posts`,
