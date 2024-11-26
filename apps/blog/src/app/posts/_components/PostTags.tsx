@@ -70,6 +70,8 @@ const PostTags = wrap
                   animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
                   transition={{ duration: 0.3 }}
                   style={{ overflow: 'hidden' }}
+                  aria-label="태그 목록"
+                  aria-hidden={!isOpen}
                   className="flex flex-wrap gap-2"
                 >
                   {Array.from(uniqueTags).map((tag) => (
@@ -79,6 +81,7 @@ const PostTags = wrap
                       useTooltip={false}
                       isActive={selectedTag === tag}
                       onClick={() => handleTagClick(tag)}
+                      aria-label={`${selectedTag === tag ? '태그 선택 해제' : '태그 선택'} ${tag}`}
                       disabled={isPostFetching > 0}
                     />
                   ))}
@@ -87,6 +90,7 @@ const PostTags = wrap
                       onClick={() => fetchNextPage()}
                       className={`cursor-pointer ${isFetchingNextPage ? 'opacity-50' : ''}`}
                       disabled={isPostFetching > 0}
+                      aria-label="태그 더보기"
                     >
                       {isFetchingNextPage ? (
                         <Loader2 className="mr-1 h-4 w-4 animate-spin" />
@@ -112,6 +116,7 @@ const PostTags = wrap
               <Badge
                 onClick={() => setIsOpen((prev) => !prev)}
                 className="whitespace-nowrap cursor-pointer"
+                aria-label={`${isOpen ? '태그 가리기' : '태그 더보기'}`}
               >
                 {isOpen ? (
                   <ChevronUpIcon className="h-4 w-4" />
