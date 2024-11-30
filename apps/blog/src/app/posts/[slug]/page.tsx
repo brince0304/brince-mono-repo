@@ -36,6 +36,7 @@ export async function generateStaticParams() {
 }
 
 export const dynamic = 'force-static';
+export const revalidate = 3600;
 
 export default async function Post({ params }: { params: { slug: string } }) {
   const post = await serverFetcher<PageBySlugResponse>(`/posts/${params.slug}`);

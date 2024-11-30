@@ -20,7 +20,13 @@
   li::marker {
     @apply text-lg !important;
   }
+
+  .notion-list-disc {
+    padding-inline-start: 0 !important;
+  }
 }
+
+
 
 /* Reset Padding/Margin */
 .notion-full-page,
