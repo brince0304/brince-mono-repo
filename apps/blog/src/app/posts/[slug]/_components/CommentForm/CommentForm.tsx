@@ -65,7 +65,7 @@ const CommentForm = memo(({ pageTitle, pageId, parentId }: Omit<CommentRequestPa
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(handleSubmitForm)} className="space-y-4" aria-label="댓글 등록">
+      <form onSubmit={handleSubmit(handleSubmitForm)} className="space-y-4 border-t pt-4" aria-label="댓글 등록">
         <div className="flex items-start space-x-4">
           <CommentAvatar handleAvatarChange={handleAvatarChange} currentAvatar={currentAvatar} />
           <div className="flex-grow space-y-2">
