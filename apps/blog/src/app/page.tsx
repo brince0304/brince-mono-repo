@@ -1,4 +1,4 @@
-import Posts from '@/components/Posts/Posts';
+import Posts from '@/app/_components/Posts';
 import QueryHydrationBoundary from '@/components/QueryHydrationBoundary';
 import { PostQueryOptions } from '@/hooks/post';
 import { generateHomeMetadata } from '@/lib/meta';

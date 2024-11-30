@@ -5,7 +5,7 @@ import { PostListSkeleton } from '@repo/ui/skeletons/PostListSkeleton';
 import { Typography } from '@repo/ui/ui/typography';
 import { SuspenseQuery } from '@suspensive/react-query';
 import { PostQueryOptions } from '@/hooks/post';
-import PostList from '@/components/Posts/PostList';
+import PostList from '@/app/_components/PostList';
 import type { NotionPage } from '@/models/notion';
 import { useIsMounted } from '@toss/react';
 import { useQueryString } from '@repo/utils/hooks';

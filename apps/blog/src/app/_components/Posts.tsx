@@ -1,6 +1,6 @@
 'use client';
 
-import PostSection from '@/components/Posts/PostSection';
+import PostSection from '@/app/_components/PostSection';
 
 import { useQuery } from '@tanstack/react-query';
 import { PostQueryOptions } from '@/hooks/post';

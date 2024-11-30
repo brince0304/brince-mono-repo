@@ -1,6 +1,6 @@
-import { convertToPostCardProps } from '@/lib/notion/convert';
+import { convertToPostCardProps } from '@/components/Postcard/PostCard.utils';
 import type { NotionPage } from '@/models/notion';
-import { PostCard } from '@repo/ui/PostCard';
+import { PostCard } from '@/components/Postcard/PostCard';
 
 interface PostListProps {
   posts: NotionPage[];
@@ -11,8 +11,8 @@ const PostList = ({ posts }: PostListProps) => {
     <ul className={'flex flex-col gap-4'}>
       {posts
         .map((post) => convertToPostCardProps(post))
-        .map((props, index) => (
-          <PostCard.Horizontal key={props.slug} {...props} priority={index === 0} />
+        .map((props) => (
+          <PostCard.Horizontal key={props.slug} {...props} />
         ))}
     </ul>
   );
