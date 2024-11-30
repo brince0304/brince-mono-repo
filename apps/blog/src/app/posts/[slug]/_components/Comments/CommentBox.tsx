@@ -10,9 +10,10 @@ interface CommentBoxProps {
   comment: NotionPage;
   childComments: NotionPage[];
   pageId: string;
+  pageTitle: string;
 }
 
-const CommentBox: React.FC<CommentBoxProps> = ({ comment, childComments, pageId }) => {
+const CommentBox: React.FC<CommentBoxProps> = ({ comment, childComments, pageId, pageTitle }) => {
   const parentId = comment.properties.ParentId.rich_text[0].text.content;
 
   if (parentId !== '') {
@@ -46,7 +47,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({ comment, childComments, pageId 
             </div>
           ))}
 
-          <CommentForm parentId={comment.id} pageId={pageId} />
+          <CommentForm parentId={comment.id} pageId={pageId} pageTitle={pageTitle} />
         </motion.div>
       </div>
     </div>

@@ -90,9 +90,9 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
             count={post.page.properties.Likes.number}
           />
         </div>
-        <Comments pageId={post.page.id} />
+        <Comments pageId={post.page.id} pageTitle={title || ''} />
         <div className="border-t border-gray-200 dark:border-gray-700" />
-        <CommentForm pageId={post.page.id} />
+        <CommentForm pageId={post.page.id} pageTitle={title || ''} />
       </div>
     </article>
   );

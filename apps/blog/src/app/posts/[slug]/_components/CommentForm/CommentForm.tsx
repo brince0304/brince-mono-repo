@@ -16,13 +16,9 @@ import { COMMENT_SUBMIT_MESSAGES } from './CommentForm.consts';
 import { cn } from '@/lib/utils';
 import { commentFormSchema } from './CommentForm.consts';
 import type { InferZodType } from '@/lib/types';
+import type { CommentRequestParameters } from '@/models/notion';
 
-interface CommentFormProps {
-  pageId: string;
-  parentId?: string;
-}
-
-const CommentForm = memo(({ pageId, parentId }: CommentFormProps) => {
+const CommentForm = memo(({ pageTitle, pageId, parentId }: Omit<CommentRequestParameters, 'data'>) => {
   const form = useForm<InferZodType<typeof commentFormSchema>>({
     resolver: zodResolver(commentFormSchema),
     defaultValues: {
@@ -32,7 +28,7 @@ const CommentForm = memo(({ pageId, parentId }: CommentFormProps) => {
   });
   const { formState: { errors }, handleSubmit } = form;
 
-  const { mutateAsync: postComment, isPending } = usePostComment({ pageId, parentId });
+  const { mutateAsync: postComment, isPending } = usePostComment({ pageId, parentId, pageTitle });
   const [currentAvatar, setCurrentAvatar] = useState<string>(getAvatarUrl());
 
   const errorMessage = errors.text?.message || errors.author?.message;
