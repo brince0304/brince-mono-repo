@@ -75,9 +75,9 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
             {/* 메타 정보 */}
             <div className="flex flex-col gap-3 mt-3">
               {tags.length > 0 && (
-                <div className="flex flex-wrap gap-1.5" role="list" aria-label="태그 목록">
+                <ul className="flex flex-wrap gap-1.5" aria-label="태그 목록">
                   {tags.map((tag) => (
-                    <div key={tag} role="listitem">
+                    <li key={tag}>
                       <Link
                         href={`/posts?tag=${tag}`}
                         className="hover:opacity-80"
@@ -86,9 +86,9 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
                       >
                         <TagBadge tag={tag} />
                       </Link>
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ul>
               )}
 
               <div className="flex items-center gap-4 text-sm text-muted-foreground/80">
