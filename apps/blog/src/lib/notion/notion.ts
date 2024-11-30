@@ -110,7 +110,7 @@ async function updatePostLike(pageId: string, count: number) {
 
 async function createCommentPage(pageId: string, data: CommentRequest) {
   try {
-    const { text, author, parentId } = data;
+    const { text, author, parentId, avatar } = data;
 
     await notion.pages.create({
       parent: {
@@ -138,6 +138,10 @@ async function createCommentPage(pageId: string, data: CommentRequest) {
               },
             },
           ],
+        },
+        Avatar: {
+          type: 'url',
+          url: avatar,
         },
         Author: {
           type: 'rich_text',

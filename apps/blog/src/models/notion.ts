@@ -164,5 +164,6 @@ export interface PageBySlugResponse {
 export interface CommentRequest {
   text: string;
   author: string;
+  avatar: string;
   parentId?: string;
 }
