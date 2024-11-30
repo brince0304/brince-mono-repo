@@ -39,10 +39,11 @@ const CommentBox: React.FC<CommentBoxProps> = ({ comment, childComments, pageId,
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: isClickedReply ? 'auto' : 0, opacity: isClickedReply ? 1 : 0 }}
           transition={{ duration: 0.3 }}
+          className="pl-8"
           style={{ overflow: 'hidden' }}
         >
           {childComments.map((childComment) => (
-            <div key={childComment.id} className="flex flex-col pl-8">
+            <div key={childComment.id} className="flex flex-col">
               <Comment {...convertToCommentProps(childComment)} isReply />
             </div>
           ))}
