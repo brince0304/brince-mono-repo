@@ -34,4 +34,4 @@ jobs:
         run: pnpm format
 
       - name: Test
-        run: pnpm test
+        run: pnpm test:ci
