@@ -1,16 +1,16 @@
 import { CommentQueryKeys } from '@/hooks/comment';
-import type { CommentRequest } from '@/models/notion';
+import type { CommentRequest, CommentRequestParameters } from '@/models/notion';
 import { commentService } from '@/services/comment';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const usePostComment = ({ pageId, parentId }: { pageId: string; parentId?: string }) => {
+export const usePostComment = (parameters: Omit<CommentRequestParameters, 'data'>) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: CommentRequest) => commentService.postComment({ pageId, data, parentId }),
+    mutationFn: (requestData: CommentRequest) => commentService.postComment({ ...parameters, data: requestData }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: CommentQueryKeys.getComments(pageId),
+        queryKey: CommentQueryKeys.getComments(parameters.pageId),
       });
     },
   });

@@ -167,3 +167,10 @@ export interface CommentRequest {
   avatar: string;
   parentId?: string;
 }
+
+export interface CommentRequestParameters {
+  pageId: string;
+  data: CommentRequest;
+  parentId?: string;
+  pageTitle: string;
+}
