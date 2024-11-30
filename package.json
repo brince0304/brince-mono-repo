@@ -15,7 +15,8 @@
     "format": "biome format . --write",
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:ci": "turbo run test:ci"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": "pnpm lint",
