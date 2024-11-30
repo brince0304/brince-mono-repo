@@ -29,7 +29,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({ comment, childComments, pageId 
     <div className="flex flex-col">
       <Comment
         {...convertToCommentProps(comment)}
-        onClick={handleTransition}
+        onClickReply={handleTransition}
         childCommentLength={childComments.length}
       />
 
