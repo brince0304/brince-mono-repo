@@ -21,7 +21,7 @@ export async function generateMetadata({
     console.error(`Failed to generate metadata for slug: ${params.slug}`, error);
     return generateDefaultMetadata({
       title: '페이지를 찾을 수 없습니다',
-      description: '요청하신 게시글을 찾을 수 없습니다.'
+      description: '요청하신 게시글을 찾을 수 없습니다.',
     });
   }
 }

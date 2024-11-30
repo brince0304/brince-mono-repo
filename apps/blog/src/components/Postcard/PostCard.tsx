@@ -44,8 +44,8 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
           {imageUrl && (
             <motion.div
               className="flex-shrink-0 w-20 h-20 sm:w-32 sm:h-32 overflow-hidden rounded-md"
-              initial={{ opacity: 0, y: 10, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 10, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.3 }}
             >
               <Image
@@ -68,10 +68,7 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
               {title}
             </Typography>
 
-            <Typography
-              variant="small"
-              className="text-muted-foreground line-clamp-2 mb-auto"
-            >
+            <Typography variant="small" className="text-muted-foreground line-clamp-2 mb-auto">
               {excerpt}
             </Typography>
 
