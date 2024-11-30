@@ -1,6 +1,6 @@
-import { convertToCommentProps } from '@/lib/notion/convert';
+import { convertToCommentProps } from './Comment.util';
 import type { NotionPage } from '@/models/notion';
-import { Comment } from '@repo/ui/Comment';
+import { Comment } from '@/app/posts/[slug]/_components/Comments/Comment';
 import { useState } from 'react';
 import CommentForm from '../CommentForm/CommentForm';
 import { motion } from 'framer-motion';

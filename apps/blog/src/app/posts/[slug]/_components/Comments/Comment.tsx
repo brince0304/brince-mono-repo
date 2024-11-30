@@ -5,11 +5,11 @@ import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import type React from 'react';
 import { useMemo } from 'react';
-import { BrinceAvatar } from './BrinceAvatar';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Button } from './ui/button';
-import { Card } from './ui/card';
-import { getAvatarUrl } from '../lib/utils';
+import { BrinceAvatar } from '@repo/ui/components/BrinceAvatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/ui/avatar';
+import { Button } from '@repo/ui/components/ui/button';
+import { Card } from '@repo/ui/components/ui/card';
+import { getAvatarUrl } from '@repo/ui/src/lib/utils';
 
 export interface CommentProps {
   id: string;

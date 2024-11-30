@@ -1,5 +1,5 @@
 import type { NotionPage } from '@/models/notion';
-import type { CommentProps } from '@repo/ui/Comment';
+import type { CommentProps } from './Comment';
 
 export function convertToCommentProps(comment: NotionPage): CommentProps {
   return {
