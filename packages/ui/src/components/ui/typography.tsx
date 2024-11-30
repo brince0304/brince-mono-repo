@@ -25,7 +25,7 @@ const textVariants = cva('', {
 
 interface TextProps
   extends React.HTMLAttributes<HTMLParagraphElement>,
-  VariantProps<typeof textVariants> {
+    VariantProps<typeof textVariants> {
   children: React.ReactNode;
   asChild?: boolean;
 }
@@ -33,11 +33,11 @@ interface TextProps
 const Typography: React.FC<TextProps> = ({ children, variant, className, ...props }) => {
   const Component =
     variant === 'p' ||
-      variant === 'blockquote' ||
-      variant === 'large' ||
-      variant === 'small' ||
-      variant === 'xsmall' ||
-      variant === 'muted'
+    variant === 'blockquote' ||
+    variant === 'large' ||
+    variant === 'small' ||
+    variant === 'xsmall' ||
+    variant === 'muted'
       ? 'p'
       : variant || 'p';
 

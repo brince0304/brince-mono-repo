@@ -5,7 +5,7 @@ import { PostListSkeleton } from '@repo/ui/skeletons/PostListSkeleton';
 import { Typography } from '@repo/ui/ui/typography';
 import { SuspenseQuery } from '@suspensive/react-query';
 import { PostQueryOptions } from '@/hooks/post';
-import PostList from '@/components/Posts/PostList';
+import PostList from '@/app/_components/PostList';
 import type { NotionPage } from '@/models/notion';
 import { useIsMounted } from '@toss/react';
 import { useQueryString } from '@repo/utils/hooks';
@@ -37,7 +37,9 @@ const PostListBody = wrap
           if (!data.data.results || data.data.results.length === 0) {
             return (
               <div className="flex flex-col items-center justify-center min-h-[200px] gap-4 rounded-lg border border-dashed border-muted p-8">
-                <Typography variant="p" className="text-muted-foreground">아직 게시글이 없어요 ✍️</Typography>
+                <Typography variant="p" className="text-muted-foreground">
+                  아직 게시글이 없어요 ✍️
+                </Typography>
               </div>
             );
           }

@@ -1,22 +1,19 @@
 'use client';
 
-import { Heart, MessageCircle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type React from 'react';
-import { TagBadge } from './TagBadge';
-import { Typography } from './ui/typography';
+import { TagBadge } from '@repo/ui/components/TagBadge';
+import { Typography } from '@repo/ui/components/ui/typography';
 import { motion } from 'framer-motion';
+
 export interface PostCardProps {
   title: string;
   excerpt: string;
   slug: string;
   date: string;
   tags: string[];
-  likes?: number;
   imageUrl?: string;
-  comments: number;
-  priority?: boolean;
 }
 
 const HorizontalPostCard: React.FC<PostCardProps> = ({
@@ -26,30 +23,34 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
   date,
   tags,
   imageUrl,
-  comments,
-  likes = 0,
 }) => {
   const formatDate = (dateString: string) => {
     const d = new Date(dateString);
     return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일`;
   };
 
+  const formattedDate = formatDate(date);
 
   return (
     <li className="group">
-      <Link href={`/posts/${slug}`} title={`${title} 보러가기`}>
+      <Link
+        href={`/posts/${slug}`}
+        title={`${title} 보러가기`}
+        className="block"
+        aria-label={`${title} 게시글로 이동`}
+      >
         <div className="flex gap-6 hover:bg-muted/50 rounded-lg transition-colors p-2 sm:p-4">
           {/* 이미지 영역 */}
           {imageUrl && (
             <motion.div
               className="flex-shrink-0 w-20 h-20 sm:w-32 sm:h-32 overflow-hidden rounded-md"
-              initial={{ opacity: 0, y: 10, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 10, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.3 }}
             >
               <Image
                 src={imageUrl}
-                alt=""
+                alt={`${title}의 대표 이미지`}
                 width={128}
                 height={128}
                 loading="lazy"
@@ -67,37 +68,33 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
               {title}
             </Typography>
 
-            <Typography
-              variant="small"
-              className="text-muted-foreground line-clamp-2 mb-auto"
-            >
+            <Typography variant="small" className="text-muted-foreground line-clamp-2 mb-auto">
               {excerpt}
             </Typography>
 
             {/* 메타 정보 */}
             <div className="flex flex-col gap-3 mt-3">
               {tags.length > 0 && (
-                <div className="flex flex-wrap gap-1.5">
+                <ul className="flex flex-wrap gap-1.5" aria-label="태그 목록">
                   {tags.map((tag) => (
-                    <Link href={`/posts?tag=${tag}`} key={tag} className="hover:opacity-80">
-                      <TagBadge tag={tag} />
-                    </Link>
+                    <li key={tag}>
+                      <Link
+                        href={`/posts?tag=${tag}`}
+                        className="hover:opacity-80"
+                        aria-label={`${tag} 태그로 필터링하기`}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <TagBadge tag={tag} />
+                      </Link>
+                    </li>
                   ))}
-                </div>
+                </ul>
               )}
 
               <div className="flex items-center gap-4 text-sm text-muted-foreground/80">
-                <time>{formatDate(date)}</time>
-                <div className="flex items-center gap-3">
-                  <Typography variant="small" className="flex items-center gap-1">
-                    <MessageCircle className="w-4 h-4" />
-                    {comments}
-                  </Typography>
-                  <Typography variant="small" className="flex items-center gap-1">
-                    <Heart className="w-4 h-4" />
-                    {likes}
-                  </Typography>
-                </div>
+                <time dateTime={date} aria-label="작성일">
+                  {formattedDate}
+                </time>
               </div>
             </div>
           </div>

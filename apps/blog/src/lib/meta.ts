@@ -60,7 +60,7 @@ export function generateMetadata({
   openGraph,
 }: GenerateMetadataOptions = {}): Metadata {
   const finalTitle = title === BLOG_TITLE ? title : `${title} | ${BLOG_TITLE}`;
-  
+
   return {
     title: finalTitle,
     description,
@@ -102,7 +102,7 @@ export function generateBlogPostMetadata(post: NotionPage): Metadata {
   const modifiedTime = post.properties.Date?.date?.start;
   const title = post.properties.Title?.title[0]?.plain_text || DEFAULT_METADATA.title;
   const description = post.properties.Excerpt?.rich_text[0]?.plain_text || '';
-  const tags = post.properties.Tags?.multi_select?.map(tag => tag.name) || [];
+  const tags = post.properties.Tags?.multi_select?.map((tag) => tag.name) || [];
   const slug = post.properties.Slug?.rich_text[0]?.plain_text;
   const imageUrl = post.properties.Thumbnail?.url || DEFAULT_METADATA.imageUrl;
 
@@ -132,16 +132,17 @@ export function generateBlogPostMetadata(post: NotionPage): Metadata {
         name: BLOG_AUTHOR,
       },
       keywords: tags.join(','),
-    }
+    },
   });
 }
 
 // 특정 페이지 메타데이터 생성 함수들
 export const generateHomeMetadata = () => generateMetadata();
 
-export const generatePostsMetadata = () => generateMetadata({
-  title: '게시글 목록',
-  description: BLOG_DESCRIPTION,
-  url: `${BLOG_URL}/posts`,
-  canonicalUrl: `${BLOG_URL}/posts`,
-});
+export const generatePostsMetadata = () =>
+  generateMetadata({
+    title: '게시글 목록',
+    description: BLOG_DESCRIPTION,
+    url: `${BLOG_URL}/posts`,
+    canonicalUrl: `${BLOG_URL}/posts`,
+  });

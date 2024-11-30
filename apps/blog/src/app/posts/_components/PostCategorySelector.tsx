@@ -31,9 +31,7 @@ const PostCategorySelector = wrap.Suspense({ fallback: null }).on(() => {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all" >
-                전체
-              </SelectItem>
+              <SelectItem value="all">전체</SelectItem>
               {uniqueCategories.map((category) => (
                 <SelectItem key={category} value={category} onClick={() => handleRoute(category)}>
                   {category}

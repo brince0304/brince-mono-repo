@@ -38,13 +38,22 @@ const ProfileCard = () => {
 
           {/* 소셜 링크 */}
           <div className="flex gap-4">
-            <a href={GITHUB_URL} className="text-muted-foreground hover:text-primary transition-colors">
+            <a
+              href={GITHUB_URL}
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
               <GithubIcon className="w-5 h-5" />
             </a>
-            <a href={LINKEDIN_URL} className="text-muted-foreground hover:text-primary transition-colors">
+            <a
+              href={LINKEDIN_URL}
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
               <LinkedInLogoIcon className="w-5 h-5" />
             </a>
-            <a href={EMAIL_URL} className="text-muted-foreground hover:text-primary transition-colors">
+            <a
+              href={EMAIL_URL}
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
               <Mail className="w-5 h-5" />
             </a>
           </div>

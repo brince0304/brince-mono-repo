@@ -1,6 +1,6 @@
 'use client';
 
-import PostList from '@/components/Posts/PostList';
+import PostList from '@/app/_components/PostList';
 import type { NotionPage } from '@/models/notion';
 import { TextGrid } from '@repo/ui/TextGrid';
 import { UISkeleton } from '@repo/ui/UISkeleton';
