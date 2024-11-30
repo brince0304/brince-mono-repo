@@ -9,6 +9,7 @@ import CommentBox from './CommentBox';
 
 interface CommentsProps {
   pageId: string;
+  pageTitle: string;
 }
 
 const Comments = wrap
@@ -20,7 +21,7 @@ const Comments = wrap
     ),
   })
   .Suspense({ fallback: <UISkeleton.Comment /> })
-  .on<CommentsProps>(({ pageId }) => (
+  .on<CommentsProps>(({ pageId, pageTitle }) => (
     <SuspenseQuery {...CommentQueryOptions.getComments(pageId)}>
       {({ data }) => {
         const commentCount = data.length;
@@ -53,6 +54,7 @@ const Comments = wrap
                   comment={comment}
                   childComments={childComments}
                   pageId={pageId}
+                  pageTitle={pageTitle}
                 />
               );
             })}

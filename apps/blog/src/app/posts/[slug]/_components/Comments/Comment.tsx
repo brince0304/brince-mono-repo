@@ -5,11 +5,11 @@ import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import type React from 'react';
 import { useMemo } from 'react';
-import { BrinceAvatar } from './BrinceAvatar';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Button } from './ui/button';
-import { Card } from './ui/card';
-import { getAvatarUrl } from '../lib/utils';
+import { BrinceAvatar } from '@repo/ui/components/BrinceAvatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/ui/avatar';
+import { Button } from '@repo/ui/components/ui/button';
+import { Card } from '@repo/ui/components/ui/card';
+import { getAvatarUrl } from './Comment.util';
 
 export interface CommentProps {
   id: string;
@@ -19,7 +19,8 @@ export interface CommentProps {
   liked?: boolean;
   owner?: boolean;
   isReply?: boolean;
-  onClick?: () => void;
+  avatar?: string;
+  onClickReply?: () => void;
   childCommentLength?: number;
 }
 
@@ -30,19 +31,22 @@ const Comment: React.FC<CommentProps> = ({
   liked,
   owner,
   isReply,
-  onClick,
+  avatar,
+  onClickReply,
   childCommentLength,
 }) => {
+  const memoizedAvatarUrl = useMemo(() => avatar || getAvatarUrl(), [avatar]);
+
   const memoizedAvatar = useMemo(() => {
     return owner ? (
       <BrinceAvatar />
     ) : (
       <Avatar>
-        <AvatarImage src={getAvatarUrl()} alt="댓글 아바타" />
+        <AvatarImage src={memoizedAvatarUrl} alt="댓글 아바타" />
         <AvatarFallback>{author[0]}</AvatarFallback>
       </Avatar>
     );
-  }, [author, owner]);
+  }, [author, owner, memoizedAvatarUrl]);
 
   return (
     <div className="w-full mb-6">
@@ -71,7 +75,7 @@ const Comment: React.FC<CommentProps> = ({
               </div>
             )}
             {!isReply && (
-              <Button variant="ghost" size="sm" onClick={onClick}>
+              <Button variant="ghost" size="sm" onClick={onClickReply}>
                 답글 {childCommentLength}개
               </Button>
             )}

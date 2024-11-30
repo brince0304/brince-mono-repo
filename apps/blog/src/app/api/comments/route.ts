@@ -21,9 +21,9 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const { pageId, data, parentId } = await request.json();
-
-  if (!pageId || !data) {
+  const parameters = await request.json();
+  
+  if (!parameters.pageId || !parameters.data) {
     return NextResponse.json(
       { error: '페이지 ID 나 요청값이 존재하지 않습니다.' },
       { status: 400 }
@@ -31,16 +31,16 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    if (parentId) {
-      data.parentId = parentId;
+    if (parameters.parentId) {
+      parameters.data.parentId = parameters.parentId;
     }
 
     const [_, comments] = await Promise.all([
-      notionClient.createCommentPage(pageId, data),
-      notionClient.getComments(pageId),
+      notionClient.createCommentPage(parameters),
+      notionClient.getComments(parameters.pageId),
     ]);
 
-    await notionClient.updatePostProperties(pageId, <NotionProperties>{
+    await notionClient.updatePostProperties(parameters.pageId, <NotionProperties>{
       Comments: {
         type: 'number',
         number: comments.length + 1,

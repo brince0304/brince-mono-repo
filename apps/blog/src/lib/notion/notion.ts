@@ -1,6 +1,6 @@
 import { COMMENT_DATABASE_ID, NOTION_TOKEN, POST_DATABASE_ID } from '@/lib/notion/consts';
 import type {
-  CommentRequest,
+  CommentRequestParameters,
   NotionMultiSelect,
   NotionPage,
   NotionProperties,
@@ -108,9 +108,9 @@ async function updatePostLike(pageId: string, count: number) {
 //   }
 // }
 
-async function createCommentPage(pageId: string, data: CommentRequest) {
+async function createCommentPage(parameters: CommentRequestParameters) {
   try {
-    const { text, author, parentId } = data;
+    const { pageId, data, parentId, pageTitle } = parameters;
 
     await notion.pages.create({
       parent: {
@@ -134,10 +134,14 @@ async function createCommentPage(pageId: string, data: CommentRequest) {
             {
               type: 'text',
               text: {
-                content: text,
+                content: data.text,
               },
             },
           ],
+        },
+        Avatar: {
+          type: 'url',
+          url: data.avatar,
         },
         Author: {
           type: 'rich_text',
@@ -145,7 +149,7 @@ async function createCommentPage(pageId: string, data: CommentRequest) {
             {
               type: 'text',
               text: {
-                content: author,
+                content: data.author,
               },
             },
           ],
@@ -157,6 +161,17 @@ async function createCommentPage(pageId: string, data: CommentRequest) {
               type: 'text',
               text: {
                 content: parentId || '',
+              },
+            },
+          ],
+        },
+        PageTitle: {
+          type: 'rich_text',
+          rich_text: [
+            {
+              type: 'text',
+              text: {
+                content: pageTitle,
               },
             },
           ],

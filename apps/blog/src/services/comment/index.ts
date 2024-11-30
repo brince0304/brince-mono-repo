@@ -9,8 +9,9 @@ const postComment = ({
   pageId,
   data,
   parentId,
-}: { pageId: string; data: CommentRequest; parentId?: string }) => {
-  return axiosClient.post('/comments', { pageId, data, parentId });
+  pageTitle,
+}: { pageId: string; data: CommentRequest; parentId?: string; pageTitle: string }) => {
+  return axiosClient.post('/comments', { pageId, data, parentId, pageTitle });
 };
 
 export const commentService = {

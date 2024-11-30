@@ -1,6 +1,6 @@
-import { convertToCommentProps } from '@/lib/notion/convert';
+import { convertToCommentProps } from './Comment.util';
 import type { NotionPage } from '@/models/notion';
-import { Comment } from '@repo/ui/Comment';
+import { Comment } from '@/app/posts/[slug]/_components/Comments/Comment';
 import { useState } from 'react';
 import CommentForm from '../CommentForm/CommentForm';
 import { motion } from 'framer-motion';
@@ -10,9 +10,10 @@ interface CommentBoxProps {
   comment: NotionPage;
   childComments: NotionPage[];
   pageId: string;
+  pageTitle: string;
 }
 
-const CommentBox: React.FC<CommentBoxProps> = ({ comment, childComments, pageId }) => {
+const CommentBox: React.FC<CommentBoxProps> = ({ comment, childComments, pageId, pageTitle }) => {
   const parentId = comment.properties.ParentId.rich_text[0].text.content;
 
   if (parentId !== '') {
@@ -29,7 +30,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({ comment, childComments, pageId 
     <div className="flex flex-col">
       <Comment
         {...convertToCommentProps(comment)}
-        onClick={handleTransition}
+        onClickReply={handleTransition}
         childCommentLength={childComments.length}
       />
 
@@ -46,7 +47,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({ comment, childComments, pageId 
             </div>
           ))}
 
-          <CommentForm parentId={comment.id} pageId={pageId} />
+          <CommentForm parentId={comment.id} pageId={pageId} pageTitle={pageTitle} />
         </motion.div>
       </div>
     </div>
