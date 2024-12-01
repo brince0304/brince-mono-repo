@@ -31,7 +31,7 @@ const Comments = wrap
       queries={[CommentQueryOptions.getComments(pageId), PostQueryOptions.getPostLike(pageId)]}
     >
       {([{ data: comments }, { data: { likeCount, isLiked } }]) => {
-        const commentSectionRef = useRef(null);
+        const commentSectionRef = useRef<HTMLDivElement>(null);
         const [isSticky, setIsSticky] = useState(true);
 
         const commentCount = comments.length;
@@ -67,6 +67,7 @@ const Comments = wrap
             {/* 고정되는 댓글 섹션 */}
             {isSticky && (
               <StickyCommentSection
+                commentSectionRef={commentSectionRef}
                 pageId={pageId}
                 commentCount={commentCount}
                 likeCount={likeCount}
