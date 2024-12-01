@@ -19,6 +19,9 @@ export const PostQueryKeys = {
 
   GET_CATEGORIES: [DEFAULT_POST_KEY, 'categories'] as const,
   getCategories: () => [...PostQueryKeys.GET_CATEGORIES],
+
+  GET_POST_LIKE: [DEFAULT_POST_KEY, 'likes', 'pageId'] as const,
+  getPostLike: (pageId: string) => [...PostQueryKeys.GET_POST_LIKE, pageId],
 };
 
 export const PostQueryOptions = {
@@ -57,5 +60,11 @@ export const PostQueryOptions = {
         return { data: response } as AxiosResponse<string[]>;
       },
       select: (data: AxiosResponse<string[]>) => data.data,
+    }),
+  getPostLike: (pageId: string) =>
+    queryOptions({
+      queryKey: PostQueryKeys.getPostLike(pageId),
+      queryFn: () => postService.getPostLike(pageId),
+      select: (data: AxiosResponse<{ likeCount: number; isLiked: boolean }>) => data.data,
     }),
 };

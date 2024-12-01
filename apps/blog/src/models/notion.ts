@@ -159,6 +159,7 @@ export type NotionPagesResponse = NotionDatabaseQueryResponse['results'];
 export interface PageBySlugResponse {
   page: NotionPage;
   recordMap: ExtendedRecordMap;
+  isLiked: boolean;
 }
 
 export interface CommentRequest {

@@ -1,12 +1,12 @@
 'use client';
-import Heart from '@/assets/lottie/heart.json';
-import LottieComponent from '@/components/LottieComponent/LottieComponent';
 import { useLikePost } from '@/hooks/post/usePostService';
-import { ReloadIcon } from '@radix-ui/react-icons';
+import { HeartFilledIcon, ReloadIcon } from '@radix-ui/react-icons';
 import { Button } from '@repo/ui/ui/button';
+import { Typography } from '@repo/ui/ui/typography';
 import type React from 'react';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
+import AnimatedHeartIcon from '../AnimatedHeartIcon';
 
 interface LikeButtonProps {
   className?: string;
@@ -23,14 +23,13 @@ const LikeButton: React.FC<LikeButtonProps> = ({ className = '', isLiked, pageId
     { pageId, count },
     {
       onSuccess: () => {
-        toast.success('좋아요를 눌렀어요 😊');
         setIsClicked(true);
       },
-    }
+    },
   );
 
   const handleLikePost = () => {
-    if (isClicked) {
+    if (isClicked || isLiked) {
       toast.error('이미 좋아요를 누르셨어요 😊');
       return;
     }
@@ -38,10 +37,6 @@ const LikeButton: React.FC<LikeButtonProps> = ({ className = '', isLiked, pageId
     setIsAnimating(true);
     likePost();
   };
-
-  const handleAnimationComplete = useCallback(() => {
-    setIsAnimating(false);
-  }, []);
 
   return (
     <Button
@@ -53,18 +48,11 @@ const LikeButton: React.FC<LikeButtonProps> = ({ className = '', isLiked, pageId
       onClick={handleLikePost}
       disabled={isPending}
     >
-      <div className="absolute inset-0 flex items-center justify-center">
-        {!isPending && (
-          <LottieComponent
-            animationData={Heart}
-            autoplay={isAnimating}
-            loop={false}
-            isStopped={!isAnimating}
-            onComplete={handleAnimationComplete}
-            className={'scale-[2] '}
-          />
-        )}
+      <div className="flex items-center justify-center absolute inset-0 gap-1">
+        {!isPending && isClicked && <HeartFilledIcon className="w-4 h-4 text-red-500" />}
+        {!isPending && !isClicked && <AnimatedHeartIcon />}
         {isPending && <ReloadIcon className="animate-spin" />}
+        <Typography className="xsmall">{count}</Typography>
       </div>
     </Button>
   );
