@@ -36,25 +36,42 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
         />
       </div>
       <div className="flex flex-col w-full flex-1 lg:ml-4 gap-4">
-        <div className="relative w-full aspect-[2/1]">
-          {cover && (
-            <Image
-              src={cover}
-              alt={title || '커버 이미지'}
-              fill
-              priority
-              className="object-cover rounded-lg"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          )}
-        </div>
         <header className="flex flex-col gap-4 mt-2">
-          <Typography variant={'h1'} className={'font-bold'}>
-            {title}
-          </Typography>
+          <div className="relative w-full aspect-[2/1]">
+            {cover && (
+              <>
+                <Image
+                  src={cover}
+                  alt={title || '커버 이미지'}
+                  fill
+                  priority
+                  className="object-cover rounded-lg blur-sm"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                <Image
+                  src={cover}
+                  alt={title || '커버 이미지'}
+                  fill
+                  priority
+                  className="object-cover rounded-lg"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg backdrop-blur-sm">
+                  <Typography
+                    variant="h1"
+                    className="text-white font-bold px-4 text-center whitespace-break-word text-3xl sm:text-4xl"
+                  >
+                    {title}
+                  </Typography>
+                </div>
+              </>
+            )}
+          </div>
           <Typography variant={'large'} className="text-gray-500 dark:text-gray-400">
             {excerpt}
           </Typography>
+          <div className="border-t border-gray-200 dark:border-gray-700" />
+
           <section className="flex gap-2 items-center">
             <div className="flex justify-center items-center gap-2">
               <BrinceAvatar className={'w-8 h-8'} />
@@ -77,7 +94,6 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
               </Link>
             ))}
           </div>
-          <div className="border-t border-gray-200 dark:border-gray-700" />
         </header>
         <div className="flex flex-col py-14 sm:py-10 gap-10">
           <NotionPage recordMap={post.recordMap} />

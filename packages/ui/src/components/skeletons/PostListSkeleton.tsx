@@ -1,12 +1,12 @@
-import { PostSkeleton } from './PostSkeleton';
+import { PostCardSkeleton } from './PostCardSkeleton';
 
 const PostListSkeleton = () => {
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-4">
-        <PostSkeleton />
-        <PostSkeleton />
-        <PostSkeleton />
+        <PostCardSkeleton />
+        <PostCardSkeleton />
+        <PostCardSkeleton />
       </div>
     </div>
   );

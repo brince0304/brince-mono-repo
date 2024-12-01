@@ -26,7 +26,13 @@
   }
 }
 
+.notion-to-do-item {
+  @apply flex items-center gap-2 !important;
 
+  > svg {
+    @apply w-4 h-4 !important;
+  }
+}
 
 /* Reset Padding/Margin */
 .notion-full-page,
