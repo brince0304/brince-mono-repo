@@ -36,9 +36,7 @@ const PostDetail = wrap.Suspense({
       <article className="flex gap-4 max-w-3xl w-full relative sm:px-0">
         <div className="hidden lg:block sticky top-1/4 h-fit">
           <PostFloatingButton
-            isLiked={false}
             pageId={post.page.id}
-            count={post.page.properties.Likes.number}
             column
           />
         </div>
@@ -108,9 +106,7 @@ const PostDetail = wrap.Suspense({
           </div>
           <div className="lg:hidden mt-4 flex gap-4">
             <PostFloatingButton
-              isLiked={false}
               pageId={post.page.id}
-              count={post.page.properties.Likes.number}
             />
           </div>
           <Comments pageId={post.page.id} pageTitle={title || ''} />

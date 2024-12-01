@@ -7,7 +7,8 @@ import { Typography } from '@repo/ui/ui/typography';
 import { useCallback } from 'react';
 import { toast } from 'sonner';
 import { useLikePost } from '@/hooks/post/usePostService';
-
+import { motion } from 'framer-motion';
+import AnimatedHeartIcon from '../AnimatedHeartIcon';
 interface ActionButtonsProps {
   pageId: string;
   likeCount: number;
@@ -62,7 +63,7 @@ export function ActionButtons({ pageId, likeCount, isLiked }: ActionButtonsProps
           isLiked ? (
             <HeartFilledIcon className="w-4 h-4 text-red-500" />
           ) : (
-            <HeartIcon className="w-4 h-4" />
+            <AnimatedHeartIcon />
           )
         )}
         <Typography variant={'small'} className="font-bold">
