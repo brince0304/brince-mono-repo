@@ -23,7 +23,11 @@ const LikeButton: React.FC<LikeButtonProps> = ({ className = '', isLiked, pageId
     { pageId, count },
     {
       onSuccess: () => {
+        toast.success('좋아요를 눌렀어요 😊');
         setIsClicked(true);
+      },
+      onError: () => {
+        toast.error('이미 좋아요를 누르셨어요 😊');
       },
     },
   );

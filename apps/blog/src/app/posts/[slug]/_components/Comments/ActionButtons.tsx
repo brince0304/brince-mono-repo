@@ -22,6 +22,9 @@ export function ActionButtons({ pageId, likeCount, isLiked }: ActionButtonsProps
       onSuccess: () => {
         toast.success('좋아요를 눌렀어요 😊');
       },
+      onError: () => {
+        toast.error('이미 좋아요를 누르셨어요 😊');
+      }
     }
   );
 

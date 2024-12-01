@@ -61,10 +61,9 @@ export const PostQueryOptions = {
       },
       select: (data: AxiosResponse<string[]>) => data.data,
     }),
-  getPostLike: (pageId: string) =>
-    queryOptions({
-      queryKey: PostQueryKeys.getPostLike(pageId),
-      queryFn: () => postService.getPostLike(pageId),
-      select: (data: AxiosResponse<{ likeCount: number; isLiked: boolean }>) => data.data,
-    }),
-};
+  getPostLike: (pageId: string) => ({
+    queryKey: PostQueryKeys.getPostLike(pageId),
+    queryFn: () => postService.getPostLike(pageId),
+    initialData: { likeCount: 0, isLiked: false },
+  }),
+} as const;
