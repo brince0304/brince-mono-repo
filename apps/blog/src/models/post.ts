@@ -18,3 +18,8 @@ export interface GetTagsResponse {
   tags: string[];
   nextCursor: null | undefined;
 }
+
+export interface PostLikeResponse {
+  likeCount: number;
+  isLiked: boolean;
+}
