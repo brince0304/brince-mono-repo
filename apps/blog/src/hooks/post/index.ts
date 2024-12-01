@@ -1,3 +1,4 @@
+import type { PostLikeResponse } from '@/models/post';
 import { serverFetcher } from '@/lib/client';
 import type { GetPostRequest } from '@/models/post';
 import { postService } from '@/services/post';
@@ -64,6 +65,6 @@ export const PostQueryOptions = {
   getPostLike: (pageId: string) => ({
     queryKey: PostQueryKeys.getPostLike(pageId),
     queryFn: () => postService.getPostLike(pageId),
-    initialData: { likeCount: 0, isLiked: false },
+    select: (data: AxiosResponse<PostLikeResponse>) => data.data,
   }),
 } as const;

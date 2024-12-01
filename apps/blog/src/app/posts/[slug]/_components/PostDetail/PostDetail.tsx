@@ -1,7 +1,6 @@
 'use client';
 
 import NotionPage from '@/components/NotionPage/NotionPage';
-import PostFloatingButton from '../PostFloatingButton/PostFloatingButton';
 import { BrinceAvatar } from '@repo/ui/BrinceAvatar';
 import { SimplifiedProfile } from '@repo/ui/SimplifiedProfile';
 import { formatDistanceToNow } from 'date-fns';
@@ -14,6 +13,7 @@ import { wrap } from '@suspensive/react';
 import { UISkeleton } from '@repo/ui/UISkeleton';
 import type { PageBySlugResponse } from '@/models/notion';
 import { Typography } from '@repo/ui/ui/typography';
+import PostFloatingButton from '../PostFloatingButton/PostFloatingButton';
 
 interface PostDetailProps {
   post: PageBySlugResponse;
