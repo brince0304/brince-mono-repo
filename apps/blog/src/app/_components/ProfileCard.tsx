@@ -1,10 +1,9 @@
 'use client';
 
 import { GithubIcon, Mail } from 'lucide-react';
-import { BrinceAvatar } from '@repo/ui/components/BrinceAvatar';
 import { LinkedInLogoIcon } from '@radix-ui/react-icons';
 import { Typography } from '@repo/ui/components/ui/typography';
-import { GITHUB_URL, LINKEDIN_URL, EMAIL_URL, BLOG_OWNER, BLOG_OWNER_JOB_DESCRIPTION } from '@repo/ui/libs/constants';
+import { GITHUB_URL, LINKEDIN_URL, EMAIL_URL, BLOG_OWNER } from '@repo/ui/libs/constants';
 import BrinceImage from '@/assets/images/brince-main-image.jpg';
 
 const ProfileCard = () => {
