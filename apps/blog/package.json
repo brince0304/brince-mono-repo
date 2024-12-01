@@ -31,7 +31,7 @@
     "next": "14.2.5",
     "next-nprogress-bar": "^2.3.13",
     "next-themes": "^0.3.0",
-    "notion-client": "^6.16.0",
+    "notion-client": "^7.1.5",
     "notion-to-md": "^3.1.1",
     "notion-types": "^7.1.5",
     "prismjs": "^1.29.0",
