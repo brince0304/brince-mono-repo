@@ -8,6 +8,7 @@
       "@repo/ui/*": ["../../packages/ui/src/components/*"],
       "@repo/ui/ui/*": ["../../packages/ui/src/components/ui/*"],
       "@repo/utils/*": ["../../packages/utils/src/*"],
+      "@repo/ui/libs/*": ["../../packages/ui/src/lib/*"],
       "@/*": ["src/*"]
     },
     "plugins": [

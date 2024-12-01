@@ -10,6 +10,6 @@
       "@/components/ui/*": ["./src/components/ui/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "../../apps/blog/src/app/_components/ProfileCard.tsx", "../../apps/blog/src/app/_components/Header.tsx"],
   "exclude": ["node_modules"]
 }
