@@ -1,12 +1,12 @@
 'use client';
 
 import NotionPage from '@/components/NotionPage/NotionPage';
-import PostFloatingButton from '../PostFloatingButton/PostFloatingButton';
+// import PostFloatingButton from '../PostFloatingButton/PostFloatingButton';
 import { BrinceAvatar } from '@repo/ui/BrinceAvatar';
 import { SimplifiedProfile } from '@repo/ui/SimplifiedProfile';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import Comments from '../Comments/Comments';
+// import Comments from '../Comments/Comments';
 import { TagBadge } from '@repo/ui/TagBadge';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -30,10 +30,10 @@ const PostDetail = wrap.Suspense({
     return (
       <article className="flex gap-4 max-w-3xl w-full relative sm:px-0">
         <div className="hidden lg:block sticky top-1/4 h-fit">
-          <PostFloatingButton
+          {/* <PostFloatingButton
             pageId={post.page.id}
             column
-          />
+          /> */}
         </div>
         <div className="flex flex-col w-full flex-1 lg:ml-4 gap-4">
           <header className="flex flex-col gap-4 mt-2">
@@ -100,11 +100,11 @@ const PostDetail = wrap.Suspense({
             <SimplifiedProfile />
           </div>
           <div className="lg:hidden mt-4 flex gap-4">
-            <PostFloatingButton
+            {/* <PostFloatingButton
               pageId={post.page.id}
-            />
+            /> */}
           </div>
-          <Comments pageId={post.page.id} pageTitle={title || ''} />
+          {/* <Comments pageId={post.page.id} pageTitle={title || ''} /> */}
         </div>
       </article>
     );
