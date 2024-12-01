@@ -1,9 +1,8 @@
-import type { PostLikeRequest } from '@/models/post';
-import { postService } from '@/services/post';
 import { type UseMutationOptions, useMutation, useQueryClient } from '@tanstack/react-query';
 import { PostQueryKeys } from '.';
-import { useQueryString } from '@repo/utils/hooks';
 import { toast } from 'sonner';
+import type { PostLikeRequest } from '@/models/post';
+import { postService } from '@/services/post';
 
 export const useLikePost = (
   request: PostLikeRequest,

@@ -2,22 +2,18 @@
 
 import NotionPage from '@/components/NotionPage/NotionPage';
 import PostFloatingButton from '../PostFloatingButton/PostFloatingButton';
-import { getPostLikeStatus } from '@/lib/cookie';
 import { BrinceAvatar } from '@repo/ui/BrinceAvatar';
 import { SimplifiedProfile } from '@repo/ui/SimplifiedProfile';
-import { Typography } from '@repo/ui/ui/typography';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import type React from 'react';
 import Comments from '../Comments/Comments';
 import { TagBadge } from '@repo/ui/TagBadge';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
-import { PostQueryKeys, PostQueryOptions } from '@/hooks/post';
 import { wrap } from '@suspensive/react';
 import { UISkeleton } from '@repo/ui/UISkeleton';
 import type { PageBySlugResponse } from '@/models/notion';
+import { Typography } from '@repo/ui/ui/typography';
 
 interface PostDetailProps {
   post: PageBySlugResponse;

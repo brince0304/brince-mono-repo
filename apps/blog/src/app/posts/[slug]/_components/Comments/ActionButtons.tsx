@@ -2,13 +2,13 @@
 
 import { Button } from '@repo/ui/ui/button';
 import { HeartFilledIcon } from '@radix-ui/react-icons';
-import { HeartIcon, Loader2, Share2Icon } from 'lucide-react';
+import { Loader2, Share2Icon } from 'lucide-react';
 import { Typography } from '@repo/ui/ui/typography';
 import { useCallback } from 'react';
 import { toast } from 'sonner';
 import { useLikePost } from '@/hooks/post/usePostService';
-import { motion } from 'framer-motion';
 import AnimatedHeartIcon from '../AnimatedHeartIcon';
+
 interface ActionButtonsProps {
   pageId: string;
   likeCount: number;
