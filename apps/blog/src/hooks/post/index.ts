@@ -4,7 +4,6 @@ import { postService } from '@/services/post';
 import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
 import type { AxiosResponse } from 'axios';
-import type { PostLikeResponse } from '@/models/post';
 
 const DEFAULT_POST_KEY = 'post';
 
@@ -65,14 +64,6 @@ export const PostQueryOptions = {
   getPostLike: (pageId: string) => ({
     queryKey: PostQueryKeys.getPostLike(pageId),
     queryFn: () => postService.getPostLike(pageId),
-    select: (data: AxiosResponse<PostLikeResponse>) => data.data,
-  }),
-  getPostLikePrefetch: (pageId: string) => ({
-    queryKey: PostQueryKeys.getPostLike(pageId),
-    queryFn: async () => {
-      const response = await serverFetcher<PostLikeResponse>(`/likes?pageId=${pageId}`);
-      return { data: response } as AxiosResponse<PostLikeResponse>;
-    },
-    select: (data: AxiosResponse<PostLikeResponse>) => data.data,
+    initialData: { likeCount: 0, isLiked: false },
   }),
 } as const;
