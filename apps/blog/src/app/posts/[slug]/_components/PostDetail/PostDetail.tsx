@@ -67,7 +67,7 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
               </>
             )}
           </div>
-          <Typography variant={'large'} className="text-gray-500 dark:text-gray-400">
+          <Typography className="text-md text-muted-foreground">
             {excerpt}
           </Typography>
           <div className="border-t border-gray-200 dark:border-gray-700" />

@@ -1,5 +1,5 @@
 import { generateHomeMetadata } from '@/lib/meta';
-import { ProfileCard } from '@repo/ui/ProfileCard';
+import { ProfileCard } from '@/app/_components/ProfileCard';
 import type { Metadata } from 'next';
 import PostSection from './_components/PostSection';
 import { notionClient } from '@/lib/notion/notion';

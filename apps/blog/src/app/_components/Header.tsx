@@ -5,15 +5,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type * as React from 'react';
 import { useState } from 'react';
-import { Button } from './ui/button';
-import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
+import { Button } from '@repo/ui/components/ui/button';
+import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle } from '@repo/ui/components/ui/drawer';
+import ThemeToggle from '@/components/ThemeToggle/ThemeToggle';
 
 interface HeaderProps {
   menuItems: { name: string; path: string }[];
-  themeToggle: React.ReactNode;
 }
 
-function Header({ menuItems, themeToggle }: HeaderProps) {
+function Header({ menuItems }: HeaderProps) {
   const pathname = usePathname();
 
   return (
@@ -32,9 +32,8 @@ function Header({ menuItems, themeToggle }: HeaderProps) {
             <Link
               key={item.path}
               href={item.path}
-              className={`transition-colors hover:text-foreground/80 ${
-                pathname === item.path ? 'text-foreground' : 'text-foreground/60'
-              }`}
+              className={`transition-colors hover:text-foreground/80 ${pathname === item.path ? 'text-foreground' : 'text-foreground/60'
+                }`}
               title={`${item.name} 클릭해서 바로가기`}
             >
               {item.name}
@@ -43,7 +42,9 @@ function Header({ menuItems, themeToggle }: HeaderProps) {
         </nav>
         <div className="flex items-center justify-between space-x-2 md:justify-end">
           <nav className="flex items-center">
-            {themeToggle}
+            <div className="hidden md:flex">
+              <ThemeToggle />
+            </div>
             <MobileNav menuItems={menuItems} />
           </nav>
         </div>
@@ -59,26 +60,31 @@ function MobileNav({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Sheet open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
-      <SheetTrigger asChild>
+    <Drawer open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
+      <DrawerTrigger asChild>
         <Button variant="ghost" size="icon" className="md:hidden">
           <Menu className="h-5 w-5" />
           <span className="sr-only">Toggle menu</span>
         </Button>
-      </SheetTrigger>
-      <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-        <nav className="flex flex-col space-y-4 mt-8">
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle className="flex items-center justify-between">
+            <span>메뉴</span>
+            <ThemeToggle />
+          </DrawerTitle>
+        </DrawerHeader>
+        <nav className="flex flex-col space-y-4 p-4">
           {menuItems.map((item) => {
             const isActive = pathname === item.path;
             return (
               <Link
                 key={item.path}
                 href={item.path}
-                className={`flex items-center p-3 rounded-lg transition-all ${
-                  isActive
-                    ? 'bg-primary text-primary-foreground'
-                    : 'text-foreground/60 hover:bg-accent hover:text-accent-foreground'
-                }`}
+                className={`flex items-center p-3 rounded-lg transition-all ${isActive
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-foreground/60 hover:bg-accent hover:text-accent-foreground'
+                  }`}
                 title={`${item.name} 클릭해서 바로가기`}
                 onClick={() => setIsOpen(false)}
               >
@@ -88,8 +94,8 @@ function MobileNav({
             );
           })}
         </nav>
-      </SheetContent>
-    </Sheet>
+      </DrawerContent>
+    </Drawer>
   );
 }
 

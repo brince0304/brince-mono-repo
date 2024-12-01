@@ -2,10 +2,9 @@
 
 import CustomError from '@/components/Error/CustomError/CustomError';
 import ProgressBar from '@/components/ProgressBar/ProgressBar';
-import ThemeToggle from '@/components/ThemeToggle/ThemeToggle';
 import ToastContainerWrapper from '@/components/Toast/ToastContainer/ToastContainerWrapper';
 import { Footer } from '@repo/ui/Footer';
-import { Header } from '@repo/ui/Header';
+import { Header } from '@/app/_components/Header';
 import { ErrorBoundary } from '@suspensive/react';
 import { ThemeProvider } from 'next-themes';
 import type { ReactNode } from 'react';
@@ -36,7 +35,7 @@ export default function ClientLayout({
           }
         >
           <ProgressBar />
-          <Header menuItems={menuItems} themeToggle={<ThemeToggle />} />
+          <Header menuItems={menuItems} />
           <main className="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">
             {children}
             <ToastContainerWrapper />
