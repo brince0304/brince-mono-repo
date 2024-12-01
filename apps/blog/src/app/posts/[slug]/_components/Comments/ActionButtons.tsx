@@ -2,7 +2,7 @@
 
 import { Button } from '@repo/ui/ui/button';
 import { HeartFilledIcon } from '@radix-ui/react-icons';
-import { HeartIcon, LinkIcon, Loader2, Share2Icon } from 'lucide-react';
+import { HeartIcon, Loader2, Share2Icon } from 'lucide-react';
 import { Typography } from '@repo/ui/ui/typography';
 import { useCallback } from 'react';
 import { toast } from 'sonner';
