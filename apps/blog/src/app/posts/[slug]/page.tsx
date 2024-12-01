@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import PostDetail from './_components/PostDetail/PostDetail';
 import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import { generateMetadata as generateDefaultMetadata } from '@/lib/meta';
+import { notionClient } from '@/lib/notion/notion';
 
 export async function generateMetadata({
   params,
@@ -39,11 +40,11 @@ export const dynamic = 'force-static';
 export const revalidate = 3600;
 
 export default async function Post({ params }: { params: { slug: string } }) {
-  const post = await serverFetcher<PageBySlugResponse>(`/posts/${params.slug}`);
+  const post = await notionClient.getPageBySlug(params.slug);
 
   return (
     <div className="flex sm:mt-4 mt-5">
-      <PostDetail post={post} />
+      <PostDetail post={post as PageBySlugResponse} />
     </div>
   );
 }

@@ -12,6 +12,7 @@ import Image, { type ImageProps } from 'next/image';
 import Link from 'next/link';
 import 'prismjs/themes/prism-twilight.css';
 import { UISkeleton } from '@repo/ui/UISkeleton';
+import { Checkbox } from '@repo/ui/ui/checkbox';
 
 interface NotionPageProps {
   recordMap: ExtendedRecordMap | null;
@@ -20,6 +21,7 @@ interface NotionPageProps {
 function NextImageComponent(props: ImageProps) {
   return (
     <Image
+      className='rounded-lg'
       src={props.src}
       alt={props.alt}
       title={props.alt}
@@ -43,6 +45,13 @@ const Pdf = dynamic(() => import('react-notion-x/build/third-party/pdf').then((m
 const Modal = dynamic(() => import('react-notion-x/build/third-party/modal').then((m) => m.Modal), {
   ssr: false,
 });
+const CheckBox = (props: { isChecked: boolean, blockId?: string }) => {
+  return (
+    <Checkbox
+      checked={props.isChecked}
+    />
+  )
+}
 
 const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
   const { theme } = useTheme();
@@ -66,6 +75,7 @@ const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
     nextImage: NextImageComponent,
     nextLink: Link,
     Collection: () => null,
+    Checkbox: CheckBox,
   };
 
   return (
@@ -80,7 +90,6 @@ const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
       showTableOfContents={true}
       showCollectionViewDropdown={false}
       components={components}
-      previewImages={true}
       forceCustomImages={true}
     />
   );
