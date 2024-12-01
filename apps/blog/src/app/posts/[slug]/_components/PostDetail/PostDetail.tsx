@@ -17,17 +17,16 @@ import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { PostQueryKeys, PostQueryOptions } from '@/hooks/post';
 import { wrap } from '@suspensive/react';
 import { UISkeleton } from '@repo/ui/UISkeleton';
+import type { PageBySlugResponse } from '@/models/notion';
 
 interface PostDetailProps {
-  slug: string;
+  post: PageBySlugResponse;
 }
 
 const PostDetail = wrap.Suspense({
   fallback: <UISkeleton.Post />,
 })
-  .on<PostDetailProps>(({ slug }) => {
-    const { data: post } = useSuspenseQuery(PostQueryOptions.getPrefetchPostBySlug(slug));
-
+  .on<PostDetailProps>(({ post }) => {
     const title = post.page.properties.Title.title[0]?.plain_text;
     const excerpt = post.page.properties.Excerpt.rich_text[0]?.plain_text;
     const cover = post.page.properties.Thumbnail?.url;
