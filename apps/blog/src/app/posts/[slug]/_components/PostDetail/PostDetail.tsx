@@ -67,12 +67,11 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
               </>
             )}
           </div>
-          {/* <Typography variant={'h1'} className={'font-bold'}>
-            {title}
-          </Typography> */}
           <Typography variant={'large'} className="text-gray-500 dark:text-gray-400">
             {excerpt}
           </Typography>
+          <div className="border-t border-gray-200 dark:border-gray-700" />
+
           <section className="flex gap-2 items-center">
             <div className="flex justify-center items-center gap-2">
               <BrinceAvatar className={'w-8 h-8'} />
@@ -95,7 +94,6 @@ const PostDetail: React.FC<PostDetailProps> = async ({ post }) => {
               </Link>
             ))}
           </div>
-          <div className="border-t border-gray-200 dark:border-gray-700" />
         </header>
         <div className="flex flex-col py-14 sm:py-10 gap-10">
           <NotionPage recordMap={post.recordMap} />
