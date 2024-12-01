@@ -2,10 +2,10 @@
 import Heart from '@/assets/lottie/heart.json';
 import LottieComponent from '@/components/LottieComponent/LottieComponent';
 import { useLikePost } from '@/hooks/post/usePostService';
-import { ReloadIcon } from '@radix-ui/react-icons';
+import { HeartFilledIcon, ReloadIcon } from '@radix-ui/react-icons';
 import { Button } from '@repo/ui/ui/button';
-import { useQueryString } from '@repo/utils/hooks';
-import { useParams } from 'next/navigation';
+import { Typography } from '@repo/ui/ui/typography';
+import { HeartIcon } from 'lucide-react';
 import type React from 'react';
 import { useCallback, useState } from 'react';
 import { toast } from 'sonner';
@@ -40,10 +40,6 @@ const LikeButton: React.FC<LikeButtonProps> = ({ className = '', isLiked, pageId
     likePost();
   };
 
-  const handleAnimationComplete = useCallback(() => {
-    setIsAnimating(false);
-  }, []);
-
   return (
     <Button
       variant="outline"
@@ -54,18 +50,21 @@ const LikeButton: React.FC<LikeButtonProps> = ({ className = '', isLiked, pageId
       onClick={handleLikePost}
       disabled={isPending}
     >
-      <div className="absolute inset-0 flex items-center justify-center">
-        {!isPending && (
-          <LottieComponent
-            animationData={Heart}
-            autoplay={isAnimating}
-            loop={false}
-            isStopped={!isAnimating}
-            onComplete={handleAnimationComplete}
-            className={'scale-[2] '}
-          />
+      <div className="flex items-center justify-center absolute inset-0 gap-1">
+        {!isPending && isClicked && (
+          // <LottieComponent
+          //   animationData={Heart}
+          //   autoplay={isAnimating}
+          //   loop={false}
+          //   isStopped={!isAnimating}
+          //   onComplete={handleAnimationComplete}
+          //   className={'scale-[2] '}
+          // />
+          <HeartFilledIcon className="w-4 h-4 text-red-500" />
         )}
+        {!isPending && !isClicked && <HeartIcon className="w-4 h-4" />}
         {isPending && <ReloadIcon className="animate-spin" />}
+        <Typography className="xsmall">{count}</Typography>
       </div>
     </Button>
   );
