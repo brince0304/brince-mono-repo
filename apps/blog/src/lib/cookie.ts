@@ -1,3 +1,5 @@
+'use server';
+
 import { cookies } from 'next/headers';
 
 const LIKED_POSTS_COOKIE_NAME = 'likedPosts';
@@ -30,10 +32,19 @@ const parseLikedPosts = (cookieValue: string | undefined): string[] => {
 };
 
 export const getPostLikeStatus = async (pageId: string): Promise<boolean> => {
-  const cookieStore = cookies();
-  const likedPostsCookie = cookieStore.get(LIKED_POSTS_COOKIE_NAME);
-  const likedPosts = parseLikedPosts(likedPostsCookie?.value);
-  return likedPosts.includes(pageId);
+  try {
+    // cookies() 함수는 서버 컴포넌트나 서버 액션에서만 호출 가능
+    // 클라이언트 컴포넌트에서 호출하면 'cookies is not defined' 에러 발생
+    const cookieStore = cookies(); 
+    const likedPostsCookie = cookieStore.get(LIKED_POSTS_COOKIE_NAME);
+    const likedPosts = parseLikedPosts(likedPostsCookie?.value);
+    return likedPosts.includes(pageId);
+  } catch (error) {
+    // 클라이언트에서 호출되거나 쿠키 접근 권한이 없는 경우 발생하는 에러
+    console.error('쿠키 접근 중 오류 발생:', error);
+    // 기본값으로 false 반환하여 좋아요 상태 초기화
+    return false;
+  }
 };
 
 export const savePostLikeStatus = async (pageId: string, isLiked: boolean): Promise<void> => {

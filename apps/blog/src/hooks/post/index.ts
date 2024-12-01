@@ -1,4 +1,5 @@
 import { serverFetcher } from '@/lib/client';
+import type { PageBySlugResponse } from '@/models/notion';
 import type { GetPostRequest } from '@/models/post';
 import { postService } from '@/services/post';
 import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
@@ -19,6 +20,12 @@ export const PostQueryKeys = {
 
   GET_CATEGORIES: [DEFAULT_POST_KEY, 'categories'] as const,
   getCategories: () => [...PostQueryKeys.GET_CATEGORIES],
+
+  GET_POST_BY_SLUG: [DEFAULT_POST_KEY, 'post', 'slug'] as const,
+  getPostBySlug: (slug: string) => [...PostQueryKeys.GET_POST_BY_SLUG, slug],
+
+  GET_POST_LIKE: [DEFAULT_POST_KEY, 'likes', 'pageId'] as const,
+  getPostLike: (pageId: string) => [...PostQueryKeys.GET_POST_LIKE, pageId],
 };
 
 export const PostQueryOptions = {
@@ -37,6 +44,15 @@ export const PostQueryOptions = {
       },
       select: (data: AxiosResponse<QueryDatabaseResponse>) => data.data,
       staleTime: 1000 * 60 * 5,
+    }),
+  getPrefetchPostBySlug: (slug: string) =>
+    queryOptions  ({
+      queryKey: PostQueryKeys.getPostBySlug(slug),
+      queryFn: async () => {
+        const response = await serverFetcher<PageBySlugResponse>(`/posts/${slug}`);
+        return { data: response } as AxiosResponse<PageBySlugResponse>;
+      },
+      select: (data: AxiosResponse<PageBySlugResponse>) => data.data,
     }),
   getInfiniteTags: () =>
     infiniteQueryOptions({
@@ -57,5 +73,11 @@ export const PostQueryOptions = {
         return { data: response } as AxiosResponse<string[]>;
       },
       select: (data: AxiosResponse<string[]>) => data.data,
+    }),
+  getPostLike: (pageId: string) =>
+    queryOptions({
+      queryKey: PostQueryKeys.getPostLike(pageId),
+      queryFn: () => postService.getPostLike(pageId),
+      select: (data: AxiosResponse<{ likeCount: number; isLiked: boolean }>) => data.data,
     }),
 };

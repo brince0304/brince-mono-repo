@@ -4,6 +4,8 @@ import LottieComponent from '@/components/LottieComponent/LottieComponent';
 import { useLikePost } from '@/hooks/post/usePostService';
 import { ReloadIcon } from '@radix-ui/react-icons';
 import { Button } from '@repo/ui/ui/button';
+import { useQueryString } from '@repo/utils/hooks';
+import { useParams } from 'next/navigation';
 import type React from 'react';
 import { useCallback, useState } from 'react';
 import { toast } from 'sonner';
@@ -23,14 +25,13 @@ const LikeButton: React.FC<LikeButtonProps> = ({ className = '', isLiked, pageId
     { pageId, count },
     {
       onSuccess: () => {
-        toast.success('좋아요를 눌렀어요 😊');
         setIsClicked(true);
       },
-    }
+    },
   );
 
   const handleLikePost = () => {
-    if (isClicked) {
+    if (isClicked || isLiked) {
       toast.error('이미 좋아요를 누르셨어요 😊');
       return;
     }

@@ -12,11 +12,11 @@ export async function GET(_: NextRequest, { params }: { params: { slug: string }
     const response = await notionClient.getPageBySlug(slug);
     const isPublished = response?.page?.properties?.Published?.checkbox ?? false;
 
-    if (!isPublished) {
+    if (!isPublished || !response) {
       return NextResponse.json({ error: '게시글이 존재하지 않습니다.' }, { status: 404 });
     }
 
-    return NextResponse.json(response);
+    return NextResponse.json({ ...response });
   } catch (error) {
     console.error('Error fetching post:', error);
     return NextResponse.json({ error: '게시글 조회에 실패하였습니다.' }, { status: 500 });

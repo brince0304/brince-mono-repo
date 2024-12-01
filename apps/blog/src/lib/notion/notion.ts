@@ -90,6 +90,15 @@ async function updatePostLike(pageId: string, count: number) {
   }
 }
 
+async function getPostLikeCount(pageId: string) {
+  try {
+    const response = await notion.pages.retrieve({ page_id: pageId }) as NotionPage;
+    return response.properties.Likes.number;
+  } catch (error) {
+    console.error('Error getting post like count:', error);
+  }
+}
+
 // async function unlikePost(pageId: string) {
 //   try {
 //     const response = await notion.pages.update({
@@ -310,6 +319,7 @@ export const notionClient = {
   getPosts,
   getPostsByParams,
   getComments,
+  getPostLikeCount,
   createCommentPage,
   getPageBySlug,
   updatePostProperties,
