@@ -1,22 +1,24 @@
 'use client';
 
-import PostList from '@/app/_components/PostList';
 import type { NotionPage } from '@/models/notion';
 import { TextGrid } from '@repo/ui/TextGrid';
-import { UISkeleton } from '@repo/ui/UISkeleton';
+import { useIsMounted } from '@toss/react';
+import PostList from './PostList';
 
 interface PostSectionProps {
   title: string;
   description: string;
-  isLoading: boolean;
   posts?: NotionPage[];
 }
 
-const PostSection = ({ title, description, posts, isLoading }: PostSectionProps) => {
+const PostSection = ({ title, description, posts }: PostSectionProps) => {
+  const isMounted = useIsMounted();
+
+  if (!isMounted) return null;
+
   return (
     <section className={'flex flex-col gap-4'}>
       <TextGrid title={title} description={description} />
-      {isLoading && <UISkeleton.PostList />}
       {posts && <PostList posts={posts} />}
     </section>
   );
