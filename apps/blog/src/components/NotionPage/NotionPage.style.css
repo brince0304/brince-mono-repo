@@ -24,6 +24,10 @@
   .notion-list-disc {
     padding-inline-start: 0 !important;
   }
+
+  > li {
+    @apply py-1 !important;
+  }
 }
 
 .notion-to-do-item {
