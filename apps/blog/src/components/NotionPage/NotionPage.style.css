@@ -34,6 +34,11 @@
   }
 }
 
+.notion-asset-caption {
+  @apply text-sm text-muted-foreground !important;
+  font-family: 'Pretendard', sans-serif !important;
+}
+
 /* Reset Padding/Margin */
 .notion-full-page,
 .notion-page-content,
