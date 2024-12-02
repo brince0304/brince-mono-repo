@@ -6,6 +6,7 @@ import PostDetail from './_components/PostDetail/PostDetail';
 import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import { generateMetadata as generateDefaultMetadata } from '@/lib/meta';
 import { notionClient } from '@/lib/notion/notion';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata({
   params,
@@ -41,6 +42,10 @@ export const revalidate = 3600;
 
 export default async function Post({ params }: { params: { slug: string } }) {
   const post = await notionClient.getPageBySlug(params.slug);
+
+  if (!post?.page.properties.Published.checkbox) {
+    notFound();
+  }
 
   return (
     <div className="flex sm:mt-4 mt-5">
