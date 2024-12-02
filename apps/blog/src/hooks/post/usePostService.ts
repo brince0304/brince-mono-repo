@@ -12,12 +12,12 @@ export const useLikePost = (
   return useMutation({
     mutationFn: () => postService.postLikePage(request),
     ...option,
-    onSuccess: (data, variables, context) => {
-      option?.onSuccess?.(data, variables, context);
+    onSuccess: (...args) => {
+      option?.onSuccess?.(...args);
       queryClient.invalidateQueries({ queryKey: PostQueryKeys.getPostLike(request.pageId) });
     },
-    onError: (error, variables, context) => {
-      option?.onError?.(error, variables, context);
+    onError: (...args) => {
+      option?.onError?.(...args);
     },
   });
 };
