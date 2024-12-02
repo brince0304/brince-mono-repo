@@ -26,8 +26,8 @@ export function StickyCommentSection({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
       className="sticky-comments fixed bottom-0 left-0 right-0 px-4 py-2 border-t border-border z-10 bg-background shadow-sm sm:hidden"
     >
