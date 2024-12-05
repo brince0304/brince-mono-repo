@@ -11,8 +11,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
   return generatePostsMetadata();
 };
 
-export const dynamic = 'force-dynamic';
-export const fetchCache = 'force-no-store';
+export const revalidate = 3600;
 
 export default async function PostsPage() {
   return (
