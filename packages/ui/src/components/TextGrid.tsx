@@ -1,4 +1,3 @@
-'use client';
 
 import type { ComponentType, FC, SVGProps } from 'react';
 import { Typography } from './ui/typography';

@@ -1,11 +1,11 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import type React from 'react';
 import { TagBadge } from '@repo/ui/components/TagBadge';
 import { Typography } from '@repo/ui/components/ui/typography';
-import { motion } from 'framer-motion';
+import { PostCardImage } from './PostCardImage';
+import { useRouteWithParameters } from '@repo/utils/hooks';
 
 export interface PostCardProps {
   title: string;
@@ -24,12 +24,20 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
   tags,
   imageUrl,
 }) => {
+  const router = useRouteWithParameters();
+
   const formatDate = (dateString: string) => {
     const d = new Date(dateString);
     return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일`;
   };
 
   const formattedDate = formatDate(date);
+
+  const handleTagClick = (tag: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    router.push({ baseUrl: '/posts', parameters: { tag } });
+  };
 
   return (
     <li className="group">
@@ -40,24 +48,7 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
         aria-label={`${title} 게시글로 이동`}
       >
         <div className="flex gap-6 hover:bg-muted/50 rounded-lg transition-colors p-2 sm:p-4">
-          {/* 이미지 영역 */}
-          {imageUrl && (
-            <motion.div
-              className="flex-shrink-0 w-20 h-20 sm:w-32 sm:h-32 overflow-hidden rounded-md"
-              initial={{ opacity: 0, y: 10, filter: 'blur(10px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ duration: 0.3 }}
-            >
-              <Image
-                src={imageUrl}
-                alt={`${title}의 대표 이미지`}
-                width={128}
-                height={128}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </motion.div>
-          )}
+          {imageUrl && <PostCardImage imageUrl={imageUrl} title={title} />}
 
           {/* 컨텐츠 영역 */}
           <div className="flex-1 flex flex-col min-w-0">
@@ -77,15 +68,8 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
               {tags.length > 0 && (
                 <ul className="flex flex-wrap gap-1.5" aria-label="태그 목록">
                   {tags.map((tag) => (
-                    <li key={tag}>
-                      <Link
-                        href={`/posts?tag=${tag}`}
-                        className="hover:opacity-80"
-                        aria-label={`${tag} 태그로 필터링하기`}
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <TagBadge tag={tag} />
-                      </Link>
+                    <li key={tag} className="hover:opacity-80">
+                      <TagBadge tag={tag} onClick={handleTagClick(tag)} />
                     </li>
                   ))}
                 </ul>

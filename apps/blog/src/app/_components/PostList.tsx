@@ -1,3 +1,5 @@
+'use client';
+
 import { convertToPostCardProps } from '@/components/Postcard/PostCard.utils';
 import type { NotionPage } from '@/models/notion';
 import { PostCard } from '@/components/Postcard/PostCard';

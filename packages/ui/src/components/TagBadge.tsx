@@ -9,7 +9,7 @@ export interface TagProps extends BadgeProps {
   tag: string;
   useTooltip?: boolean;
   isActive?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 const TagBadge: FC<TagProps> = ({
