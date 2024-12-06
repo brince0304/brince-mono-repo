@@ -37,7 +37,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export const revalidate = 3600;
+export const dynamic = 'force-static';
 
 export default async function Post({ params }: { params: { slug: string } }) {
   const post = await notionClient.getPageBySlug(params.slug);
