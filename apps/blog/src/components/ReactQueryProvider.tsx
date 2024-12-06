@@ -12,6 +12,7 @@ export default function ReactQueryProvider({ children }: { children: React.React
           queries: {
             staleTime: 1000 * 60 * 10,
             gcTime: 1000 * 60 * 10,
+            refetchOnMount: false,
           },
         },
       })

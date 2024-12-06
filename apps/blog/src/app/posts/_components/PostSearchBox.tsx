@@ -3,11 +3,12 @@
 import { PostQueryKeys } from '@/hooks/post';
 import { Input } from '@repo/ui/ui/input';
 import { useIsFetching } from '@tanstack/react-query';
-import { useDebounce } from '@toss/react';
+import { useDebounce, useIsMounted } from '@toss/react';
 import { useRef, useState } from 'react';
 import { useQueryString, useRouteWithParameters } from '@repo/utils/hooks';
 
 const PostSearch = () => {
+  const isMounted = useIsMounted();
   const isPostFetching = useIsFetching({
     queryKey: PostQueryKeys.GET_POSTS,
   });
@@ -67,7 +68,7 @@ const PostSearch = () => {
         inputMode="search"
         autoComplete="off"
         className="resize-none"
-        isLoading={isPostFetching > 0}
+        isLoading={isMounted && isPostFetching > 0}
         value={input}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
