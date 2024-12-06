@@ -4,6 +4,7 @@ import type { NotionPage } from '@/models/notion';
 import { TextGrid } from '@repo/ui/TextGrid';
 import { useIsMounted } from '@toss/react';
 import PostList from './PostList';
+import { UISkeleton } from '@repo/ui/UISkeleton';
 
 interface PostSectionProps {
   title: string;
@@ -14,12 +15,11 @@ interface PostSectionProps {
 const PostSection = ({ title, description, posts }: PostSectionProps) => {
   const isMounted = useIsMounted();
 
-  if (!isMounted) return null;
-
   return (
     <section className={'flex flex-col gap-4'}>
       <TextGrid title={title} description={description} />
-      {posts && <PostList posts={posts} />}
+      {!isMounted && <UISkeleton.PostList />}
+      {posts && isMounted && <PostList posts={posts} />}
     </section>
   );
 };
