@@ -2,7 +2,6 @@
 
 import type { ExtendedRecordMap } from 'notion-types';
 import type React from 'react';
-import { useEffect, useState } from 'react';
 import { NotionRenderer } from 'react-notion-x';
 import 'react-notion-x/src/styles.css';
 import { useTheme } from 'next-themes';
@@ -11,8 +10,8 @@ import dynamic from 'next/dynamic';
 import Image, { type ImageProps } from 'next/image';
 import Link from 'next/link';
 import 'prismjs/themes/prism-twilight.css';
-import { UISkeleton } from '@repo/ui/UISkeleton';
 import { Checkbox } from '@repo/ui/ui/checkbox';
+import { useIsMounted } from '@toss/react';
 
 interface NotionPageProps {
   recordMap: ExtendedRecordMap | null;
@@ -54,14 +53,9 @@ const CheckBox = (props: { isChecked: boolean, blockId?: string }) => {
 }
 
 const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
-  const { theme } = useTheme();
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return <UISkeleton.Post />;
+  const { resolvedTheme } = useTheme();
+  const isMounted = useIsMounted();
+  const isDark = resolvedTheme === 'dark' && isMounted;
 
   if (!recordMap) {
     return null;
@@ -82,7 +76,7 @@ const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
     <NotionRenderer
       recordMap={recordMap}
       fullPage={true}
-      darkMode={theme === 'dark'}
+      darkMode={isDark}
       disableHeader={true}
       hideBlockId={true}
       isShowingSearch={false}
