@@ -14,7 +14,7 @@ export default async function HomePage() {
   const posts = await notionClient.getPosts();
 
   return (
-    <main className={'flex flex-col mx-auto gap-4'}>
+    <main className={'flex flex-col mx-auto gap-4 min-h-screen'}>
       <ProfileCard />
       <section className={'flex flex-col gap-4'}>
         <PostSection
