@@ -24,7 +24,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className="relative w-full">
         <input
           type={type}
-          disabled={disabled || isLoading}
+          disabled={disabled}
           className={inputClassName}
           ref={ref}
           {...props}

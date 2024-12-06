@@ -32,15 +32,14 @@ export const PostQueryOptions = {
       queryFn: () => postService.getPosts(getPostRequest),
       select: (res: AxiosResponse<QueryDatabaseResponse>) => res.data,
     }),
-  getPrefetchPosts: (getPostRequest?: GetPostRequest) =>
+  getPrefetchPosts: () =>
     queryOptions({
-      queryKey: PostQueryKeys.getPosts(getPostRequest),
+      queryKey: PostQueryKeys.getPosts({}),
       queryFn: async () => {
         const response = await serverFetcher<QueryDatabaseResponse>('/posts');
         return { data: response } as AxiosResponse<QueryDatabaseResponse>;
       },
       select: (data: AxiosResponse<QueryDatabaseResponse>) => data.data,
-      staleTime: 1000 * 60 * 5,
     }),
   getInfiniteTags: () =>
     infiniteQueryOptions({

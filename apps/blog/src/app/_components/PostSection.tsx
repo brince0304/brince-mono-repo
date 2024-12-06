@@ -1,25 +1,23 @@
 'use client';
 
-import type { NotionPage } from '@/models/notion';
 import { TextGrid } from '@repo/ui/TextGrid';
-import { useIsMounted } from '@toss/react';
 import PostList from './PostList';
-import { UISkeleton } from '@repo/ui/UISkeleton';
+import { wrap } from '@suspensive/react';
+import { SuspenseQuery } from '@suspensive/react-query';
+import { PostQueryOptions } from '@/hooks/post';
+import type { NotionPage } from '@/models/notion';
 
-interface PostSectionProps {
-  title: string;
-  description: string;
-  posts?: NotionPage[];
-}
+const PostBody = wrap.Suspense().on(() => (
+  <SuspenseQuery {...PostQueryOptions.getPrefetchPosts()}>
+    {({ data: { results } }) => results && <PostList posts={results as NotionPage[]} />}
+  </SuspenseQuery>
+));
 
-const PostSection = ({ title, description, posts }: PostSectionProps) => {
-  const isMounted = useIsMounted();
-
+const PostSection = () => {
   return (
     <section className={'flex flex-col gap-4'}>
-      <TextGrid title={title} description={description} />
-      {!isMounted && <UISkeleton.PostList />}
-      {posts && isMounted && <PostList posts={posts} />}
+      <TextGrid title={"최근 포스트"} description={"여러 이야기를 다루고 있어요 🤗"} />
+      <PostBody />
     </section>
   );
 };

@@ -7,7 +7,6 @@ import { SuspenseQuery } from '@suspensive/react-query';
 import { PostQueryOptions } from '@/hooks/post';
 import PostList from '@/app/_components/PostList';
 import type { NotionPage } from '@/models/notion';
-import { useIsMounted } from '@toss/react';
 import { useQueryString } from '@repo/utils/hooks';
 
 const PostListBody = wrap
@@ -20,10 +19,7 @@ const PostListBody = wrap
     ),
   })
   .on(() => {
-    const isMounted = useIsMounted();
     const { search, tag, category } = useQueryString(['search', 'tag', 'category']);
-
-    if (!isMounted) return <PostListSkeleton />;
 
     return (
       <SuspenseQuery
