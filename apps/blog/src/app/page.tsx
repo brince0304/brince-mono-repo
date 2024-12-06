@@ -8,7 +8,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
   return generateHomeMetadata();
 };
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
 
 export default async function HomePage() {
   const posts = await notionClient.getPosts();
