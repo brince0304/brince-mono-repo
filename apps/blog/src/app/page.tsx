@@ -9,7 +9,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
   return generateHomeMetadata();
 };
 
-export const dynamic = 'force-static';
+export const revalidate = 3600;
 
 export default async function HomePage() {
   return (

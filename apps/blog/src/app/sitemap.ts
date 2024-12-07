@@ -1,6 +1,8 @@
 import type { MetadataRoute } from 'next';
 import { notionClient } from '@/lib/notion/notion';
 
+export const revalidate = 21600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_BLOG_URL;
 
