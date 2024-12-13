@@ -16,33 +16,6 @@
   }
 }
 
-.notion-list {
-  li::marker {
-    @apply text-lg !important;
-  }
-
-  .notion-list-disc {
-    padding-inline-start: 0 !important;
-  }
-
-  > li {
-    @apply py-1 !important;
-  }
-}
-
-.notion-to-do-item {
-  @apply flex items-center gap-2 !important;
-
-  > svg {
-    @apply w-4 h-4 !important;
-  }
-}
-
-.notion-asset-caption {
-  @apply text-sm text-muted-foreground !important;
-  font-family: 'Pretendard', sans-serif !important;
-}
-
 /* Reset Padding/Margin */
 .notion-full-page,
 .notion-page-content,
@@ -73,13 +46,62 @@
   @apply text-[1.05rem] !important;
 }
 
+/* Lists */
+.notion-list {
+  li::marker {
+    @apply text-lg !important;
+  }
+
+  .notion-list-disc {
+    padding-inline-start: 0 !important;
+  }
+
+  > li {
+    @apply py-1 !important;
+  }
+}
+
+.notion-to-do-item {
+  @apply flex items-center gap-2 !important;
+
+  > svg {
+    @apply w-4 h-4 !important;
+  }
+}
+
 /* Table of Contents */
+.notion-table-of-contents {
+  @apply ml-4 !important;
+}
+
 .notion-table-of-contents-active-item {
-  @apply font-semibold bg-black text-white dark:bg-white dark:text-black !important;
+  @apply bg-none text-primary font-semibold border-l-2 border-primary pl-2 -ml-2 transition-all duration-200 !important;
 }
 
 .notion-table-of-contents-item-body {
   border-bottom: none !important;
+}
+
+/* Aside */
+.notion-aside {
+  flex: none !important;
+  z-index: 1;
+  @apply ml-4 !important;
+}
+
+.notion-aside-table-of-contents {
+  background-color: transparent !important;
+  overflow: unset !important;
+}
+
+.notion-aside-table-of-contents-header {
+  display: none;
+}
+
+/* Images & Captions */
+.notion-asset-caption {
+  @apply text-sm text-muted-foreground !important;
+  font-family: 'Pretendard', sans-serif !important;
 }
 
 /* Hide Elements */
@@ -94,18 +116,4 @@
 
 .notion-app {
   background-color: transparent !important;
-}
-
-/* Aside */
-.notion-aside {
-  z-index: 1;
-}
-
-.notion-aside-table-of-contents {
-  background-color: transparent !important;
-  overflow: unset !important;
-}
-
-.notion-aside-table-of-contents-header {
-  display: none;
 }
