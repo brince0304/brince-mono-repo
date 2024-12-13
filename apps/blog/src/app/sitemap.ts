@@ -9,6 +9,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = ['', '/posts'].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
+    changeFrequency: 'daily',
+    priority: 0.7,
   }));
 
   const posts = (await notionClient.getPosts()) ?? [];
