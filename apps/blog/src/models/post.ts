@@ -12,6 +12,7 @@ export interface GetPostRequest {
   search?: string;
   tag?: string;
   category?: string;
+  series?: string;
 }
 
 export interface GetTagsResponse {

@@ -130,6 +130,8 @@ export interface NotionProperties {
   CreatedAt: NotionCreatedTime;
   Category: NotionSelect;
   Views: NotionNumber;
+  SeriesNumber: NotionNumber;
+  Series: NotionSelect;
 }
 
 export interface NotionPage extends PageObjectResponse {

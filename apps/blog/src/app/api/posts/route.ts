@@ -11,6 +11,7 @@ function getParameters(params: URLSearchParams) {
     search: params.get('search') || '',
     tag: params.get('tag') || '',
     category: params.get('category') || '',
+    series: params.get('series') || '',
   };
 }
 export async function GET(request: NextRequest) {

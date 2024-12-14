@@ -1,26 +1,28 @@
 'use client';
 
-import NotionPage from '@/components/NotionPage/NotionPage';
-import { BrinceAvatar } from '@repo/ui/BrinceAvatar';
-import { SimplifiedProfile } from '@repo/ui/SimplifiedProfile';
-import { formatDistanceToNow } from 'date-fns';
-import { ko } from 'date-fns/locale';
 import Comments from '../Comments/Comments';
 import { TagBadge } from '@repo/ui/TagBadge';
 import Link from 'next/link';
 import Image from 'next/image';
-import type { PageBySlugResponse } from '@/models/notion';
+import type { NotionPage, PageBySlugResponse } from '@/models/notion';
 import { Typography } from '@repo/ui/ui/typography';
 import PostFloatingButton from '../PostFloatingButton/PostFloatingButton';
+import NotionRendererWrap from '@/components/NotionPage/NotionRendererWrap';
+import SeriesButtons from '../SeriesButtons/SeriesButtons';
+import { SeriesNavigation } from '../SeriesNavigation/SeriesNavigation';
 
 interface PostDetailProps {
   post: PageBySlugResponse;
+  seriesPosts: NotionPage[];
 }
 
-const PostDetail = ({ post }: PostDetailProps) => {
+const PostDetail = ({ post, seriesPosts }: PostDetailProps) => {
   const title = post.page.properties.Title.title[0]?.plain_text;
   const excerpt = post.page.properties.Excerpt.rich_text[0]?.plain_text;
   const cover = post.page.properties.Thumbnail?.url;
+
+  const seriesNumber = post.page.properties.SeriesNumber?.number;
+  const series = post.page.properties.Series?.select?.name;
 
   return (
     <article className="flex gap-4 max-w-3xl w-full relative sm:px-0">
@@ -51,7 +53,7 @@ const PostDetail = ({ post }: PostDetailProps) => {
                   className="object-cover rounded-lg"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg backdrop-blur-sm">
+                <div className="flex flex-col gap-2 absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg backdrop-blur-sm">
                   <Typography
                     variant="h1"
                     className="text-white font-bold px-4 text-center whitespace-break-word text-3xl sm:text-4xl"
@@ -66,23 +68,12 @@ const PostDetail = ({ post }: PostDetailProps) => {
             {excerpt}
           </Typography>
           <div className="border-t border-gray-200 dark:border-gray-700" />
-
-          <section className="flex gap-2 items-center">
-            <div className="flex justify-center items-center gap-2">
-              <BrinceAvatar className={'w-8 h-8'} />
-              <Typography variant={'small'}>브린스</Typography>
-            </div>
-            <Typography
-              variant={'small'}
-              className="text-gray-500 dark:text-gray-400 before:content-['·'] before:mr-1"
-            >
-              {formatDistanceToNow(new Date(post.page.properties.Date.date?.start || ''), {
-                addSuffix: true,
-                locale: ko,
-              })}
-            </Typography>
-          </section>
           <div className="flex flex-wrap gap-2">
+            {/* {series &&
+              <Link href={`/series`} key={series}>
+                <TagBadge tag={series} />
+              </Link>
+            } */}
             {post.page.properties.Tags.multi_select.map((tag) => (
               <Link href={`/posts?tag=${tag.name}`} key={tag.name}>
                 <TagBadge tag={tag.name} />
@@ -91,14 +82,22 @@ const PostDetail = ({ post }: PostDetailProps) => {
           </div>
         </header>
         <div className="flex flex-col py-14 sm:py-10 gap-10">
-          <NotionPage recordMap={post.recordMap} />
-          <SimplifiedProfile />
+          {series && <SeriesNavigation
+            title={series}
+            posts={seriesPosts}
+            currentNumber={seriesNumber}
+          />}
+          <NotionRendererWrap recordMap={post.recordMap} />
         </div>
         <div className="lg:hidden mt-4 flex gap-4">
           <PostFloatingButton
             pageId={post.page.id}
           />
         </div>
+        {series && <SeriesButtons
+          posts={seriesPosts}
+          currentNumber={seriesNumber}
+        />}
         <Comments pageId={post.page.id} pageTitle={title || ''} />
       </div>
     </article>
