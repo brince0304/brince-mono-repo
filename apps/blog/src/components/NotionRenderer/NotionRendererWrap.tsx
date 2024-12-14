@@ -73,21 +73,19 @@ const NotionRendererWrap: React.FC<NotionPageProps> = ({ recordMap }) => {
   };
 
   return (
-    <div className='flex'>
-      <NotionRenderer
-        recordMap={recordMap}
-        fullPage={true}
-        darkMode={isDark}
-        disableHeader={true}
-        hideBlockId={true}
-        isShowingSearch={false}
-        pageTitle={false}
-        showTableOfContents={true}
-        showCollectionViewDropdown={false}
-        components={components}
-        forceCustomImages={true}
-      />
-    </div>
+    <NotionRenderer
+      recordMap={recordMap}
+      fullPage={true}
+      darkMode={isDark}
+      disableHeader={true}
+      hideBlockId={true}
+      isShowingSearch={false}
+      pageTitle={false}
+      showTableOfContents={true}
+      showCollectionViewDropdown={false}
+      components={components}
+      forceCustomImages={true}
+    />
   );
 };
 
