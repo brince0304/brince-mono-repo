@@ -7,7 +7,7 @@ import Image from 'next/image';
 import type { NotionPage, PageBySlugResponse } from '@/models/notion';
 import { Typography } from '@repo/ui/ui/typography';
 import PostFloatingButton from '../PostFloatingButton/PostFloatingButton';
-import NotionRendererWrap from '@/components/NotionPage/NotionRendererWrap';
+import NotionRendererWrap from '@/components/NotionRenderer/NotionRendererWrap';
 import SeriesButtons from '../SeriesButtons/SeriesButtons';
 import { SeriesNavigation } from '../SeriesNavigation/SeriesNavigation';
 
