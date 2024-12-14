@@ -38,7 +38,7 @@ async function getPosts() {
 }
 
 async function getPostsByParams(params: GetPostRequest) {
-  const { search, tag, category, sortBy = 'Date', sort = 'descending', pageSize = 10 } = params;
+  const { search, tag, category, sortBy = 'Date', sort = 'descending', pageSize = 10, series } = params;
 
   const baseFilter = {
     property: 'Published',
@@ -58,7 +58,9 @@ async function getPostsByParams(params: GetPostRequest) {
 
   const categoryFilter = category ? { property: 'Category', select: { equals: category } } : null;
 
-  const filters = [baseFilter, searchFilter, tagsFilter, categoryFilter].filter(
+  const seriesFilter = series ? { property: 'Series', select: { equals: series } } : null;
+
+  const filters = [baseFilter, searchFilter, tagsFilter, categoryFilter, seriesFilter].filter(
     (filter): filter is NonNullable<typeof filter> => filter !== null
   );
 
@@ -315,6 +317,37 @@ async function getAllCategories() {
   }
 }
 
+export const getPostSeries = async () => {
+  const response = await notion.databases.query({
+    database_id: POST_DATABASE_ID,
+    page_size: 100,
+    filter: {
+      and: [
+        {
+          property: 'Series',
+          select: {
+            is_not_empty: true,
+          },
+        },
+        {
+          property: 'Published',
+          checkbox: {
+            equals: true,
+          },
+        },
+      ],
+    },
+    sorts: [
+      {
+        property: 'Date',
+        direction: 'descending',
+      },
+    ],
+  });
+
+  return response.results;
+};
+
 export const notionClient = {
   getPosts,
   getPostsByParams,
@@ -326,4 +359,5 @@ export const notionClient = {
   updatePostLike,
   getAllTags,
   getAllCategories,
+  getPostSeries,
 };

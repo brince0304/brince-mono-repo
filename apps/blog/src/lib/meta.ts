@@ -146,3 +146,11 @@ export const generatePostsMetadata = () =>
     url: `${BLOG_URL}/posts`,
     canonicalUrl: `${BLOG_URL}/posts`,
   });
+
+export const generateSeriesMetadata = () =>
+  generateMetadata({
+    title: '포스트 시리즈',
+    description: BLOG_DESCRIPTION,
+    url: `${BLOG_URL}/series`,
+    canonicalUrl: `${BLOG_URL}/series`,
+  });

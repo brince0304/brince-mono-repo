@@ -12,6 +12,7 @@ import type { ReactNode } from 'react';
 const menuItems = [
   { name: '홈', path: '/' },
   { name: '포스트', path: '/posts' },
+  // { name: '시리즈', path: '/series' },
 ];
 
 export default function ClientLayout({

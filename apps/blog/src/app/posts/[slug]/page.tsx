@@ -41,6 +41,18 @@ export const revalidate = 3600;
 
 export default async function Post({ params }: { params: { slug: string } }) {
   const post = await notionClient.getPageBySlug(params.slug);
+  let seriesPosts: NotionPage[] = [];
+
+  if (post?.page.properties.Series) {
+    const seriesResponse = await notionClient.getPostsByParams({ series: post.page.properties.Series.select?.name });
+    seriesPosts = seriesResponse?.results.filter((page): page is NotionPage => 'properties' in page) ?? [];
+
+    seriesPosts.sort((a, b) => {
+      const aIndex = a.properties.SeriesNumber.number;
+      const bIndex = b.properties.SeriesNumber.number;
+      return aIndex - bIndex;
+    });
+  }
 
   if (!post?.page.properties.Published.checkbox) {
     notFound();
@@ -48,7 +60,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
 
   return (
     <div className="flex sm:mt-4 mt-5">
-      <PostDetail post={post as PageBySlugResponse} />
+      <PostDetail post={post as PageBySlugResponse} seriesPosts={seriesPosts} />
     </div>
   );
 }

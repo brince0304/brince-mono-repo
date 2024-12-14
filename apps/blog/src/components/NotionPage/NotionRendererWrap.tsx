@@ -5,7 +5,7 @@ import type React from 'react';
 import { NotionRenderer } from 'react-notion-x';
 import 'react-notion-x/src/styles.css';
 import { useTheme } from 'next-themes';
-import './NotionPage.style.css';
+import './NotionRendererWrap.style.css';
 import dynamic from 'next/dynamic';
 import Image, { type ImageProps } from 'next/image';
 import Link from 'next/link';
@@ -52,7 +52,7 @@ const CheckBox = (props: { isChecked: boolean, blockId?: string }) => {
   )
 }
 
-const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
+const NotionRendererWrap: React.FC<NotionPageProps> = ({ recordMap }) => {
   const { resolvedTheme } = useTheme();
   const isMounted = useIsMounted();
   const isDark = resolvedTheme === 'dark' && isMounted;
@@ -73,20 +73,22 @@ const NotionPage: React.FC<NotionPageProps> = ({ recordMap }) => {
   };
 
   return (
-    <NotionRenderer
-      recordMap={recordMap}
-      fullPage={true}
-      darkMode={isDark}
-      disableHeader={true}
-      hideBlockId={true}
-      isShowingSearch={false}
-      pageTitle={false}
-      showTableOfContents={true}
-      showCollectionViewDropdown={false}
-      components={components}
-      forceCustomImages={true}
-    />
+    <div className='flex'>
+      <NotionRenderer
+        recordMap={recordMap}
+        fullPage={true}
+        darkMode={isDark}
+        disableHeader={true}
+        hideBlockId={true}
+        isShowingSearch={false}
+        pageTitle={false}
+        showTableOfContents={true}
+        showCollectionViewDropdown={false}
+        components={components}
+        forceCustomImages={true}
+      />
+    </div>
   );
 };
 
-export default NotionPage;
+export default NotionRendererWrap;
