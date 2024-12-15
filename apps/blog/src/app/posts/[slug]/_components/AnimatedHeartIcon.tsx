@@ -1,7 +1,15 @@
 import { motion } from 'framer-motion';
 import { HeartIcon } from 'lucide-react';
 
-const AnimatedHeartIcon = () => {
+interface AnimatedHeartIconProps {
+  isLiked: boolean;
+}
+
+const AnimatedHeartIcon = ({ isLiked }: AnimatedHeartIconProps) => {
+  if (isLiked) {
+    return <HeartIcon className="w-4 h-4 text-red-500" />;
+  }
+
   return (
     <motion.div
       animate={{

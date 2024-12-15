@@ -1,7 +1,7 @@
 'use client';
 
 import { useLikePost } from '@/hooks/post/usePostService';
-import { HeartFilledIcon, ReloadIcon } from '@radix-ui/react-icons';
+import { ReloadIcon } from '@radix-ui/react-icons';
 import { Button } from '@repo/ui/ui/button';
 import { Typography } from '@repo/ui/ui/typography';
 import { useState } from 'react';
@@ -37,7 +37,7 @@ const LikeButton = wrap.Suspense({
       const [isClicked, setIsClicked] = useState(isLiked);
 
       const { mutate: likePost, isPending } = useLikePost(
-        { pageId, count: likeCount },
+        { pageId, currentLikeCount: likeCount },
         {
           onSuccess: () => {
             toast.success('좋아요를 눌렀어요 😊');
@@ -70,8 +70,7 @@ const LikeButton = wrap.Suspense({
           disabled={isPending}
         >
           <div className="flex items-center justify-center absolute inset-0 gap-1">
-            {!isPending && isClicked && <HeartFilledIcon className="w-4 h-4 text-red-500" />}
-            {!isPending && !isClicked && <AnimatedHeartIcon />}
+            {!isPending && <AnimatedHeartIcon isLiked={isClicked || isLiked} />}
             {isPending && <ReloadIcon className="animate-spin" />}
             <Typography className="xsmall">{likeCount}</Typography>
           </div>

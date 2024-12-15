@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@repo/ui/ui/button';
-import { HeartFilledIcon } from '@radix-ui/react-icons';
 import { Loader2, Share2Icon } from 'lucide-react';
 import { Typography } from '@repo/ui/ui/typography';
 import { useCallback } from 'react';
@@ -17,7 +16,7 @@ interface ActionButtonsProps {
 
 export function ActionButtons({ pageId, likeCount, isLiked }: ActionButtonsProps) {
   const { mutate: likePost, isPending } = useLikePost(
-    { pageId, count: likeCount },
+    { pageId, currentLikeCount: likeCount },
     {
       onSuccess: () => {
         toast.success('좋아요를 눌렀어요 😊');
@@ -62,13 +61,7 @@ export function ActionButtons({ pageId, likeCount, isLiked }: ActionButtonsProps
         type="button"
       >
         {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
-        {!isPending && (
-          isLiked ? (
-            <HeartFilledIcon className="w-4 h-4 text-red-500" />
-          ) : (
-            <AnimatedHeartIcon />
-          )
-        )}
+        {!isPending && <AnimatedHeartIcon isLiked={isLiked} />}
         <Typography variant={'small'} className="font-bold">
           {likeCount}
         </Typography>

@@ -4,7 +4,7 @@ import type { PostLikeRequest, GetPostRequest, GetTagsResponse } from '@/models/
 import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import type { PostLikeResponse } from '@/models/post';
 
-const postLikePage = ({ pageId, count }: PostLikeRequest) => {
+const postLikePage = ({ pageId, currentLikeCount: count }: PostLikeRequest) => {
   return axiosClient.post('/likes', { pageId, count });
 };
 

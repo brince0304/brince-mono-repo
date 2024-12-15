@@ -2,7 +2,7 @@ import type { MyProperties } from './notion';
 
 export interface PostLikeRequest {
   pageId: string;
-  count: number;
+  currentLikeCount: number;
 }
 export interface GetPostRequest {
   page?: number;
