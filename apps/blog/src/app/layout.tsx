@@ -43,9 +43,6 @@ export default function RootLayout({
                 code={500}
                 message="알수없는 오류가 발생했어요"
                 emoji="🙅"
-                onClick={() => {
-                  window.location.href = '/';
-                }}
               />
             }
           >

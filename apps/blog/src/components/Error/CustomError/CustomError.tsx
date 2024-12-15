@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@repo/ui/ui/button';
 import { Typography } from '@repo/ui/ui/typography';
 import type React from 'react';
@@ -13,7 +15,7 @@ const CustomError: React.FC<CustomErrorProps> = ({
   code,
   message,
   emoji = '🤔',
-  onClick = () => {},
+  onClick = () => { window.location.href = '/'; },
 }) => {
   return (
     <div className="flex flex-col items-center justify-center text-gray-900 dark:text-white gap-4 pt-16">
