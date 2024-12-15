@@ -1,3 +1,6 @@
+'use client';
+
+import { useIsMounted } from '@toss/react';
 import { motion } from 'framer-motion';
 import { HeartIcon } from 'lucide-react';
 
@@ -6,6 +9,10 @@ interface AnimatedHeartIconProps {
 }
 
 const AnimatedHeartIcon = ({ isLiked }: AnimatedHeartIconProps) => {
+  const isMounted = useIsMounted();
+
+  if (!isMounted) return null;
+
   if (isLiked) {
     return <HeartIcon className="w-4 h-4 text-red-500" />;
   }

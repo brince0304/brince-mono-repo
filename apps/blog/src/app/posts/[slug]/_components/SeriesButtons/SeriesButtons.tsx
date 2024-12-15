@@ -60,7 +60,7 @@ const SeriesButtons = ({ posts, currentNumber }: SeriesButtonsProps) => {
         asChild
         className="flex-1 h-auto py-3 sm:py-4"
       >
-        <Link href={`/posts/${slug}`} className="flex items-center gap-4">
+        <Link href={`/posts/${slug}`} className="flex items-center gap-4" scroll={true}>
           {content}
         </Link>
       </Button>
