@@ -1,7 +1,7 @@
 'use client';
 
 import { useLikePost } from '@/hooks/post/usePostService';
-import { HeartFilledIcon, ReloadIcon } from '@radix-ui/react-icons';
+import { ReloadIcon } from '@radix-ui/react-icons';
 import { Button } from '@repo/ui/ui/button';
 import { Typography } from '@repo/ui/ui/typography';
 import { useState } from 'react';
@@ -10,7 +10,6 @@ import AnimatedHeartIcon from '../AnimatedHeartIcon';
 import { wrap } from '@suspensive/react';
 import { PostQueryOptions } from '@/hooks/post';
 import { SuspenseQuery } from '@suspensive/react-query';
-import { Heart } from 'lucide-react';
 
 interface LikeButtonProps {
   className?: string;
