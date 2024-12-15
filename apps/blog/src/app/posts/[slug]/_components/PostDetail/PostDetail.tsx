@@ -69,11 +69,11 @@ const PostDetail = ({ post, seriesPosts }: PostDetailProps) => {
           </Typography>
           <div className="border-t border-gray-200 dark:border-gray-700" />
           <div className="flex flex-wrap gap-2">
-            {/* {series &&
-              <Link href={`/series`} key={series}>
+            {series &&
+              <Link href={`/series/${series}`} key={series}>
                 <TagBadge tag={series} />
               </Link>
-            } */}
+            }
             {post.page.properties.Tags.multi_select.map((tag) => (
               <Link href={`/posts?tag=${tag.name}`} key={tag.name}>
                 <TagBadge tag={tag.name} />
