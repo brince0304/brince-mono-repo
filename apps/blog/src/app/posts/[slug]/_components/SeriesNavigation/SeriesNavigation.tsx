@@ -28,7 +28,7 @@ export function SeriesNavigation({ title, posts, className, currentNumber }: Ser
         </div>
         {/* 전체 목록 토글 */}
         <details className="mt-4">
-          <summary className="cursor-pointer text-sm text-muted-foreground hover:text-primary transition-colors flex justify-between items-center">
+          <summary className="cursor-pointer text-sm text-muted-foreground hover:text-primary transition-colors flex justify-between items-center [&::-webkit-details-marker]:hidden">
             시리즈 전체 보기
             <div className="flex justify-between w-full max-w-[80px]">
               <Button
