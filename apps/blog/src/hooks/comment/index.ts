@@ -16,7 +16,6 @@ export const CommentQueryOptions = {
     queryOptions({
       queryKey: CommentQueryKeys.getComments(pageId),
       queryFn: () => commentService.getComments(pageId),
-      select: (res) => res.data,
       enabled: !!pageId,
       retry: false,
     }),

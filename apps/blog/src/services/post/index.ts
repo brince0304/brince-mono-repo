@@ -4,26 +4,36 @@ import type { PostLikeRequest, GetPostRequest, GetTagsResponse } from '@/models/
 import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import type { PostLikeResponse } from '@/models/post';
 
-const postLikePage = ({ pageId, currentLikeCount: count }: PostLikeRequest) => {
-  return axiosClient.post('/likes', { pageId, count });
+const postLikePage = async ({ pageId, currentLikeCount: count }: PostLikeRequest) => {
+  const { data } = await axiosClient.post<PostLikeResponse>('/likes', { pageId, count });
+  return data;
 };
 
-const getPostLike = (pageId: string) => {
-  return axiosClient.get<PostLikeResponse>('/likes', {
+const getPostLike = async (pageId: string) => {
+  const { data } = await axiosClient.get<PostLikeResponse>('/likes', {
     params: { pageId },
   });
+  return data;
 };
 
-const getPosts = (getPostRequest?: GetPostRequest) => {
-  return axiosClient.get<QueryDatabaseResponse>('/posts', { params: getPostRequest });
+const getPosts = async (getPostRequest?: GetPostRequest) => {
+  const { data } = await axiosClient.get<QueryDatabaseResponse>('/posts', { params: getPostRequest });
+  return data;
 };
 
-const getTags = (nextCursor?: string | undefined) => {
-  return axiosClient.get<GetTagsResponse>('/tags', { params: { nextCursor } });
+const getTags = async (nextCursor?: string | undefined) => {
+  const { data } = await axiosClient.get<GetTagsResponse>('/tags', { params: { nextCursor } });
+  return data;
 };
 
-const getPostBySlug = (slug: string) => {
-  return axiosClient.get<PageBySlugResponse>(`/posts/${slug}`);
+const getPostBySlug = async (slug: string) => {
+  const { data } = await axiosClient.get<PageBySlugResponse>(`/posts/${slug}`);
+  return data;
+};
+
+const getPostCategories = async () => {
+  const { data } = await axiosClient.get<string[]>('/categories');
+  return data;
 };
 
 export const postService = {
@@ -32,4 +42,5 @@ export const postService = {
   getTags,
   getPostBySlug,
   getPostLike,
+  getPostCategories,
 };

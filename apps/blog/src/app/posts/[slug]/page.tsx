@@ -7,6 +7,8 @@ import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpo
 import { generateMetadata as generateDefaultMetadata } from '@/lib/meta';
 import { notionClient } from '@/lib/notion/notion';
 import { notFound } from 'next/navigation';
+import QueryHydrationBoundary from '@/components/QueryHydrationBoundary';
+import { PostQueryOptions } from '@/hooks/post';
 
 export async function generateMetadata({
   params,
@@ -60,7 +62,9 @@ export default async function Post({ params }: { params: { slug: string } }) {
 
   return (
     <div className="flex sm:mt-4 mt-5">
-      <PostDetail post={post as PageBySlugResponse} seriesPosts={seriesPosts} />
+      <QueryHydrationBoundary queryOptions={PostQueryOptions.getPostLike(post.page.id)}>
+        <PostDetail post={post as PageBySlugResponse} seriesPosts={seriesPosts} />
+      </QueryHydrationBoundary>
     </div>
   );
 }
