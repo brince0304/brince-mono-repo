@@ -1,14 +1,11 @@
 import { serverFetcher } from '@/lib/client';
-import { generateBlogPostMetadata } from '@/lib/meta';
-import type { NotionPage, PageBySlugResponse } from '@/models/notion';
-import type { Metadata } from 'next';
-import PostDetail from './_components/PostDetail/PostDetail';
-import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
-import { generateMetadata as generateDefaultMetadata } from '@/lib/meta';
+import { generateBlogPostMetadata, generateMetadata as generateDefaultMetadata } from '@/lib/meta';
 import { notionClient } from '@/lib/notion/notion';
+import type { NotionPage, PageBySlugResponse } from '@/models/notion';
+import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import QueryHydrationBoundary from '@/components/QueryHydrationBoundary';
-import { PostQueryOptions } from '@/hooks/post';
+import PostDetail from './_components/PostDetail/PostDetail';
 
 export async function generateMetadata({
   params,
@@ -46,8 +43,11 @@ export default async function Post({ params }: { params: { slug: string } }) {
   let seriesPosts: NotionPage[] = [];
 
   if (post?.page.properties.Series) {
-    const seriesResponse = await notionClient.getPostsByParams({ series: post.page.properties.Series.select?.name });
-    seriesPosts = seriesResponse?.results.filter((page): page is NotionPage => 'properties' in page) ?? [];
+    const seriesResponse = await notionClient.getPostsByParams({
+      series: post.page.properties.Series.select?.name,
+    });
+    seriesPosts =
+      seriesResponse?.results.filter((page): page is NotionPage => 'properties' in page) ?? [];
 
     seriesPosts.sort((a, b) => {
       const aIndex = a.properties.SeriesNumber.number;
@@ -62,9 +62,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
 
   return (
     <div className="flex sm:mt-4 mt-5">
-      <QueryHydrationBoundary queryOptions={PostQueryOptions.getPostLike(post.page.id)}>
-        <PostDetail post={post as PageBySlugResponse} seriesPosts={seriesPosts} />
-      </QueryHydrationBoundary>
+      <PostDetail post={post as PageBySlugResponse} seriesPosts={seriesPosts} />
     </div>
   );
 }

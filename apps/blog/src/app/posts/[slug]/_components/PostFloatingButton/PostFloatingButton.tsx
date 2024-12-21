@@ -1,10 +1,12 @@
-'use client'
+'use client';
 
+import { Button } from '@repo/ui/ui/button';
+import { HeartIcon } from 'lucide-react';
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
+import CommentDrawerTrigger from '../Comments/CommentDrawerTrigger';
+import CommentSheetTrigger from '../Comments/CommentSheetTrigger';
 import LikeButton from '../LikeButton/LikeButton';
 import ShareButton from '../ShareButton/ShareButton';
-import CommentSheetTrigger from '../Comments/CommentSheetTrigger';
-import { useEffect, useState, useRef, useCallback } from 'react';
-import CommentDrawerTrigger from '../Comments/CommentDrawerTrigger';
 
 interface LikeAndShareProps {
   pageId: string;
@@ -12,9 +14,23 @@ interface LikeAndShareProps {
   className?: string;
 }
 
+const LikeButtonFallback = ({ isMobile }: { isMobile: boolean }) => {
+  return (
+    <Button
+      variant={isMobile ? 'ghost' : 'outline'}
+      className={`w-12 h-12 rounded-full ${isMobile ? 'w-8 h-8' : ''}`}
+      disabled
+    >
+      <HeartIcon className={`w-6 h-6 ${isMobile ? 'w-4 h-4' : ''}`} />
+    </Button>
+  );
+};
+
 const PostFloatingButton = ({ pageId, column = false, className = '' }: LikeAndShareProps) => (
   <div className={`flex ${column ? 'flex-col' : ''} gap-2 ${className}`}>
-    <LikeButton pageId={pageId} />
+    <Suspense fallback={<LikeButtonFallback isMobile={false} />}>
+      <LikeButton pageId={pageId} />
+    </Suspense>
     <CommentSheetTrigger pageId={pageId} pageTitle={''} />
     <ShareButton />
   </div>
@@ -66,16 +82,19 @@ const MobilePostFloatingButton = ({ pageId }: { pageId: string }) => {
 
   return (
     <div
-      className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-transform duration-300 ${isVisible ? 'translate-y-0' : 'translate-y-[200%]'
-        }`}
+      className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-transform duration-300 ${
+        isVisible ? 'translate-y-0' : 'translate-y-[200%]'
+      }`}
     >
       <div className="flex items-center gap-2 bg-background/80 backdrop-blur-sm rounded-full p-2 shadow-lg">
-        <LikeButton className="w-10 h-10" variant="ghost" pageId={pageId} />
-        <CommentDrawerTrigger pageId={pageId} pageTitle={''} className="w-10 h-10" variant="ghost" />
-        <ShareButton variant="ghost" className="w-10 h-10" />
+        <Suspense fallback={<LikeButtonFallback isMobile />}>
+          <LikeButton className="w-8 h-8" variant="ghost" pageId={pageId} />
+        </Suspense>
+        <CommentDrawerTrigger pageId={pageId} pageTitle={''} className="w-8 h-8" variant="ghost" />
+        <ShareButton variant="ghost" className="w-8 h-8" />
       </div>
     </div>
   );
 };
 
-export { PostFloatingButton, MobilePostFloatingButton };
+export { MobilePostFloatingButton, PostFloatingButton };
