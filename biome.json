@@ -6,6 +6,7 @@
   "linter": {
     "enabled": true,
     "rules": {
+      "recommended": true,
       "suspicious": {
         "noExplicitAny": "error",
         "noConsoleLog": {
@@ -43,6 +44,7 @@
   },
   "javascript": {
     "formatter": {
+      "enabled": true,
       "quoteStyle": "single",
       "trailingCommas": "es5"
     }

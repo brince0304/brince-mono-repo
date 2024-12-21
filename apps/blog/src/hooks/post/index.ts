@@ -1,8 +1,6 @@
 import type { GetPostRequest } from '@/models/post';
 import { postService } from '@/services/post';
-import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
-
 
 const DEFAULT_POST_KEY = 'post';
 
