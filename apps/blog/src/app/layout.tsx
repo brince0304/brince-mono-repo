@@ -11,6 +11,7 @@ import ProgressBar from '@/components/ProgressBar/ProgressBar';
 import { Header } from './_components/Header';
 import ToastContainerWrapper from '@/components/Toast/ToastContainer/ToastContainerWrapper';
 import { Footer } from '@repo/ui/Footer';
+import { OverlayProviderWrap } from '@/components/OverlayProvider/OverlayProviderWrap';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -51,7 +52,9 @@ export default function RootLayout({
                 <ProgressBar />
                 <Header menuItems={menuItems} />
                 <main className="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">
-                  {children}
+                  <OverlayProviderWrap>
+                    {children}
+                  </OverlayProviderWrap>
                   <ToastContainerWrapper />
                 </main>
                 <Footer />

@@ -20,16 +20,8 @@ const PostSearch = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const debouncedSearch = useDebounce((value: string) => {
-    if (value) {
-      router.replace({
-        parameters: { search: value, tag, category },
-      });
-
-      return;
-    }
-
     router.replace({
-      parameters: { search: undefined, tag, category },
+      parameters: { search: value, tag, category },
     });
   }, 300);
 
@@ -37,22 +29,6 @@ const PostSearch = () => {
     const value = e.target.value;
     setInput(value);
     debouncedSearch(value);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      if (input) {
-        router.replace({
-          parameters: { search: input, tag, category },
-        });
-
-        return;
-      }
-
-      router.replace({
-        parameters: { search: undefined, tag, category },
-      });
-    }
   };
 
   const handleClear = () => {
@@ -71,7 +47,6 @@ const PostSearch = () => {
         isLoading={isMounted && isPostFetching > 0}
         value={input}
         onChange={handleInputChange}
-        onKeyDown={handleKeyDown}
         onClear={input ? handleClear : undefined}
         ref={inputRef}
       />

@@ -65,7 +65,7 @@ const CommentForm = memo(({ pageTitle, pageId, parentId }: Omit<CommentRequestPa
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(handleSubmitForm)} className="space-y-4 border-t pt-4" aria-label="댓글 등록">
+      <form onSubmit={handleSubmit(handleSubmitForm)} className="space-y-4" aria-label="댓글 등록">
         <div className="flex items-start space-x-4">
           <CommentAvatar handleAvatarChange={handleAvatarChange} currentAvatar={currentAvatar} />
           <div className="flex-grow space-y-2">
@@ -90,7 +90,7 @@ const CommentForm = memo(({ pageTitle, pageId, parentId }: Omit<CommentRequestPa
             />
             <div className="flex justify-between">
               <Typography variant={'muted'} className={cn(errorMessage && 'text-red-400')}>
-                {errorMessage || '아바타를 클릭해서 변경해보세요 💡'}
+                {errorMessage || '아바타를 클릭해보세요 💡'}
               </Typography>
               <Button disabled={isPending} type={'submit'} variant={'outline'} size={'sm'}>
                 {parentId ? '답글 등록' : '등록'}

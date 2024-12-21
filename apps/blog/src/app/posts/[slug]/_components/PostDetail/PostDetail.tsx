@@ -1,15 +1,16 @@
 'use client';
 
-import Comments from '../Comments/Comments';
 import { TagBadge } from '@repo/ui/TagBadge';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { NotionPage, PageBySlugResponse } from '@/models/notion';
 import { Typography } from '@repo/ui/ui/typography';
-import PostFloatingButton from '../PostFloatingButton/PostFloatingButton';
 import NotionRendererWrap from '@/components/NotionRenderer/NotionRendererWrap';
 import SeriesButtons from '../SeriesButtons/SeriesButtons';
 import { SeriesNavigation } from '../SeriesNavigation/SeriesNavigation';
+import { usePrefetchQuery } from '@tanstack/react-query';
+import { PostQueryOptions } from '@/hooks/post';
+import { MobilePostFloatingButton, PostFloatingButton } from '../PostFloatingButton/PostFloatingButton';
 
 interface PostDetailProps {
   post: PageBySlugResponse;
@@ -17,6 +18,8 @@ interface PostDetailProps {
 }
 
 const PostDetail = ({ post, seriesPosts }: PostDetailProps) => {
+  usePrefetchQuery(PostQueryOptions.getPostLike(post.page.id))
+
   const title = post.page.properties.Title.title[0]?.plain_text;
   const excerpt = post.page.properties.Excerpt.rich_text[0]?.plain_text;
   const cover = post.page.properties.Thumbnail?.url;
@@ -89,16 +92,13 @@ const PostDetail = ({ post, seriesPosts }: PostDetailProps) => {
           />}
           <NotionRendererWrap recordMap={post.recordMap} />
         </div>
-        <div className="lg:hidden mt-4 flex gap-4">
-          <PostFloatingButton
-            pageId={post.page.id}
-          />
+        <div className="sm:hidden">
+          <MobilePostFloatingButton pageId={post.page.id} />
         </div>
         {series && <SeriesButtons
           posts={seriesPosts}
           currentNumber={seriesNumber}
         />}
-        <Comments pageId={post.page.id} pageTitle={title || ''} />
       </div>
     </article>
   );
