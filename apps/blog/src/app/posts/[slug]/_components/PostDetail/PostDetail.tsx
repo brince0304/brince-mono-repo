@@ -21,7 +21,6 @@ interface PostDetailProps {
 
 const PostDetail = ({ post, seriesPosts }: PostDetailProps) => {
   const title = post.page.properties.Title.title[0]?.plain_text;
-  const excerpt = post.page.properties.Excerpt.rich_text[0]?.plain_text;
   const cover = post.page.properties.Thumbnail?.url;
 
   const seriesNumber = post.page.properties.SeriesNumber?.number;
