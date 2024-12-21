@@ -1,9 +1,9 @@
-import { motion } from "framer-motion";
-import { Avatar, AvatarImage } from "@repo/ui/ui/avatar";
-import { RefreshCwIcon } from "lucide-react";
-import { getAvatarUrl } from "../Comments/Comment.util";
-import { memo, useState } from "react";
-import { useThrottle } from "@toss/react";
+import { motion } from 'framer-motion';
+import { Avatar, AvatarImage } from '@repo/ui/ui/avatar';
+import { RefreshCwIcon } from 'lucide-react';
+import { getAvatarUrl } from '../Comments/Comment.util';
+import { memo, useState } from 'react';
+import { useThrottle } from '@toss/react';
 
 interface CommentAvatarProps {
   handleAvatarChange: (setIsLoading: (isLoading: boolean) => void) => () => void;
@@ -23,15 +23,12 @@ const CommentAvatar = memo(({ handleAvatarChange, currentAvatar }: CommentAvatar
       whileTap={{ scale: 0.95 }}
       transition={{ duration: 0.3 }}
     >
-      <Avatar
-        className="cursor-pointer group relative"
-        onClick={throttledHandleAvatarChange}
-      >
+      <Avatar className="cursor-pointer group relative" onClick={throttledHandleAvatarChange}>
         <motion.div
           className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500 rounded-full"
           animate={{
             scale: isLoading ? 0.8 : 1,
-            opacity: isLoading ? 0.5 : 1
+            opacity: isLoading ? 0.5 : 1,
           }}
           transition={{ duration: 0.3 }}
         />
@@ -41,7 +38,7 @@ const CommentAvatar = memo(({ handleAvatarChange, currentAvatar }: CommentAvatar
         <motion.div
           animate={{
             scale: isLoading ? 0.8 : 1,
-            opacity: isLoading ? 0.5 : 1
+            opacity: isLoading ? 0.5 : 1,
           }}
           transition={{ duration: 0.3 }}
         >
@@ -49,7 +46,7 @@ const CommentAvatar = memo(({ handleAvatarChange, currentAvatar }: CommentAvatar
         </motion.div>
       </Avatar>
     </motion.div>
-  )
-})
+  );
+});
 
 export default CommentAvatar;
