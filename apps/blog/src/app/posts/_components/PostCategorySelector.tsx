@@ -37,6 +37,7 @@ const PostCategorySelector = wrap.Suspense({ fallback: null }).on(() => {
                   {category}
                 </SelectItem>
               ))}
+              <SelectItem value="series">시리즈</SelectItem>
             </SelectContent>
           </Select>
         );

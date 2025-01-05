@@ -1,4 +1,4 @@
-import type { MyProperties } from './notion';
+import type { NotionProperty } from '@/types/notion';
 
 export interface PostLikeRequest {
   pageId: string;
@@ -8,7 +8,7 @@ export interface GetPostRequest {
   page_size?: number;
   start_cursor?: string | undefined;
   sort?: 'ascending' | 'descending';
-  sort_by?: MyProperties;
+  sort_by?: NotionProperty;
   search?: string;
   tag?: string;
   category?: string;
