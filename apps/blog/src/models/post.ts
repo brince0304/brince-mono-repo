@@ -5,10 +5,10 @@ export interface PostLikeRequest {
   currentLikeCount: number;
 }
 export interface GetPostRequest {
-  page?: number;
-  pageSize?: number;
+  page_size?: number;
+  start_cursor?: string | undefined;
   sort?: 'ascending' | 'descending';
-  sortBy?: MyProperties;
+  sort_by?: MyProperties;
   search?: string;
   tag?: string;
   category?: string;
@@ -17,7 +17,7 @@ export interface GetPostRequest {
 
 export interface GetTagsResponse {
   tags: string[];
-  nextCursor: null | undefined;
+  nextCursor: string | null;
 }
 
 export interface PostLikeResponse {

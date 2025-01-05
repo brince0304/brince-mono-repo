@@ -4,11 +4,17 @@ interface QueryHydrationBoundaryProps {
   children: React.ReactNode;
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   queryOptions: any;
+  isInfiniteQuery?: boolean;
 }
 
-const QueryHydrationBoundary = async ({ children, queryOptions }: QueryHydrationBoundaryProps) => {
+const QueryHydrationBoundary = async ({ children, queryOptions, isInfiniteQuery }: QueryHydrationBoundaryProps) => {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(queryOptions);
+
+  if (isInfiniteQuery) {
+    await queryClient.prefetchInfiniteQuery(queryOptions);
+  } else {
+    await queryClient.prefetchQuery(queryOptions);
+  }
 
   const dehydratedState = dehydrate(queryClient);
 

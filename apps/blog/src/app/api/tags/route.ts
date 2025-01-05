@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  const nextCursor = searchParams.get('nextCursor') ?? undefined;
+  const nextCursor = searchParams.get('next_cursor') ?? undefined;
 
   try {
     const response = await notionClient.getAllTags(nextCursor);

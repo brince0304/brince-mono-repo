@@ -22,17 +22,26 @@ export const PostQueryKeys = {
 };
 
 export const PostQueryOptions = {
-  getPosts: (getPostRequest?: GetPostRequest) =>
-    queryOptions({
+  getInfinitePosts: (getPostRequest?: GetPostRequest) => {
+    return infiniteQueryOptions({
       queryKey: PostQueryKeys.getPosts(getPostRequest),
-      queryFn: () => postService.getPosts(getPostRequest),
-    }),
+      queryFn: ({ pageParam }) => postService.getPosts(getPostRequest, pageParam),
+      getNextPageParam: (lastPage) => lastPage.next_cursor ?? null,
+      initialPageParam: '',
+      select: (response) => {
+        return {
+          pages: response.pages.map((page) => page.results),
+          pageParams: response.pages.map((page) => page.next_cursor),
+        };
+      },
+    });
+  },
   getInfiniteTags: () =>
     infiniteQueryOptions({
       queryKey: PostQueryKeys.getTags(),
       queryFn: ({ pageParam }) => postService.getTags(pageParam),
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
-      initialPageParam: undefined,
+      getNextPageParam: (lastPage) => lastPage.nextCursor ?? null,
+      initialPageParam: '',
       select: (response) => ({
         pages: response.pages.map((page) => page.tags),
         pageParams: response.pages.map((page) => page.nextCursor),
