@@ -24,7 +24,6 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
   date,
   tags,
   imageUrl,
-  series,
 }) => {
   const router = useRouteWithParameters();
 
@@ -40,12 +39,6 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
 
     router.push({ baseUrl: '/posts', parameters: { tag } });
   };
-
-  // const handleSeriesClick = (series: string) => (e: React.MouseEvent) => {
-  //   e.preventDefault();
-
-  //   router.push({ baseUrl: '/series', parameters: { series } });
-  // };
 
   return (
     <li className="group">
@@ -75,7 +68,7 @@ const HorizontalPostCard: React.FC<PostCardProps> = ({
             <div className="flex flex-col gap-3 mt-3">
               {tags.length > 0 && (
                 <ul className="flex flex-wrap gap-1.5" aria-label="태그 목록">
-                  {series && <TagBadge tag={series} onClick={() => { }} />}
+                  {/* {series && <TagBadge tag={series} onClick={() => { }} />} */}
                   {tags.map((tag) => (
                     <li key={tag} className="hover:opacity-80">
                       <TagBadge tag={tag} onClick={handleTagClick(tag)} />

@@ -15,6 +15,9 @@ const nextConfig = {
       {
         hostname: 'www.notion.so',
       },
+      {
+        hostname: 'res.cloudinary.com',
+      },
     ],
   },
   transpilePackages: ['@repo/ui'],
