@@ -22,8 +22,8 @@ export const PostQueryKeys = {
 };
 
 export const PostQueryOptions = {
-  getInfinitePosts: (getPostRequest?: GetPostRequest) =>
-    infiniteQueryOptions({
+  getInfinitePosts: (getPostRequest?: GetPostRequest) => {
+    return infiniteQueryOptions({
       queryKey: PostQueryKeys.getPosts(getPostRequest),
       queryFn: ({ pageParam }) => postService.getPosts(getPostRequest, pageParam),
       getNextPageParam: (lastPage) => lastPage.next_cursor ?? null,
@@ -34,7 +34,8 @@ export const PostQueryOptions = {
           pageParams: response.pages.map((page) => page.next_cursor),
         };
       },
-    }),
+    });
+  },
   getInfiniteTags: () =>
     infiniteQueryOptions({
       queryKey: PostQueryKeys.getTags(),

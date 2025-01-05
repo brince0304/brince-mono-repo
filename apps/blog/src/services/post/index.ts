@@ -21,8 +21,8 @@ const getPosts = async (getPostRequest?: GetPostRequest, startCursor: string | u
   return data;
 };
 
-const getTags = async (nextCursor?: string | undefined ) => {
-  const { data } = await axiosClient.get<GetTagsResponse>('/tags', { params: { nextCursor } });
+const getTags = async (nextCursor?: string | undefined) => {
+  const { data } = await axiosClient.get<GetTagsResponse>('/tags', { params: { next_cursor: nextCursor } });
   return data;
 };
 

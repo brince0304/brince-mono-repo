@@ -38,7 +38,7 @@ async function getPosts() {
 }
 
 async function getPostsByParams(params: GetPostRequest) {
-  const { search, tag, category, sortBy = 'Date', sort = 'descending', pageSize = 10, series, start_cursor } = params;
+  const { search, tag, category, sort_by = 'Date', sort = 'descending', page_size = 10, series, start_cursor } = params;
 
   const baseFilter = {
     property: 'Published',
@@ -68,9 +68,9 @@ async function getPostsByParams(params: GetPostRequest) {
     return await notion.databases.query({
       database_id: POST_DATABASE_ID,
       filter: { and: filters },
-      sorts: [{ property: sortBy, direction: sort }],
-      page_size: pageSize,
-      start_cursor: start_cursor,
+      sorts: [{ property: sort_by, direction: sort }],
+      page_size: page_size,
+      start_cursor: start_cursor ? start_cursor : undefined,
     });
   } catch (error) {
     console.error('getPostsByParams error', error);
@@ -267,7 +267,7 @@ async function getAllTags(nextCursor?: string) {
   try {
     const response = await notion.databases.query({
       database_id: POST_DATABASE_ID,
-      start_cursor: nextCursor as string | undefined,
+      start_cursor: nextCursor ? nextCursor : undefined,
       page_size: 3,
       filter: {
         property: 'Tags',
