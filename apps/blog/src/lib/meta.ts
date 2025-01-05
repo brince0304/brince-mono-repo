@@ -19,15 +19,30 @@ interface MetadataBase {
 }
 
 interface SchemaOrgArticle {
+  '@context': string;
   '@type': string;
   headline: string;
+  description?: string;
+  image?: string;
   datePublished?: string;
   dateModified?: string;
   author?: {
     '@type': string;
     name: string;
   };
+  publisher?: {
+    '@type': string;
+    name: string;
+    logo?: {
+      '@type': string;
+      url: string;
+    };
+  };
   keywords?: string;
+  mainEntityOfPage: {
+    '@type': string;
+    '@id': string;
+  };
 }
 
 interface GenerateMetadataOptions extends Partial<MetadataBase> {
@@ -58,8 +73,10 @@ export function generateMetadata({
   url = DEFAULT_METADATA.url,
   canonicalUrl,
   openGraph,
+  schema,
 }: GenerateMetadataOptions = {}): Metadata {
   const finalTitle = title === BLOG_TITLE ? title : `${title} | ${BLOG_TITLE}`;
+  const finalUrl = canonicalUrl || url;
 
   return {
     title: finalTitle,
@@ -67,29 +84,66 @@ export function generateMetadata({
     keywords,
     authors: [{ name: author }],
     publisher: author,
+    creator: author,
     icons: {
-      icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+      icon: [
+        { url: '/icon.svg', type: 'image/svg+xml' },
+        { url: '/favicon.ico', sizes: 'any' },
+      ],
+      apple: [{ url: '/apple-touch-icon.png' }],
     },
-    robots: 'index, follow',
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title: finalTitle,
       description,
-      url,
+      url: finalUrl,
       siteName: BLOG_TITLE,
       locale: 'ko_KR',
       type,
-      images: imageUrl,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: finalTitle,
+        },
+      ],
       ...openGraph,
     },
     twitter: {
       card: 'summary_large_image',
       title: finalTitle,
       description,
-      images: imageUrl,
+      images: [
+        {
+          url: imageUrl,
+          alt: finalTitle,
+        },
+      ],
+      creator: `@${author}`,
+      site: `@${author}`,
     },
     alternates: {
-      canonical: canonicalUrl || url,
+      canonical: finalUrl,
+      languages: {
+        'ko-KR': finalUrl,
+      },
     },
+    other: schema
+      ? {
+          'script:ld+json': JSON.stringify(schema),
+        }
+      : {},
   };
 }
 
@@ -105,13 +159,41 @@ export function generateBlogPostMetadata(post: NotionPage): Metadata {
   const tags = post.properties.Tags?.multi_select?.map((tag) => tag.name) || [];
   const slug = post.properties.Slug?.rich_text[0]?.plain_text;
   const imageUrl = post.properties.Thumbnail?.url || DEFAULT_METADATA.imageUrl;
+  const postUrl = `${BLOG_URL}/posts/${slug}`;
+
+  const schema: SchemaOrgArticle = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    image: imageUrl,
+    datePublished: publishedTime,
+    dateModified: modifiedTime,
+    author: {
+      '@type': 'Person',
+      name: BLOG_AUTHOR,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: BLOG_TITLE,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${BLOG_URL}/icon.svg`,
+      },
+    },
+    keywords: tags.join(','),
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': postUrl,
+    },
+  };
 
   return generateMetadata({
     title,
     description,
     keywords: tags.join(', ') || DEFAULT_METADATA.keywords,
-    url: `${BLOG_URL}/posts/${slug}`,
-    canonicalUrl: `${BLOG_URL}/posts/${slug}`,
+    url: postUrl,
+    canonicalUrl: postUrl,
     imageUrl,
     type: 'article',
     openGraph: {
@@ -122,17 +204,7 @@ export function generateBlogPostMetadata(post: NotionPage): Metadata {
       tags,
       section: post.properties.Category?.select?.name || 'Blog',
     },
-    schema: {
-      '@type': 'BlogPosting',
-      headline: title,
-      datePublished: publishedTime,
-      dateModified: modifiedTime,
-      author: {
-        '@type': 'Person',
-        name: BLOG_AUTHOR,
-      },
-      keywords: tags.join(','),
-    },
+    schema,
   });
 }
 

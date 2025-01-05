@@ -1,12 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { BrinceAvatar } from './BrinceAvatar';
-import { Card, CardContent } from './ui/card';
-import { BLOG_OWNER, BLOG_OWNER_JOB, GITHUB_URL, LINKEDIN_URL } from '../lib/constants';
+import { BrinceAvatar } from '@repo/ui/components/BrinceAvatar';
+import { Card, CardContent } from '@repo/ui/components/ui/card';
 import { GithubIcon, LinkedinIcon } from 'lucide-react';
+import { BLOG_OWNER, BLOG_OWNER_JOB, GITHUB_URL, LINKEDIN_URL } from '@repo/ui/libs/constants';
 
-const SimplifiedProfile = () => {
+const SimplifiedProfileCard = () => {
   return (
     <Card className="w-full mt-4">
       <CardContent className="flex items-center space-x-4 p-4">
@@ -42,4 +42,4 @@ const SimplifiedProfile = () => {
   );
 };
 
-export { SimplifiedProfile };
+export { SimplifiedProfileCard };
