@@ -1,10 +1,9 @@
 import { COMMENT_DATABASE_ID, NOTION_TOKEN, POST_DATABASE_ID } from '@/lib/notion/consts';
 import type {
   CommentRequestParameters,
-  NotionMultiSelect,
   NotionPage,
-  NotionProperties,
 } from '@/models/notion';
+import type { NotionMultiSelect, NotionProperties } from '@/types/notion';
 import type { GetPostRequest } from '@/models/post';
 import { Client } from '@notionhq/client';
 import { NotionAPI } from 'notion-client';
@@ -38,42 +37,58 @@ async function getPosts() {
 }
 
 async function getPostsByParams(params: GetPostRequest) {
-  const { search, tag, category, sort_by = 'Date', sort = 'descending', page_size = 10, series, start_cursor } = params;
+  const { search, tag, category, sort_by = 'Date', sort = 'descending', page_size = 10, start_cursor } = params;
 
-  const baseFilter = {
+  const filters = [];
+
+  filters.push({
     property: 'Published',
     checkbox: { equals: true },
-  };
+  });
 
-  const searchFilter = search
-    ? {
-        or: [
-          { property: 'Title', rich_text: { contains: search } },
-          { property: 'Excerpt', rich_text: { contains: search } },
-        ],
-      }
-    : null;
+  if (search && category !== 'series') {
+    filters.push({
+      or: [
+        { property: 'Title', rich_text: { contains: search } },
+        { property: 'Excerpt', rich_text: { contains: search } },
+      ],
+    });
+  }
 
-  const tagsFilter = tag ? { property: 'Tags', multi_select: { contains: tag } } : null;
+  // 태그 필터
+  if (tag) {
+    filters.push({
+      property: 'Tags',
+      multi_select: { contains: tag },
+    });
+  }
 
-  const categoryFilter = category ? { property: 'Category', select: { equals: category } } : null;
-
-  const seriesFilter = series ? { property: 'Series', select: { equals: series } } : null;
-
-  const filters = [baseFilter, searchFilter, tagsFilter, categoryFilter, seriesFilter].filter(
-    (filter): filter is NonNullable<typeof filter> => filter !== null
-  );
+  // 카테고리 필터
+  if (category) {
+    if (category === 'series' && search) {
+      filters.push({
+        property: 'Series',
+        select: { equals: search },
+      });
+    } else {
+      filters.push({
+        property: 'Category',
+        select: { equals: category },
+      });
+    }
+  }
 
   try {
     return await notion.databases.query({
       database_id: POST_DATABASE_ID,
       filter: { and: filters },
       sorts: [{ property: sort_by, direction: sort }],
-      page_size: page_size,
-      start_cursor: start_cursor ? start_cursor : undefined,
+      page_size,
+      start_cursor,
     });
   } catch (error) {
-    console.error('getPostsByParams error', error);
+    console.error('getPostsByParams error:', error);
+    throw error;
   }
 }
 

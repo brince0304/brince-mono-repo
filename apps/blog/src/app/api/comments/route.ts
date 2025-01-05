@@ -1,5 +1,5 @@
 import { notionClient } from '@/lib/notion/notion';
-import type { NotionProperties } from '@/models/notion';
+import type { NotionProperties } from '@/types/notion';
 import { type NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
