@@ -37,7 +37,7 @@ async function getPosts() {
 }
 
 async function getPostsByParams(params: GetPostRequest) {
-  const { search, tag, category, sort_by = 'Date', sort = 'descending', page_size = 10, start_cursor } = params;
+  const { search, tag, category, sort_by = 'Date', sort = 'descending', page_size = 10, start_cursor, series } = params;
 
   const filters = [];
 
@@ -52,6 +52,13 @@ async function getPostsByParams(params: GetPostRequest) {
         { property: 'Title', rich_text: { contains: search } },
         { property: 'Excerpt', rich_text: { contains: search } },
       ],
+    });
+  }
+
+  if (series) {
+    filters.push({
+      property: 'Series',
+      select: { equals: series },
     });
   }
 
