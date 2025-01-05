@@ -15,7 +15,7 @@ export default async function HomePage() {
   return (
     <main className={'flex flex-col mx-auto gap-4 min-h-screen'}>
       <ProfileCard />
-      <QueryHydrationBoundary queryOptions={PostQueryOptions.getPosts({})}>
+      <QueryHydrationBoundary queryOptions={PostQueryOptions.getInfinitePosts({})} isInfiniteQuery={true}>
         <PostSection />
       </QueryHydrationBoundary>
     </main>

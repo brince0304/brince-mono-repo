@@ -16,12 +16,12 @@ const getPostLike = async (pageId: string) => {
   return data;
 };
 
-const getPosts = async (getPostRequest?: GetPostRequest) => {
-  const { data } = await axiosClient.get<QueryDatabaseResponse>('/posts', { params: getPostRequest });
+const getPosts = async (getPostRequest?: GetPostRequest, startCursor: string | undefined = undefined) => {
+  const { data } = await axiosClient.get<QueryDatabaseResponse>('/posts', { params: { ...getPostRequest, start_cursor: startCursor } });
   return data;
 };
 
-const getTags = async (nextCursor?: string | undefined) => {
+const getTags = async (nextCursor?: string | undefined ) => {
   const { data } = await axiosClient.get<GetTagsResponse>('/tags', { params: { nextCursor } });
   return data;
 };

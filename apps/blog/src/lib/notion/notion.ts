@@ -38,7 +38,7 @@ async function getPosts() {
 }
 
 async function getPostsByParams(params: GetPostRequest) {
-  const { search, tag, category, sortBy = 'Date', sort = 'descending', pageSize = 10, series } = params;
+  const { search, tag, category, sortBy = 'Date', sort = 'descending', pageSize = 10, series, start_cursor } = params;
 
   const baseFilter = {
     property: 'Published',
@@ -70,6 +70,7 @@ async function getPostsByParams(params: GetPostRequest) {
       filter: { and: filters },
       sorts: [{ property: sortBy, direction: sort }],
       page_size: pageSize,
+      start_cursor: start_cursor,
     });
   } catch (error) {
     console.error('getPostsByParams error', error);

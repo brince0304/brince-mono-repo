@@ -28,6 +28,7 @@
     "framer-motion": "^11.3.28",
     "lottie-web": "^5.12.2",
     "lucide-react": "^0.429.0",
+    "nanoid": "^5.0.9",
     "next": "14.2.5",
     "next-nprogress-bar": "^2.3.13",
     "next-themes": "^0.3.0",

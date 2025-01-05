@@ -4,8 +4,8 @@ import { type NextRequest, NextResponse } from 'next/server';
 
 function getParameters(params: URLSearchParams) {
   return {
-    page: Number(params.get('page') || 1),
     pageSize: Number(params.get('pageSize') || 5),
+    start_cursor: params.get('start_cursor') || undefined,
     sort: params.get('sort') || ('descending' as 'descending' | 'ascending'),
     sortBy: params.get('sortBy') || ('Date' as 'Date' | 'Likes'),
     search: params.get('search') || '',
@@ -26,6 +26,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const response = await notionClient.getPostsByParams(parameters as GetPostRequest);
+    
     return NextResponse.json(response);
   } catch (error) {
     console.error(error);
