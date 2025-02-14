@@ -21,7 +21,7 @@ const CommentDrawerTrigger = ({
   const { data: comments } = useQuery(CommentQueryOptions.getComments(pageId));
 
   return (
-    <Drawer>
+    <Drawer repositionInputs={false}>
       <DrawerTrigger asChild>
         <Button
           variant="outline"
