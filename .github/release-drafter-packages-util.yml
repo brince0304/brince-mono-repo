@@ -1,0 +1,6 @@
+_extends: guardrail:.github/release-drafter.yml
+name-template: 'util-v$RESOLVED_VERSION'
+tag-template: 'util-v$RESOLVED_VERSION'
+tag-prefix: util-v
+include-paths:
+  - "packages/util"
