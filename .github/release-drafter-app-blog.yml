@@ -1,6 +1,0 @@
-_extends: guardrail:.github/release-drafter.yml
-name-template: 'app-blog-v$RESOLVED_VERSION'
-tag-template: 'app-blog-v$RESOLVED_VERSION'
-tag-prefix: app-blog-v
-include-paths:
-  - "apps/blog"
