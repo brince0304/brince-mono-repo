@@ -1,0 +1,6 @@
+_extends: brince-mono-repo:.github/release-drafter.yml
+name-template: 'packages-utils-v$RESOLVED_VERSION'
+tag-template: 'packages-utils-v$RESOLVED_VERSION'
+tag-prefix: packages-utils-v
+include-paths:
+  - "packages/utils"
