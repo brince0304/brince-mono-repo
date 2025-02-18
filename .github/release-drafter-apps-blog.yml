@@ -4,7 +4,3 @@ tag-template: 'v$NEXT_PATCH_VERSION-apps-blog'
 tag-prefix: v
 include-paths:
   - "apps/blog"
-version-resolver:
-  default: patch
-  package-json:
-    - "apps/blog/package.json"
