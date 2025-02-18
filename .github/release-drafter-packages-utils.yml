@@ -4,7 +4,3 @@ tag-template: 'v$NEXT_PATCH_VERSION-packages-utils'
 tag-prefix: v
 include-paths:
   - "packages/utils"
-version-resolver:
-  default: patch
-  package-json:
-    - "packages/utils/package.json"

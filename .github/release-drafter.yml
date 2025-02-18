@@ -1,24 +1,32 @@
 categories:
-  - title: '🚀 Features'
+  - title: 'New Features'
     labels:
-      - 'enhancement'
-  - title: '🐛 Bug Fixes'
+      - 'feature'
+
+  - title: 'Improvements'
+    labels:
+      - 'improvement'
+
+  - title: 'Bug Fixes'
     labels:
       - 'bug'
-  - title: '🧰 Maintenance'
-    label: 'chore'
+
+  - title: 'Hotfix'
+    labels:
+      - 'hotfix'
+
+  - title: 'Maintenances'
+    labels:
+      - 'ci'
+      - 'docs'
+      - 'refactoring'
+      - 'styles'
+      - 'typo'
+      - 'test'
+
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
 version-resolver:
-  major:
-    labels:
-      - 'major'
-  minor:
-    labels:
-      - 'minor'
-  patch:
-    labels:
-      - 'patch'
   default: patch
 template: |
   ## Changes
