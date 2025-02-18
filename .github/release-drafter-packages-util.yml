@@ -1,6 +1,6 @@
-_extends: guardrail:.github/release-drafter.yml
-name-template: 'util-v$RESOLVED_VERSION'
-tag-template: 'util-v$RESOLVED_VERSION'
-tag-prefix: util-v
+_extends: brince-mono-repo:.github/release-drafter.yml
+name-template: 'packages-util-v$RESOLVED_VERSION'
+tag-template: 'packages-util-v$RESOLVED_VERSION'
+tag-prefix: packages-util-v
 include-paths:
   - "packages/util"
